@@ -1,4 +1,4 @@
-package com.atlantis.supermarket.business.sale;
+package com.atlantis.supermarket.business.sale.handlers;
 
 import java.util.concurrent.Delayed;
 
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.atlantis.supermarket.core.sale.gateway.GeneratePayment;
 
 @Service
-public class PaymentHandler implements GeneratePayment{
+public class GeneratePaymentHandler implements GeneratePayment {
 
     @Override
     public void to(String saleId) {

@@ -7,9 +7,7 @@
 		<artifactId>com.atlantis.supermarket</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>business</artifactId>
-	<name>business</name>
-	<description>business layer</description>
+	<artifactId>infrastructure-external</artifactId>
 	<dependencies>
 		<dependency>
 			<groupId>com.atlantis</groupId>
@@ -17,16 +15,18 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>com.atlantis</groupId>
-			<artifactId>infrastructure</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>com.sendgrid</groupId>
+			<artifactId>sendgrid-java</artifactId>
+			<version>4.3.0</version>
 		</dependency>
-
-
 		<dependency>
-			<groupId>com.atlantis</groupId>
-			<artifactId>infrastructure-external</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-amqp</artifactId>
 		</dependency>
+		<!-- <dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-solr</artifactId>
+			<version>2.0.5.RELEASE</version>
+		</dependency> -->
 	</dependencies>
 </project>
