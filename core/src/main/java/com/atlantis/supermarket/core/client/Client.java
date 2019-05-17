@@ -2,20 +2,19 @@ package com.atlantis.supermarket.core.client;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.UUID;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
+import com.atlantis.supermarket.core.client.events.SaleAddedEvent;
+import com.atlantis.supermarket.core.sale.Sale;
 import com.atlantis.supermarket.core.shared.BaseEntity;
 import com.atlantis.supermarket.core.user.User;
 
@@ -26,25 +25,21 @@ public class Client extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @Column(name = "NOMBRE", nullable = false)
+    @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(name = "APELLIDO", nullable = false)
+    @Column(name = "surname", nullable = false)
     private String surname;
 
-    @Column(name = "DNI", nullable = false)
+    @Column(name = "document", nullable = false)
     private Integer document;
-
-    @Column(name = "DELETED", nullable = false)
-    private Boolean deleted;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    /*
-     * @OneToMany private Collection<Venta> ventas;
-     */
+    @OneToMany(mappedBy = "client",cascade = CascadeType.ALL)
+    private Collection<Sale> sales = new ArrayList<Sale>();
 
     public Client(){}
 
@@ -56,14 +51,6 @@ public class Client extends BaseEntity {
 	client.setDocument(document);
 	
 	return client;
-    }
-
-    public void delete() {
-	deleted = true;
-    }
-
-    public Boolean getDeleted() {
-	return deleted;
     }
     
     public String getName() {
@@ -98,7 +85,16 @@ public class Client extends BaseEntity {
         this.user = user;
     }
 
-    public void setDeleted(Boolean deleted) {
-        this.deleted = deleted;
+    public Collection<Sale> getSales() {
+        return sales;
+    }
+
+    public void setSales(Collection<Sale> sales) {
+        this.sales = sales;
+    }
+    
+    public void addSale(Sale sale) {
+	this.sales.add(sale);
+	this.registerEvent(new SaleAddedEvent());
     }
 }

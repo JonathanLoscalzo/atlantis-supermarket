@@ -31,51 +31,6 @@ public class SupermarketIntegrationTests {
     @LocalServerPort
     private int port;
     
-    @Autowired
-    private SaveUser userRepository;
-
-    @Test
-    public void whenSignUpUserCanLogin() {
-
-	JSONObject jsonObj = null;
-
-	try {
-	    jsonObj = new JSONObject().put("username", "pepo").put("password", "password");
-	} catch (JSONException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	}
-
-	RestAssured.given().contentType("application/json").body(jsonObj.toString()).when().post("/api/public/sign-up").then()
-		.statusCode(200).extract();
-
-	String authorization = RestAssured.given().contentType("application/json").body(jsonObj.toString())
-		.post("/api/authenticate").then().statusCode(200).extract().header("Authorization");
-	
-	assertThat(authorization).isNotEmpty();
-    }
     
-    @Test
-    public void whenSignUpUserReturn409() {
-	
-	User user = new User();
-	user.setUsername("pepo2");
-	user.setPassword("asdfgasdf");
-	userRepository.save(user);
-	
-	JSONObject jsonObj = null;
-
-	try {
-	    jsonObj = new JSONObject().put("username", "pepo2").put("password", "password");
-	} catch (JSONException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	}
-
-	String msg = RestAssured.given().contentType("application/json").body(jsonObj.toString()).when().post("/api/public/sign-up").then()
-		.statusCode(409).extract().body().jsonPath().get("message");
-	
-	assertThat(msg).contains("El usuario ya existe");
-    }
 
 }

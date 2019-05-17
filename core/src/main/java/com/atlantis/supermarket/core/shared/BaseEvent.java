@@ -1,5 +1,5 @@
 package com.atlantis.supermarket.core.shared;
 
-public interface UseCase {
+public abstract class BaseEvent {
 
 }

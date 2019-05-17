@@ -1,0 +1,53 @@
+package com.atlantis.supermarket.business.client.useCases.input;
+
+import java.util.UUID;
+
+import com.atlantis.supermarket.core.shared.business.InputPort;
+
+public class CreateClientByUser extends InputPort {
+    
+    private String name;
+
+    private String surname;
+
+    private Integer document;
+    
+    public UUID userID;
+
+    public String getName() {
+        return name;
+    }
+
+    public CreateClientByUser setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public CreateClientByUser setSurname(String surname) {
+        this.surname = surname;
+        return this;
+    }
+
+    public Integer getDocument() {
+        return document;
+    }
+
+    public CreateClientByUser setDocument(Integer document) {
+        this.document = document;
+        return this;
+    }
+
+    public UUID getUserID() {
+        return userID;
+    }
+
+    public CreateClientByUser setUserID(UUID userID) {
+        this.userID = userID;
+        return this;
+    }
+    
+}

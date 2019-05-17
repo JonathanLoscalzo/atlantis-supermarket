@@ -20,9 +20,6 @@ import com.atlantis.supermarket.core.client.Client;
 @Entity
 public class User extends BaseEntity {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = 1L;
 
     public enum UserRole {
@@ -34,6 +31,9 @@ public class User extends BaseEntity {
 
     @Column(nullable = false)
     private String password;
+    
+    @Column
+    private String email;
 
     @ElementCollection(targetClass = UserRole.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
@@ -74,5 +74,21 @@ public class User extends BaseEntity {
 
     public void addRole(UserRole role) {
 	this.Roles.add(role);
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

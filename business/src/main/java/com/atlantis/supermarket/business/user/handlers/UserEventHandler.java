@@ -1,17 +1,18 @@
-package com.atlantis.supermarket.infrastructure.user;
+package com.atlantis.supermarket.business.user.handlers;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.event.TransactionalEventListener;
 
+import com.atlantis.supermarket.core.shared.BaseServiceEventHandler;
 import com.atlantis.supermarket.core.user.event.UserCreatedEvent;
 
 @Service
-public class UserEventHandler {
+public class UserEventHandler extends BaseServiceEventHandler<UserCreatedEvent>{
 
     @Async
     @TransactionalEventListener
-    public void handleBankTransferCompletedEvent(UserCreatedEvent event) {
+    public void handle(UserCreatedEvent event) {
 	System.out.println("aloha: " + event);
 	//PODRÍA PERSISTIR EL EVENTO.
     }

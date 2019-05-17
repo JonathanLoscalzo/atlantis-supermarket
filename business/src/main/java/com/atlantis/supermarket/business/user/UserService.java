@@ -1,13 +1,14 @@
 package com.atlantis.supermarket.business.user;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.atlantis.supermarket.common.parser.Encoder;
-import com.atlantis.supermarket.core.shared.UseCase;
+import com.atlantis.supermarket.core.shared.business.UseCase;
 import com.atlantis.supermarket.core.user.User;
 import com.atlantis.supermarket.core.user.event.UserCreatedEvent;
 import com.atlantis.supermarket.core.user.exceptions.UserExistsException;
@@ -20,7 +21,7 @@ import com.atlantis.supermarket.core.user.validation.UserNotExists;
 import com.atlantis.supermarket.infrastructure.user.UserRepository;
 
 @Service
-public class UserService implements UseCase {
+public class UserService {
 
     @Autowired
     private FindUserByUsername searcher;
@@ -30,6 +31,9 @@ public class UserService implements UseCase {
 
     @Autowired
     private FindAll finder;
+    
+    @Autowired
+    private UserRepository users;
     
     public User findUserByUsername(String username) throws UsernameNotFoundException {
 	User user = searcher.findByUsername(username);
@@ -45,9 +49,23 @@ public class UserService implements UseCase {
 	saver.save(user);
 	return user;
     }
+    
+    public User createUser(String username, String password) throws UserExistsException {
+	User existent = searcher.findByUsername(username);
+	UserExists.validate(existent);
+	User user = new User();
+	user.setPassword(Encoder.passwordEncoder().encode(password));
+	user.addRole(User.UserRole.CLIENT);
+	saver.save(user);
+	return user;
+    }
 
     public List<User> findAll() {
 	return finder.findAll();
+    }
+    
+    public User findById(UUID id) throws UsernameNotFoundException {
+	return users.findById(id).orElseThrow(() -> new UsernameNotFoundException(id.toString()));
     }
 
 }
