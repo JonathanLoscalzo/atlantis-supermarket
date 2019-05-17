@@ -1,4 +1,4 @@
-package com.atlantis.supermarket.external.payment;
+package com.atlantis.supermarket.infrastructure.external.payment;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
