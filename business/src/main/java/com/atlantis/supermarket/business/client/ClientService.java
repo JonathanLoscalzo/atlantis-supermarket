@@ -12,6 +12,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.atlantis.supermarket.business.ServiceImpl;
 import com.atlantis.supermarket.business.client.useCases.CreateClientByUserUseCase;
 import com.atlantis.supermarket.business.client.useCases.input.CreateClientAndUser;
 import com.atlantis.supermarket.business.client.useCases.input.CreateClientByUser;
@@ -19,9 +20,8 @@ import com.atlantis.supermarket.business.user.UserService;
 import com.atlantis.supermarket.core.client.Client;
 
 @Service
-public class ClientService implements BaseService<Client, UUID> {
+public class ClientService extends ServiceImpl<Client> {
 
-    @Autowired
     private ClientRepository clients;
 
     @Autowired
@@ -29,7 +29,11 @@ public class ClientService implements BaseService<Client, UUID> {
     
     @Autowired
     private CreateClientByUserUseCase createClientByUserUseCase;
-
+    
+    public ClientService(ClientRepository clients) {
+	super(clients);
+    }
+    
     public Client createClientByUser(CreateClientByUser input) throws UsernameNotFoundException {
 	return createClientByUserUseCase.handle(input).client;
     }
@@ -59,11 +63,6 @@ public class ClientService implements BaseService<Client, UUID> {
 
     public void delete(UUID identifier) {
 	this.clients.deleteById(identifier);
-    }
-
-    public Boolean validateModel(Client e) {
-	// TODO Auto-generated method stub
-	return true;
     }
 
 }

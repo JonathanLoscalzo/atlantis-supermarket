@@ -19,6 +19,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.atlantis.supermarket.business.client.useCases.CreateClientByUserUseCase;
 import com.atlantis.supermarket.business.client.useCases.input.CreateClientByUser;
 import com.atlantis.supermarket.business.user.UserService;
 import com.atlantis.supermarket.core.client.Client;
@@ -34,13 +35,18 @@ public class ClientServiceTest {
     static class MyTestConfiguration {
 
 	@Bean
-	public ClientService clientService() {
-	    return new ClientService();
+	public ClientService clientService(ClientRepository clients) {
+	    return new ClientService(clients);
 	}
 
 	@Bean
 	public UserService userService() {
 	    return new UserService();
+	}
+	
+	@Bean
+	public CreateClientByUserUseCase createClientByUserUseCase() {
+	    return new CreateClientByUserUseCase();
 	}
     }
 

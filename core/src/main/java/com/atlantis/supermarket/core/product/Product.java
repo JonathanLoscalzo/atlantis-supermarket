@@ -20,6 +20,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -83,6 +85,10 @@ public class Product extends BaseEntityAuditable {
     @JoinColumn(name = "product_id")
     private Provider provider;
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "product_category", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Collection<Category> categories = new ArrayList<>();
+    
     public Product() {
 	this.batches = new ArrayList<Batch>();
     }
@@ -175,6 +181,16 @@ public class Product extends BaseEntityAuditable {
 
     public Collection<Batch> getBatches() {
 	return this.getBatches(false);
+    }
+    
+    public void addCategory(Category tag) {
+	categories.add(tag);
+        tag.getProducts().add(this);
+    }
+ 
+    public void removeCategory(Category tag) {
+        categories.remove(tag);
+        tag.getProducts().remove(this);
     }
 
     /**

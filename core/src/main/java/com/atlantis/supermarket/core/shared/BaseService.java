@@ -1,6 +1,6 @@
 package com.atlantis.supermarket.core.shared;
 
-import java.util.List;
+import java.util.UUID;
 
 public interface BaseService<Entity extends BaseEntity, Identity> {
     Entity save(Entity entity);
@@ -10,4 +10,6 @@ public interface BaseService<Entity extends BaseEntity, Identity> {
     Entity retrieve(Identity identifier);
 
     void delete(Identity identifier);
+
+    Entity retrieve(UUID identifier, Class<?> klass);
 }

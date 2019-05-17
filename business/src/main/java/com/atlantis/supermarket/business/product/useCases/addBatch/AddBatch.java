@@ -19,7 +19,7 @@ public class AddBatch implements UseCaseInput<AddBatchInput>{
     
     @Override
     public void handle(AddBatchInput input) {
-	Product p = products.findById(input.productId).orElseThrow( ()->new ProductNotFoundException());
+	Product p = products.findById(input.productId).orElseThrow( ()->new ProductNotFoundException(input.productId));
 	
 	Batch b = new Batch()
 		.setDetail(input.detail)

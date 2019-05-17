@@ -28,7 +28,12 @@ public abstract class ServiceImpl<T extends BaseEntity> implements BaseService<T
 
     @Override
     public T retrieve(UUID identifier) {
-	return this.repo.findById(identifier).orElseThrow(() -> new EntityNotFoundException("Entity not found"));
+	return this.repo.findById(identifier).orElseThrow(() -> new EntityNotFoundException("Entity not found", "Class", identifier.toString()));
+    }
+    
+    @Override
+    public T retrieve(UUID identifier, Class<?> klass) {
+	return this.repo.findById(identifier).orElseThrow(() -> new EntityNotFoundException("Entity not found", klass.getName(), identifier.toString()));
     }
 
     @Override
