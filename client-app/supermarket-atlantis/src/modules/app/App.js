@@ -8,7 +8,8 @@ import { ToastContainer } from 'react-toastify';
 // import ClientEdit from './modules/clients/container/ClientEdit';
 // import ClientNew from './modules/clients/container/ClientNew';
 // import ClientView from './modules/clients/container/ClientView';
-// import LoginPage from './modules/auth/containers/LoginPage';
+import LoginPage from '../auth/containers/LoginPage';
+import ProductPage from '../products/containers/ProductListPage'
 // import LogoutPage from './modules/auth/containers/LogoutPage';
 // import ElementListPage from './modules/element/list/container/ElementListPage'
 // import TaskListPage from './modules/task/list/container/TaskListPage'
@@ -16,18 +17,19 @@ import { ToastContainer } from 'react-toastify';
 
 
 const Private = (props) => {
-    if (true || localStorage.getItem('JWT_LOGIN')) {
+    if (localStorage.getItem('JWT_LOGIN')) {
         return (<React.Fragment> {props.children} </React.Fragment>)
-    } 
-    // else {
-    //     return (<React.Fragment><LoginPage /></React.Fragment>)
-    // }
+    } else {
+        return (<React.Fragment><LoginPage /></React.Fragment>)
+    }
 }
 
 export default () => (
     <div>
         <Private>
             <Layout>
+                <Route exact path="/" component={()=>{return "hola"}} />
+                <Route exact path="/product" component={ProductPage} />
                 {/* <Route exact path='/' component={Home} />
                 <Route exact path='/client' component={Clients} />
                 <Route path='/client/edit/:id' component={ClientEdit} />

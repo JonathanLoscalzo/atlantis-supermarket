@@ -3,9 +3,11 @@ import thunk from 'redux-thunk';
 import { connectRouter } from 'connected-react-router'
 import { routerMiddleware } from 'connected-react-router'
 import { reducer as formReducer } from 'redux-form'
+import { composeWithDevTools } from 'remote-redux-devtools'
 
 // import client from '../modules/clients';
-// import auth from '../modules/auth'
+import auth from '../modules/auth'
+import product from '../modules/products'
 // import element from '../modules/element';
 // import task from '../modules/task';
 // import repair from '../modules/repair';
@@ -13,8 +15,9 @@ import { reducer as formReducer } from 'redux-form'
 export default function configureStore(history, initialState) {
     const reducers = {
         form: formReducer,
-        router: connectRouter(history)
-        // auth,
+        router: connectRouter(history),
+        auth,
+        product
         // client,
         // element, 
         // task,
@@ -26,9 +29,9 @@ export default function configureStore(history, initialState) {
         routerMiddleware(history)
     ];
 
-    // In development, use the browser's Redux dev tools extension if installed
     const enhancers = [];
     const isDevelopment = process.env.NODE_ENV === 'development';
+
     if (isDevelopment && typeof window !== 'undefined' && window.devToolsExtension) {
         enhancers.push(window.devToolsExtension());
     }

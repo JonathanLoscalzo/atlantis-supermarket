@@ -1,6 +1,7 @@
 package com.atlantis.supermarket.security;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -80,7 +81,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
-	    FilterChain filterChain, Authentication authentication) {
+	    FilterChain filterChain, Authentication authentication) throws IOException {
 	UserPrincipal user = ((UserPrincipal) authentication.getPrincipal());
 
 	List<String> roles = user.getAuthorities().stream().map(GrantedAuthority::getAuthority)
@@ -94,5 +95,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		.setExpiration(new Date(System.currentTimeMillis() + 864000000)).claim("rol", roles).compact();
 
 	response.addHeader(SecurityConstants.TOKEN_HEADER, SecurityConstants.TOKEN_PREFIX + token);
+	response.setContentType("application/json");
+	response.getWriter().write(SecurityConstants.TOKEN_PREFIX + token);
+	
     }
 }

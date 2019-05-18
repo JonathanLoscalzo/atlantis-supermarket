@@ -34,7 +34,6 @@ const history = createBrowserHistory({ basename: baseUrl });
 const initialState = window.initialReduxState;
 const store = configureStore(history, initialState);
 
-
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
