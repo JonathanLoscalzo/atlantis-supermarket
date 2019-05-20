@@ -26,7 +26,7 @@ import { Provider } from 'react-redux'
 import { createBrowserHistory } from 'history';
 import configureStore from './store/configureStore';
 import { ConnectedRouter } from 'connected-react-router'
-import  App from './modules/app/App'
+import App from './modules/app/App'
 import 'react-toastify/dist/ReactToastify.css';
 
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
@@ -34,10 +34,14 @@ const history = createBrowserHistory({ basename: baseUrl });
 const initialState = window.initialReduxState;
 const store = configureStore(history, initialState);
 
+const menu = {
+  { title: "Productos", to: "/product" }
+};
+
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <App />
+      <App menu/>
     </ConnectedRouter>
   </Provider>,
   document.getElementById('root')

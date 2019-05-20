@@ -8,6 +8,8 @@ import { composeWithDevTools } from 'remote-redux-devtools'
 // import client from '../modules/clients';
 import auth from '../modules/auth'
 import product from '../modules/products'
+import home from '../modules/home'
+
 // import element from '../modules/element';
 // import task from '../modules/task';
 // import repair from '../modules/repair';
@@ -17,7 +19,8 @@ export default function configureStore(history, initialState) {
         form: formReducer,
         router: connectRouter(history),
         auth,
-        product
+        product,
+        home
         // client,
         // element, 
         // task,

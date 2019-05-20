@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify';
 // import ClientEdit from './modules/clients/container/ClientEdit';
 // import ClientNew from './modules/clients/container/ClientNew';
 // import ClientView from './modules/clients/container/ClientView';
+import HomePage from '../home/container/HomePage';
 import LoginPage from '../auth/containers/LoginPage';
 import ProductPage from '../products/containers/ProductListPage'
 // import LogoutPage from './modules/auth/containers/LogoutPage';
@@ -24,11 +25,11 @@ const Private = (props) => {
     }
 }
 
-export default () => (
+export default (props) => (
     <div>
         <Private>
-            <Layout>
-                <Route exact path="/" component={()=>{return "hola"}} />
+            <Layout {...props} >
+                <Route exact path="/" component={HomePage} />
                 <Route exact path="/product" component={ProductPage} />
                 {/* <Route exact path='/' component={Home} />
                 <Route exact path='/client' component={Clients} />
