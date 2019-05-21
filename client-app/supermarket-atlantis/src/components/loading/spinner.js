@@ -1,12 +1,10 @@
 import React from 'react';
 import './styles.css';
 
-const Spinner =({ loading, ...props }) => {
+const Spinner = ({ loading, ...props }) => {
     if (loading) {
-        return (<div className="spinner" >
-            <div className="bounce1"></div>
-            <div className="bounce2"></div>
-            <div className="bounce3"></div>
+        return (<div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
         </div>)
     }
     else {

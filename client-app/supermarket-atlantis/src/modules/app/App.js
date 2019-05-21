@@ -10,8 +10,8 @@ import { ToastContainer } from 'react-toastify';
 // import ClientView from './modules/clients/container/ClientView';
 import HomePage from '../home/container/HomePage';
 import LoginPage from '../auth/containers/LoginPage';
-import ProductPage from '../products/containers/ProductListPage'
-// import LogoutPage from './modules/auth/containers/LogoutPage';
+import ProductPage from '../products/list/containers/ProductListPage'
+import LogoutPage from '../auth/containers/LogoutPage';
 // import ElementListPage from './modules/element/list/container/ElementListPage'
 // import TaskListPage from './modules/task/list/container/TaskListPage'
 // import RepairListPage from './modules/repair/list/container/RepairListPage';
@@ -38,8 +38,8 @@ export default (props) => (
                 <Route path='/client/new' component={ClientNew} />
                 <Route path='/element' component={ElementListPage} />
                 <Route path='/repair' component={RepairListPage} />
-                <Route path='/task' component={TaskListPage} />
-                <Route path="/logout" component={LogoutPage} /> */}
+                <Route path='/task' component={TaskListPage} />*/}
+                <Route path="/logout" component={LogoutPage} /> 
             </Layout>
             <ToastContainer autoClose={2000} />
         </Private>

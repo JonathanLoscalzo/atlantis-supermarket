@@ -4,13 +4,13 @@ import Sidebar from './page/Sidebar';
 import NavMenu from './page/NavMenu';
 import Footer from './page/Footer';
 import BodyContainer from './page/BodyContainer';
+import { connect } from 'react-redux';
 
-
-export default props => (
+const Layout =  props => (
     <React.Fragment>
         {/* //<NavMenu /> */}
         <div>
-            <Sidebar />
+            <Sidebar menu={props.menu} {...props} />
             <div className="main-panel">
                 <NavMenu />
                 <BodyContainer {...props} />
@@ -19,3 +19,8 @@ export default props => (
         </div>
     </React.Fragment >
 );
+const mapStateToProps = state => ({
+    router: state.router
+})
+
+export default connect(mapStateToProps)(Layout)

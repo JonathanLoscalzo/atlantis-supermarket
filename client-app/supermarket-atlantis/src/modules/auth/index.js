@@ -71,5 +71,6 @@ export const signup = ({ username, password }) => (dispatch) => {
 
 export const logout = () => (dispatch) => {
     localStorage.removeItem('JWT_LOGIN');
+    dispatch(replace("/"))
     window.location.reload()
 }

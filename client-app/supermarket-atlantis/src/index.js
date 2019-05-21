@@ -34,14 +34,16 @@ const history = createBrowserHistory({ basename: baseUrl });
 const initialState = window.initialReduxState;
 const store = configureStore(history, initialState);
 
-const menu = {
-  { title: "Productos", to: "/product" }
-};
+const menu_factory = (title, to, icon, children = []) => ({ title, to, icon, children })
+
+const menu = [
+  menu_factory("Productos", "/product", "now-ui-icons design_app")
+];
 
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <App menu/>
+      <App menu={menu} />
     </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
