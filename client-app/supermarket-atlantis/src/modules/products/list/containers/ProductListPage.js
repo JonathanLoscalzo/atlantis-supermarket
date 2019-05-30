@@ -13,23 +13,13 @@ class ProductListPage extends React.Component {
 
     render() {
         const { list } = this.props;
-        console.log(this.props.match.url)
         return (
-            // <div class="col-md-12">
-            //     <div class="card">
-            //         <div class="card-header">
-            //             <h5 class="title">Productos</h5>
-            //         </div>
-            //         <div class="card-body">
-            //             aloha
-            //         </div>
-            //     </div>
-            // </div>
             <Spinner loading={this.props.loading}>
                 <Switch>
                     <Route path={`${this.props.match.url}/new`} component={df} />
                     <Route path={`${this.props.match.url}/edit/:id`} component={df} />
                     {/* <ElementList {...this.props} /> */}
+                    
                 </Switch>
                 <Route path={`${this.props.match.url}/remove/:id`} component={df} />
                 <Route path={`${this.props.match.url}/view/:id`} component={df} />

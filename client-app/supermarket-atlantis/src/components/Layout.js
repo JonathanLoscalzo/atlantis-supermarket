@@ -6,19 +6,19 @@ import Footer from './page/Footer';
 import BodyContainer from './page/BodyContainer';
 import { connect } from 'react-redux';
 
-const Layout =  props => (
+const Layout = props => (
     <React.Fragment>
-        {/* //<NavMenu /> */}
-        <div>
-            <Sidebar menu={props.menu} {...props} />
-            <div className="main-panel">
-                <NavMenu />
+        <NavMenu />
+        <div className="container-fluid wrapper">
+            <div className="row">
+                <Sidebar menu={props.menu} {...props} />
                 <BodyContainer {...props} />
             </div>
-            <Footer />
+            {/* <Footer /> */}
         </div>
     </React.Fragment >
 );
+
 const mapStateToProps = state => ({
     router: state.router
 })
