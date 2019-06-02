@@ -18,6 +18,7 @@ import 'bootstrap/dist/js/bootstrap'
 // import './vendor/sb-admin-2.css'
 // import 'react-table/react-table.css'
 import 'react-widgets/dist/css/react-widgets.css';
+import "react-table/react-table.css";
 
 import React from 'react'
 import ReactDOM from 'react-dom'

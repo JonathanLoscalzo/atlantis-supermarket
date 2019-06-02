@@ -14,8 +14,8 @@ const menu = [
       menu_factory("Ver", "/batch", "icon-basket"),
     ]),
   
-    menu_factory("Clientes", "/client", "icon-basket", [
-      menu_factory("Ver", "/client", "icon-basket"),
+    menu_factory("Clientes", "/clients", "icon-basket", [
+      menu_factory("Ver", "/clients", "icon-basket"),
     ]),
   
   

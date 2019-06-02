@@ -4,7 +4,7 @@ import Layout from '../../components/Layout';
 //import Home from './components/Home';
 import { ToastContainer } from 'react-toastify';
 
-// import Clients from './modules/clients/container/Clients';
+import ClientPage from '../clients/list/container/Page';
 // import ClientEdit from './modules/clients/container/ClientEdit';
 // import ClientNew from './modules/clients/container/ClientNew';
 // import ClientView from './modules/clients/container/ClientView';
@@ -31,6 +31,7 @@ export default (props) => (
             <Layout {...props} >
                 <Route exact path="/" component={HomePage} />
                 <Route exact path="/product" component={ProductPage} />
+                <Route exact path="/clients" component={ClientPage} />
                 {/* <Route exact path='/' component={Home} />
                 <Route exact path='/client' component={Clients} />
                 <Route path='/client/edit/:id' component={ClientEdit} />

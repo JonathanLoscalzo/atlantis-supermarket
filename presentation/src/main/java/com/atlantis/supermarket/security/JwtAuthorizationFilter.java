@@ -77,6 +77,8 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 				List<SimpleGrantedAuthority> authorities = ((List<?>) parsedToken.getBody().get("rol")).stream()
 						.map(authority -> new SimpleGrantedAuthority((String) authority)).collect(Collectors.toList());
 
+				//TODO: VER SI LLAMO AL REPOSITORIO Y SETEO EL USUARIO REAL, para que todos los requests lo tengan
+				
 				if (!StringUtils.isEmpty(username)) {
 					return new UsernamePasswordAuthenticationToken(username, null, authorities);
 				}

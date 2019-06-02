@@ -1,7 +1,10 @@
 package com.atlantis.supermarket.business;
 
+import java.util.Collection;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.atlantis.supermarket.core.shared.BaseEntity;
@@ -39,5 +42,15 @@ public abstract class ServiceImpl<T extends BaseEntity> implements BaseService<T
     @Override
     public void delete(UUID identifier) {
 	this.repo.findById(identifier).ifPresent(x -> x.setDeleted(true));
+    }
+    
+    @Override
+    public Collection<T> find() {
+	return this.repo.findAll();
+    }
+    
+    @Override
+    public Page<T> find(Pageable pageable) {
+	return this.repo.findAll(pageable);
     }
 }

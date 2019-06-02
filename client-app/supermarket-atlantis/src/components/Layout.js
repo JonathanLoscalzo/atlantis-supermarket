@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 const Layout = props => (
     <React.Fragment>
         <NavMenu />
-        <div className="container-fluid wrapper">
+        <div className="container-fluid">
             <div className="row">
                 <Sidebar menu={props.menu} {...props} />
                 <BodyContainer {...props} />

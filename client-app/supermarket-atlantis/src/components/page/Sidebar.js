@@ -10,8 +10,8 @@ export default class Sidebar extends React.Component {
         let { menu, router } = this.props;
 
         return (
-            <aside className="main-sidebar">
-                <section className="sidebar" id="sidebar-scroll">
+            <aside className="col-md-2">
+                <section className="row">
                     {renderMenu(menu, router)}
                 </section>
             </aside>
@@ -21,37 +21,35 @@ export default class Sidebar extends React.Component {
 
 const renderMenu = (menu, router) => {
     return (
-        <div className="col-3">
-            <div className="sidebar row">
+        <div className="row">
 
-                {/* <div className="logo">
+            {/* <div className="logo">
                     <a href="http://www.creative-tim.com" className="simple-text logo-normal">
                         <img src={logo} alt="logo" />
                         Atlantis
                     </a>
                 </div> */}
 
-                <div className="sidebar-wrapper" id="sidebar-wrapper">
-                    <ul className="nav">
-                        {menu.map(m => {
-                            if (m.children.length == 0) {
-                                return (
-                                    <li key={m.title} className={router.location.pathname == m.to ? "active" : ""}>
-                                        <NavLink to={m.to}>
-                                            <i class={m.icon}></i>
-                                            <p>{m.title}</p>
-                                        </NavLink>
-                                    </li>
-                                )
-                            }
-                            else {
-                                return (
-                                    <MenuWithChildren key={m.title} m={m} router={router} />
-                                )
-                            }
-                        })}
-                    </ul>
-                </div>
+            <div className="" id="sidebar-wrapper">
+                <ul className="nav">
+                    {menu.map(m => {
+                        if (m.children.length == 0) {
+                            return (
+                                <li key={m.title} className={router.location.pathname == m.to ? "active" : ""}>
+                                    <NavLink to={m.to}>
+                                        <i class={m.icon}></i>
+                                        <p>{m.title}</p>
+                                    </NavLink>
+                                </li>
+                            )
+                        }
+                        else {
+                            return (
+                                <MenuWithChildren key={m.title} m={m} router={router} />
+                            )
+                        }
+                    })}
+                </ul>
             </div>
         </div>
     )

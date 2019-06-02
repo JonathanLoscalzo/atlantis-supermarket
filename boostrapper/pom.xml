@@ -45,6 +45,7 @@
 			<artifactId>infrastructure-external</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+
 	</dependencies>
 
 
@@ -61,6 +62,8 @@
 					<skipTests>true</skipTests>
 				</configuration>
 			</plugin>
+			
 		</plugins>
 	</build>
+
 </project>

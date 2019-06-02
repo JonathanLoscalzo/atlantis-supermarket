@@ -12,7 +12,11 @@ public class CreateClientByUser extends InputPort {
 
     private Integer document;
     
+    private String email;
+    
     public UUID userID;
+    
+    public String username;
 
     public String getName() {
         return name;
@@ -48,6 +52,22 @@ public class CreateClientByUser extends InputPort {
     public CreateClientByUser setUserID(UUID userID) {
         this.userID = userID;
         return this;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
     
 }

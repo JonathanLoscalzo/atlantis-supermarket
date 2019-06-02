@@ -5,7 +5,7 @@ import { routerMiddleware } from 'connected-react-router'
 import { reducer as formReducer } from 'redux-form'
 import { composeWithDevTools } from 'remote-redux-devtools'
 
-// import client from '../modules/clients';
+import client from '../modules/clients';
 import auth from '../modules/auth'
 import product from '../modules/products'
 import home from '../modules/home'
@@ -20,7 +20,8 @@ export default function configureStore(history, initialState) {
         router: connectRouter(history),
         auth,
         product,
-        home
+        home,
+        client
         // client,
         // element, 
         // task,
