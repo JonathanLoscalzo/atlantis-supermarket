@@ -10,7 +10,7 @@ const Layout = props => (
     <React.Fragment>
         <NavMenu />
         <div className="container-fluid">
-            <div className="row">
+            <div className="row mt-2">
                 <Sidebar menu={props.menu} {...props} />
                 <BodyContainer {...props} />
             </div>

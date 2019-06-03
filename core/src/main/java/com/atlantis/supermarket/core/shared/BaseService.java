@@ -14,6 +14,8 @@ public interface BaseService<Entity extends BaseEntity, Identity> {
     Entity retrieve(Identity identifier);
 
     void delete(Identity identifier);
+    
+    void delete(String identifier);
 
     Entity retrieve(UUID identifier, Class<?> klass);
 

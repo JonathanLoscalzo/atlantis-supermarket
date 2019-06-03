@@ -10,11 +10,12 @@ import ClientPage from '../clients/list/container/Page';
 // import ClientView from './modules/clients/container/ClientView';
 import HomePage from '../home/container/HomePage';
 import LoginPage from '../auth/containers/LoginPage';
-import ProductPage from '../products/list/containers/ProductListPage'
+import ProductPage from '../products/admin/list/containers/ProductListPage'
 import LogoutPage from '../auth/containers/LogoutPage';
 // import ElementListPage from './modules/element/list/container/ElementListPage'
 // import TaskListPage from './modules/task/list/container/TaskListPage'
 // import RepairListPage from './modules/repair/list/container/RepairListPage';
+import ProviderPage from '../products/admin/providers/list/container/Page'
 
 
 const Private = (props) => {
@@ -32,6 +33,7 @@ export default (props) => (
                 <Route exact path="/" component={HomePage} />
                 <Route exact path="/product" component={ProductPage} />
                 <Route exact path="/clients" component={ClientPage} />
+                <Route exact path="/provider" component={ProviderPage} />
                 {/* <Route exact path='/' component={Home} />
                 <Route exact path='/client' component={Clients} />
                 <Route path='/client/edit/:id' component={ClientEdit} />

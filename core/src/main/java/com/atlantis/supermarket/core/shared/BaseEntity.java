@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 import org.springframework.data.domain.AbstractAggregateRoot;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -18,6 +19,7 @@ import com.atlantis.supermarket.common.parser.JsonParser;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
+@Where(clause = "deleted = 0")
 public abstract class BaseEntity extends AbstractAggregateRoot<BaseEntity> implements Serializable {
 
     @Id

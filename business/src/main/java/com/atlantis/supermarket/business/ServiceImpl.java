@@ -45,6 +45,11 @@ public abstract class ServiceImpl<T extends BaseEntity> implements BaseService<T
     }
     
     @Override
+    public void delete(String identifier) {
+	this.delete(UUID.fromString(identifier));
+    }
+    
+    @Override
     public Collection<T> find() {
 	return this.repo.findAll();
     }

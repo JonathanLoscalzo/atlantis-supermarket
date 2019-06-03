@@ -1,5 +1,7 @@
 
 const PRODUCT_DEFAULT = "PRODUCT/DEFAULT"
+const FETCH_PRODUCTS = "PRODUCTS/ADMIN/FETCH"
+
 
 const initialState = {
     loading: false,

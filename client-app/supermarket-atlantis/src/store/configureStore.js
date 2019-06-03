@@ -9,6 +9,7 @@ import client from '../modules/clients';
 import auth from '../modules/auth'
 import product from '../modules/products'
 import home from '../modules/home'
+import provider from '../modules/products/admin/providers'
 
 // import element from '../modules/element';
 // import task from '../modules/task';
@@ -21,7 +22,8 @@ export default function configureStore(history, initialState) {
         auth,
         product,
         home,
-        client
+        client,
+        provider
         // client,
         // element, 
         // task,

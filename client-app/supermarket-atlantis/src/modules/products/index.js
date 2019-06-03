@@ -1,7 +1,13 @@
-import {combineReducers} from 'redux'
+import { combineReducers } from 'redux'
+import { getRoles } from '../../common/auth'
+import admin from './admin'
+import client from './client'
 
-import list from './list'
+let roles = getRoles();
+let reducer = null
 
-export default combineReducers({
-    list
-});
+if (roles.indexOf("CLIENT") >= 0) {
+    reducer = admin
+}
+
+export default reducer;

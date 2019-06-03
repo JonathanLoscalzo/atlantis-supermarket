@@ -4,8 +4,8 @@ import './styles.css';
 const Spinner = ({ loading, ...props }) => {
     if (loading) {
         return (
-            <div class="ml-auto spinner-border text-primary" role="status">
-                <span class="sr-only">Loading...</span>
+            <div className="ml-auto mt-auto spinner-border text-primary" role="status">
+                <span className="sr-only">Loading...</span>
             </div>
         )
     }
