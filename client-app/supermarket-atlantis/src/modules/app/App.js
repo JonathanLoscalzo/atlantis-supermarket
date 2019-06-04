@@ -33,7 +33,7 @@ export default (props) => (
                 <Route exact path="/" component={HomePage} />
                 <Route exact path="/product" component={ProductPage} />
                 <Route exact path="/clients" component={ClientPage} />
-                <Route exact path="/provider" component={ProviderPage} />
+                <Route path="/provider" component={ProviderPage} />
                 {/* <Route exact path='/' component={Home} />
                 <Route exact path='/client' component={Clients} />
                 <Route path='/client/edit/:id' component={ClientEdit} />

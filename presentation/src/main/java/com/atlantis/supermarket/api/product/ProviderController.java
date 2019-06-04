@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,6 +39,11 @@ public class ProviderController {
 	return providerRepo.findAll(pageable);
     }
     
+    @GetMapping("/{identifier}")
+    public Provider get(@PathVariable String identifier) {
+	return providerService.retrieve(identifier);
+    }
+    
     @PostMapping
     public Provider create(@RequestBody Provider provider) {
 	return providerService.save(provider);
@@ -48,8 +54,8 @@ public class ProviderController {
 	return providerService.save(provider);
     }
     
-    @DeleteMapping
-    public void update(@RequestBody String identifier) {
+    @DeleteMapping("/{identifier}")
+    public void update(@PathVariable String identifier) {
 	providerService.delete(identifier);
     }
 }

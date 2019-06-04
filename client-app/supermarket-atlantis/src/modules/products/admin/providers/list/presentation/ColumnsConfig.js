@@ -7,7 +7,7 @@ const renderToolbar = ({ ...props }) => {
     let viewButton = (
         <Link to={`/provider/view/${props.value}`}>
             <button >
-                <FaSearch /> ver
+                <FaSearch />
             </button>
         </Link>
     )
@@ -15,15 +15,15 @@ const renderToolbar = ({ ...props }) => {
     let editButton = (
         <Link to={`/provider/edit/${props.value}`}>
             <button >
-                <FaEdit /> editar
+                <FaEdit />
             </button>
         </Link>
     )
 
     let removeButton = (
-        <Link to={`provider/remove/${props.value}`}>
+        <Link to={`/provider/remove/${props.value}`}>
             <button >
-                <FaTrash /> borrar
+                <FaTrash />
             </button>
         </Link>
     )

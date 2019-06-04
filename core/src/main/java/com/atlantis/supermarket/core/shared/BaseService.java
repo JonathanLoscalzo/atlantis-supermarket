@@ -12,6 +12,8 @@ public interface BaseService<Entity extends BaseEntity, Identity> {
     Boolean exist(Identity id);
 
     Entity retrieve(Identity identifier);
+    
+    Entity retrieve(String identifier);
 
     void delete(Identity identifier);
     

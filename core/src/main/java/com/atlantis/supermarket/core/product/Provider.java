@@ -9,10 +9,13 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Where;
+
 import com.atlantis.supermarket.core.shared.BaseEntity;
 
 @Entity
 @Table(name = "provider")
+@Where(clause = "deleted = 0")
 public class Provider extends BaseEntity {
     private String name;
     private String email;

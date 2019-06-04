@@ -3,6 +3,8 @@ package com.atlantis.supermarket.business;
 import java.util.Collection;
 import java.util.UUID;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,14 +13,14 @@ import com.atlantis.supermarket.core.shared.BaseEntity;
 import com.atlantis.supermarket.core.shared.BaseService;
 import com.atlantis.supermarket.core.shared.EntityNotFoundException;
 
-public abstract class ServiceImpl<T extends BaseEntity> implements BaseService<T, UUID>{
-    
+public abstract class ServiceImpl<T extends BaseEntity> implements BaseService<T, UUID> {
+
     protected JpaRepository<T, UUID> repo;
-    
-    protected ServiceImpl(JpaRepository<T,UUID> repo) {
+
+    protected ServiceImpl(JpaRepository<T, UUID> repo) {
 	this.repo = repo;
     }
-    
+
     @Override
     public T save(T entity) {
 	return repo.save(entity);
@@ -31,29 +33,40 @@ public abstract class ServiceImpl<T extends BaseEntity> implements BaseService<T
 
     @Override
     public T retrieve(UUID identifier) {
-	return this.repo.findById(identifier).orElseThrow(() -> new EntityNotFoundException("Entity not found", "Class", identifier.toString()));
-    }
-    
-    @Override
-    public T retrieve(UUID identifier, Class<?> klass) {
-	return this.repo.findById(identifier).orElseThrow(() -> new EntityNotFoundException("Entity not found", klass.getName(), identifier.toString()));
+	return this.repo.findById(identifier)
+		.orElseThrow(() -> new EntityNotFoundException("Entity not found", "Class", identifier.toString()));
     }
 
     @Override
-    public void delete(UUID identifier) {
-	this.repo.findById(identifier).ifPresent(x -> x.setDeleted(true));
+    public T retrieve(String identifier) {
+	return this.retrieve(UUID.fromString(identifier));
     }
-    
+
+    @Override
+    public T retrieve(UUID identifier, Class<?> klass) {
+	return this.repo.findById(identifier).orElseThrow(
+		() -> new EntityNotFoundException("Entity not found", klass.getName(), identifier.toString()));
+    }
+
+    @Override
+    @Transactional
+    public void delete(UUID identifier) {
+	this.repo.findById(identifier).ifPresent(x -> {
+	    x.setDeleted(true);
+	    this.repo.save(x);
+	});
+    }
+
     @Override
     public void delete(String identifier) {
 	this.delete(UUID.fromString(identifier));
     }
-    
+
     @Override
     public Collection<T> find() {
 	return this.repo.findAll();
     }
-    
+
     @Override
     public Page<T> find(Pageable pageable) {
 	return this.repo.findAll(pageable);

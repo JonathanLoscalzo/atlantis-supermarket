@@ -1,5 +1,8 @@
 package com.atlantis.supermarket.security;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -83,7 +86,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 	final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-	source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+	List<String> allowedMethods = new ArrayList<String>();
+	allowedMethods.add("GET");
+	allowedMethods.add("POST");
+	allowedMethods.add("PUT");
+	allowedMethods.add("DELETE");
+	allowedMethods.add("HEAD");
+	CorsConfiguration conf = new CorsConfiguration().applyPermitDefaultValues();
+	conf.setAllowedMethods(allowedMethods);
+	
+	source.registerCorsConfiguration("/**", conf);
 
 	return source;
     }
