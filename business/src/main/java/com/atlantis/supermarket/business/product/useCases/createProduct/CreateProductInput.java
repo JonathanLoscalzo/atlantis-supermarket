@@ -21,6 +21,7 @@ public class CreateProductInput extends InputPort {
     private String description;
     private String batchDetails;
     private Date expiration;
+    private String providerId;
 
     // TODO: unit type
     private BatchType type;
@@ -119,5 +120,43 @@ public class CreateProductInput extends InputPort {
 
     public void setExpiration(Date expiration) {
 	this.expiration = expiration;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+	// TODO Auto-generated method stub
+	return super.clone();
+    }
+
+    @Override
+    public boolean equals(Object arg0) {
+	// TODO Auto-generated method stub
+	return super.equals(arg0);
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+	// TODO Auto-generated method stub
+	super.finalize();
+    }
+
+    @Override
+    public int hashCode() {
+	// TODO Auto-generated method stub
+	return super.hashCode();
+    }
+
+    @Override
+    public String toString() {
+	// TODO Auto-generated method stub
+	return super.toString();
+    }
+
+    public String getProviderId() {
+	return providerId;
+    }
+
+    public void setProviderId(String providerId) {
+	this.providerId = providerId;
     }
 }

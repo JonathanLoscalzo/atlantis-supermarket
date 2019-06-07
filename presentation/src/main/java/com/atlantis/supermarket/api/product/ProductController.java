@@ -47,7 +47,7 @@ public class ProductController {
     
     
     @PostMapping()
-    public ProductDto createProduct(CreateProductInput input){
+    public ProductDto createProduct(@RequestBody CreateProductInput input){
 	CreateProductOutput output = createProduct.handle(input);
 	return productMapper.toDto(output.getProduct());
     }

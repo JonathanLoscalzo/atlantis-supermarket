@@ -8,6 +8,7 @@ import { Switch, Route } from 'react-router-dom'
 import { Spinner } from '../../../../shared/index'
 import ProductList from '../presentational/ProductList';
 import ProductView from '../../view/container/Page'
+import ProductCreate from '../../create/container/CreatePage'
 
 const df = () => (<div></div>)
 
@@ -28,7 +29,7 @@ class ProductListPage extends React.Component {
         return (
             <Spinner loading={this.props.loading}>
                 <Switch>
-                    <Route path={urls.new} component={df} />
+                    <Route path={urls.new} component={ProductCreate} />
                     <Route path={urls.edit} component={df} />
                     <Route path={urls.view} component={ProductView} />
                     <ProductList

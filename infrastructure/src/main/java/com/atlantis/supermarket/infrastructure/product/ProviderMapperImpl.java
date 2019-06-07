@@ -12,6 +12,7 @@ public class ProviderMapperImpl implements ProviderMapper {
 
     @Override
     public ProviderDto toDto(Provider p) {
+	if (p == null) return null;
 	ProviderDto dto = new ProviderDto();
 	
 	dto.setEmail(p.getEmail());

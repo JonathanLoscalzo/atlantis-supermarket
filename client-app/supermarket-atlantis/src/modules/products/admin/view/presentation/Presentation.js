@@ -5,7 +5,6 @@ import BatchTypes from '../../shared/batchTypes';
 
 const Presentation = (props) => {
     const productKeys = ["name", "brand", "description", "minStock", "providerPrice", "retailPrice", "sku", "upc"]
-    debugger
     return (
         <Row>
             <Col sm="12">
@@ -35,8 +34,8 @@ const Presentation = (props) => {
                         <ul>
                             <p>Lote {i + 1}</p>
                             <li>detalle: {b["detail"]}</li>
-                            <li>Entrada: {moment(Date(b["entry"])).format("DD/MM/YYYY")}</li>
-                            <li>Expiracion: {moment(Date(b["expiration"])).format("DD/MM/YYYY")}</li>
+                            <li>Entrada: {moment(b["entry"]).format("DD/MM/YYYY")}</li>
+                            <li>Expiracion: {moment(b["expiration"]).format("DD/MM/YYYY")}</li>
                             <li>Restante: {b["remainingUnits"]}</li>
                         </ul>
                     ))}
@@ -45,17 +44,23 @@ const Presentation = (props) => {
             <Col sm="4">
                 <Card body>
                     <CardTitle>Proveedor</CardTitle>
-                    {
-                        <ul>
-                            <li>Nombre: {props.element.provider.name}</li>
-                            <li>Email: {props.element.provider.email}</li>
-                            <li>Telefono: {props.element.provider.phone}</li>
-                        </ul>
-                    }
+                    {renderProvider(props.element.provider)}
                 </Card>
             </Col>
         </Row>
     )
+}
+
+const renderProvider = (provider) => {
+    if (provider != null) {
+        return (<ul>
+            <li>Nombre: {provider.name}</li>
+            <li>Email: {provider.email}</li>
+            <li>Telefono: {provider.phone}</li>
+        </ul>)
+    } else {
+        return (<></>)
+    }
 }
 
 export default Presentation
