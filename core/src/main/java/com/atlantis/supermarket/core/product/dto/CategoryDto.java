@@ -10,6 +10,15 @@ import com.atlantis.supermarket.core.product.Product;
 import com.atlantis.supermarket.core.shared.BaseEntityDto;
 
 public class CategoryDto extends BaseEntityDto {
-  
+
     private String description;
+
+    public String getDescription() {
+	return description;
+    }
+
+    public void setDescription(String description) {
+	this.description = description;
+    }
+
 }

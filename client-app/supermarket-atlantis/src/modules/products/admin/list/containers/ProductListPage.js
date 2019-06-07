@@ -2,18 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { get_products } from '../index'
+import { getProducts, onPageSizeChange, removeElementAt, goToCreate } from '../index'
 import { Switch, Route } from 'react-router-dom'
 
-import Spinner from '../../../../../components/loading/spinner'
+import { Spinner } from '../../../../shared/index'
 import ProductList from '../presentational/ProductList';
-import { push, go, replace, goBack, goForward } from 'connected-react-router'
 
 const df = () => (<div></div>)
 
 class ProductListPage extends React.Component {
     componentDidMount() {
-        this.props.get_products()
+        //this.props.get_products()
     }
 
     render() {
@@ -30,23 +29,30 @@ class ProductListPage extends React.Component {
                 <Switch>
                     <Route path={urls.new} component={df} />
                     <Route path={urls.edit} component={df} />
-                    <ProductList {...this.props} urls={urls} />
+                    <Route path={urls.view} component={df} />
+                    <ProductList   
+                        fetchData={this.props.getProducts}
+                        urls={urls}
+                        {...this.props} />
                 </Switch>
                 <Route path={urls.remove} component={df} />
-                <Route path={urls.view} component={df} />
             </Spinner>
         )
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ product: element }) => {
     return ({
-        products: state.product.list.products
+        loading: element.list.loading,
+        defaultPageSize: element.list.defaultPageSize,
+        data: element.list.data.rows,
+        pages: element.list.data.pages,
+        data_loading: element.list.data.loading,
     })
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    ...bindActionCreators({ get_products, push }, dispatch)
+    ...bindActionCreators({ getProducts, onPageSizeChange, removeElementAt, goToCreate }, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductListPage)

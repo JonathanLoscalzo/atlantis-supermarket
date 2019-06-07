@@ -6,7 +6,7 @@ import client from './client'
 let roles = getRoles();
 let reducer = null
 
-if (roles.indexOf("CLIENT") >= 0) {
+if (roles.indexOf("ADMIN") >= 0) {
     reducer = admin
 }
 

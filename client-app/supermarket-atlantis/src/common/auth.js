@@ -13,7 +13,6 @@ export const getRoles = () => {
 
 export const isAdmin = () => {
     let roles = getRoles();
-    debugger;
     return roles.indexOf("ADMIN") >= 0
 }
 

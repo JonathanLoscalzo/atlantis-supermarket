@@ -5,4 +5,5 @@ import com.atlantis.supermarket.core.product.dto.ProductDto;
 
 public interface ProductMapper {
     public ProductDto toDto(Product p);
+    public ProductDto toDtoSimple(Product p);
 }

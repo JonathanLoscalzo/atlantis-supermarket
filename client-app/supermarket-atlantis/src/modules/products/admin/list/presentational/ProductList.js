@@ -4,11 +4,17 @@ import ReactTable from 'react-table'
 
 const ProductList = (props) => {
     return (
-        <div>
+        <div className="col">
             <ReactTable
-                data={props.products}
+                {...props}
+                manual
+                data={props.data}
+                pages={props.pages}
+                loading={props.data_loading}
+                onFetchData={props.fetchData}
+                onPageSizeChange={props.onPageSizeChange}
                 columns={columns}
-                defaultPageSize={10}
+                defaultPageSize={props.defaultPageSize}
                 className="-striped -highlight" />
         </div>
     )

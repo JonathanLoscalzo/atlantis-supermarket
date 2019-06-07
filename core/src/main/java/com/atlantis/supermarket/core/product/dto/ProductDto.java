@@ -21,6 +21,8 @@ import com.atlantis.supermarket.core.product.Category;
 import com.atlantis.supermarket.core.product.Provider;
 import com.atlantis.supermarket.core.product.Batch.BatchType;
 import com.atlantis.supermarket.core.shared.BaseEntityDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ProductDto extends BaseEntityDto {
 
@@ -44,8 +46,104 @@ public class ProductDto extends BaseEntityDto {
 
     private Collection<BatchDto> batches;
 
-    private Provider provider;
+    private ProviderDto provider;
 
-    private Collection<Category> categories = new ArrayList<>();
+    private Collection<CategoryDto> categories = new ArrayList<>();
+
+    public String getSku() {
+	return sku;
+    }
+
+    public String getUpc() {
+	return upc;
+    }
+
+    public String getName() {
+	return name;
+    }
+
+    public String getBrand() {
+	return brand;
+    }
+
+    public Double getMinStock() {
+	return minStock;
+    }
+
+    public BigDecimal getProviderPrice() {
+	return providerPrice;
+    }
+
+    public BigDecimal getRetailPrice() {
+	return retailPrice;
+    }
+
+    public String getDescription() {
+	return description;
+    }
+
+    public BatchType getType() {
+	return type;
+    }
+
+    public Collection<BatchDto> getBatches() {
+	return batches;
+    }
+
+    public ProviderDto getProvider() {
+	return provider;
+    }
+
+    public Collection<CategoryDto> getCategories() {
+	return categories;
+    }
+
+    public void setSku(String sku) {
+	this.sku = sku;
+    }
+
+    public void setUpc(String upc) {
+	this.upc = upc;
+    }
+
+    public void setName(String name) {
+	this.name = name;
+    }
+
+    public void setBrand(String brand) {
+	this.brand = brand;
+    }
+
+    public void setMinStock(Double minStock) {
+	this.minStock = minStock;
+    }
+
+    public void setProviderPrice(BigDecimal providerPrice) {
+	this.providerPrice = providerPrice;
+    }
+
+    public void setRetailPrice(BigDecimal retailPrice) {
+	this.retailPrice = retailPrice;
+    }
+
+    public void setDescription(String description) {
+	this.description = description;
+    }
+
+    public void setType(BatchType type) {
+	this.type = type;
+    }
+
+    public void setBatches(Collection<BatchDto> batches) {
+	this.batches = batches;
+    }
+
+    public void setProvider(ProviderDto provider) {
+	this.provider = provider;
+    }
+
+    public void setCategories(Collection<CategoryDto> categories) {
+	this.categories = categories;
+    }
 
 }

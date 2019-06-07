@@ -32,7 +32,7 @@ import com.atlantis.supermarket.security.auth.IAuthenticationFacade;
 
 @RestController
 @RequestMapping("/api/client")
-public class ClientController extends BaseController {
+public class ClientController {
     @Autowired
     private CreateProduct createProduct;
     

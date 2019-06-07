@@ -19,7 +19,7 @@ import com.atlantis.supermarket.core.user.exceptions.UserExistsException;
 
 @RestController
 @RequestMapping("/api/public")
-public class UserController extends BaseController {
+public class UserController{
 
     @Autowired
     private UserService userService;

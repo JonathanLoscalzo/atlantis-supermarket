@@ -1,34 +1,61 @@
 import React from 'react'
-import moment from 'moment'
 import { Link } from 'react-router-dom'
 import { FaEdit, FaTrash, FaSearch } from 'react-icons/fa'
+import batchTypes from '../../shared/batchTypes'
+/*sku
+upc
+name
+brand
+minStock
+providerPrice
+retailPrice
+description*/
 
 const renderToolbar = ({ ...props }) => {
-    let editButton;
-    editButton = (
-        <Link to={`/client/sales/${props.value}`}>
+    let viewButton = (
+        <Link to={`/product/view/${props.value}`}>
             <button >
-                <FaEdit /> ver
+                <FaSearch />
             </button>
         </Link>
     )
 
-    return <span>
-        {/* <Link to={`/repair/view/${props.value}`}>
-            <button>
-                <FaSearch />
+    let editButton = (
+        <Link to={`/product/edit/${props.value}`}>
+            <button >
+                <FaEdit />
             </button>
-        </Link> {' '} */}
-        {editButton} {' '}
-        {/* <Link to={`/repair/remove/${props.value}`}>
-            <button>
+        </Link>
+    )
+
+    let removeButton = (
+        <Link to={`/product/remove/${props.value}`}>
+            <button >
                 <FaTrash />
             </button>
-        </Link> */}
-    </span>
+        </Link>
+    )
+
+    return (<span>
+        {viewButton} {' '}
+        {editButton} {' '}
+        {removeButton} {' '}
+    </span>)
 }
 
 const columns = [
+    {
+        Header: () => (
+            <div style={{
+                textAlign: "left",
+                fontWeight: 'bold'
+            }}>
+                SKU
+              </div>
+        ),
+        accessor: 'sku',
+        Cell: props => props.value != null ? props.value : ' - '
+    },
     {
         Header: () => (
             <div style={{
@@ -47,10 +74,10 @@ const columns = [
                 textAlign: "left",
                 fontWeight: 'bold'
             }}>
-                Apellido
+                Marca
               </div>
         ),
-        accessor: 'surname',
+        accessor: 'brand',
         Cell: props => props.value
     },
     {
@@ -59,22 +86,10 @@ const columns = [
                 textAlign: "left",
                 fontWeight: 'bold'
             }}>
-                Document 
+                Costo
               </div>
         ),
-        accessor: 'document',
-        Cell: props => props.value
-    },
-    {
-        Header: () => (
-            <div style={{
-                textAlign: "left",
-                fontWeight: 'bold'
-            }}>
-                Usuario
-              </div>
-        ),
-        accessor: 'username',
+        accessor: 'providerPrice',
         Cell: props => props.value
     },
 
@@ -84,11 +99,25 @@ const columns = [
                 textAlign: "left",
                 fontWeight: 'bold'
             }}>
-                Email
+                Venta
               </div>
         ),
-        accessor: 'email',
+        accessor: 'retailPrice',
         Cell: props => props.value
+    }, {
+        Header: () => (
+            <div style={{
+                textAlign: "left",
+                fontWeight: 'bold'
+            }}>
+                Tipo Lote
+              </div>
+        ),
+        accessor: 'type',
+        Cell: props => {
+            debugger
+            return batchTypes[props.value].text
+        }
     },
     {
         Header: () => (

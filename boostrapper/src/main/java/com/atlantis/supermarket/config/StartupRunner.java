@@ -23,8 +23,8 @@ import com.atlantis.supermarket.infrastructure.product.ProviderRepository;
 public class StartupRunner implements CommandLineRunner {
     private static final Logger LOG = LoggerFactory.getLogger(StartupRunner.class);
     
-    @Autowired
-    private RabbitTemplate rabbitTemplate;
+    //@Autowired
+    //private RabbitTemplate rabbitTemplate;
     
     @Autowired
     private ProductRepository products;
@@ -74,8 +74,8 @@ public class StartupRunner implements CommandLineRunner {
 	products.save(p2);
 
 	try {
-	    p2.consume(2750);
-	    products.save(p2);
+	    //p2.consume(2750);
+	    //products.save(p2);
 	} catch (ProductNotSatisfiedStockException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();

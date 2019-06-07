@@ -9,4 +9,6 @@ import com.atlantis.supermarket.core.product.dto.ProductDto;
 public interface BatchMapper {
 
     public BatchDto toDto(Batch p) ;
+
+    BatchDto toDtoWithProduct(Batch b);
 }

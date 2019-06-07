@@ -222,6 +222,10 @@ public class Product extends BaseEntityAuditable {
 	this.batches = batches;
 	return this;
     }
+    
+    public Collection<Category> getCategories(){
+	return this.categories;
+    }
 
     public Provider getProvider() {
 	return provider;
