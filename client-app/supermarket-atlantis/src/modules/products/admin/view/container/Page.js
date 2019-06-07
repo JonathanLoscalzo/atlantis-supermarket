@@ -1,32 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { action } from '../index'
-import { Presentation } from '../presentation/Presentation'
-import Spinner from '../../../../components/loading/spinner'
+import { getElement, goBack } from '../index'
+import Presentation from '../presentation/Presentation'
+import { Spinner } from '../../../../shared'
 
-class ProductListPage extends React.Component {
+const ViewPage = (props) => {
+    useEffect(() => {
+        props.getElement(props.match.params.id)
+    }, [props.match.params.id])
 
-    render() {
-        return (
-            <Spinner loading={this.props.loading}>
-                <Presentation action={this.props.action} />
-            </Spinner>
-        )
-    }
+    return (
+        <Spinner loading={props.loading}>
+            <Presentation {...props} />
+        </Spinner>
+    )
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ product: entity }) => {
     return ({
-        loading: state.example.loading
+        element: entity.view.element,
+        loading: entity.view.loading
     })
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    ...bindActionCreators({ action }, dispatch)
+    ...bindActionCreators({ getElement, goBack }, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductListPage)
+export default connect(mapStateToProps, mapDispatchToProps)(ViewPage)
 
 

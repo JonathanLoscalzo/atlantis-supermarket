@@ -115,7 +115,6 @@ const columns = [
         ),
         accessor: 'type',
         Cell: props => {
-            debugger
             return batchTypes[props.value].text
         }
     },

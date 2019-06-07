@@ -32,7 +32,7 @@ public class ProductMapperImpl implements ProductMapper {
 	dto.setRetailPrice(p.getRetailPrice());
 	dto.setDescription(p.getDescription());
 	dto.setType(p.getType());
-	dto.setBatches(p.getBatches()
+	dto.setBatches(p.getConsumableBatches()
 		.stream()
 		.map(batchMapper::toDto)
 		.collect(Collectors.toList()));

@@ -1,11 +1,12 @@
-import {combineReducers} from 'redux'
+import { combineReducers } from 'redux'
 
 import list from './list'
+import view from './view'
 
 export default combineReducers({
-    list
+    list, view
 });
 
 export const getCategories = () => (dispatch) => {
-    
+
 }

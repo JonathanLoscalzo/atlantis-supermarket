@@ -32,12 +32,17 @@ public class ProductController {
     private CreateProduct createProduct;
     
     @Autowired private ProductService productService;
-    @Autowired private ProductRepository productRepo;
+    @Autowired private ProductRepository productRepo; //todo: eliminar
     @Autowired private ProductMapper productMapper;
     
     @GetMapping
     public Page<ProductDto> get(Pageable pageable) {
 	return productRepo.findAll(pageable).map(x -> productMapper.toDto(x));
+    }
+    
+    @GetMapping("/{identifier}")
+    public ProductDto get(@PathVariable String identifier) {
+	return productMapper.toDto(productService.retrieve(identifier));
     }
     
     

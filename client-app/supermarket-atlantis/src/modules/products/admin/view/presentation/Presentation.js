@@ -1,7 +1,62 @@
 import React from 'react'
+import moment from 'moment'
+import { Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import BatchTypes from '../../shared/batchTypes';
 
 const Presentation = (props) => {
-    return <button onClick={()=>props.action()}> a button </button>
+    const productKeys = ["name", "brand", "description", "minStock", "providerPrice", "retailPrice", "sku", "upc"]
+    debugger
+    return (
+        <Row>
+            <Col sm="12">
+                <Button onClick={props.goBack} >Volver</Button>
+            </Col>
+            <Col sm="4">
+                <Card body>
+                    <CardTitle>Producto</CardTitle>
+
+                    <ul>
+                        {productKeys.map(p => (<li>{p}: {props.element[p]}</li>))}
+                        {(<li>tipo: {BatchTypes[props.element["type"]].text}</li>)}
+                    </ul>
+                    <p>Categorias</p>
+                    <ul>
+                        {props.element.categories.length == 0
+                            ? "sin categorias"
+                            : props.element.categories.map(c => (<li>{c.description}</li>))}
+                    </ul>
+
+                </Card>
+            </Col>
+            <Col sm="4">
+                <Card body>
+                    <CardTitle>Lotes</CardTitle>
+                    {props.element.batches.map((b, i) => (
+                        <ul>
+                            <p>Lote {i + 1}</p>
+                            <li>detalle: {b["detail"]}</li>
+                            <li>Entrada: {moment(Date(b["entry"])).format("DD/MM/YYYY")}</li>
+                            <li>Expiracion: {moment(Date(b["expiration"])).format("DD/MM/YYYY")}</li>
+                            <li>Restante: {b["remainingUnits"]}</li>
+                        </ul>
+                    ))}
+                </Card>
+            </Col>
+            <Col sm="4">
+                <Card body>
+                    <CardTitle>Proveedor</CardTitle>
+                    {
+                        <ul>
+                            <li>Nombre: {props.element.provider.name}</li>
+                            <li>Email: {props.element.provider.email}</li>
+                            <li>Telefono: {props.element.provider.phone}</li>
+                        </ul>
+                    }
+                </Card>
+            </Col>
+        </Row>
+    )
 }
 
 export default Presentation
+

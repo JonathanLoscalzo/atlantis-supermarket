@@ -43,7 +43,7 @@ export default (props) => (
             <Layout {...props} >
                 <Switch>
                     <Route exact path="/" component={HomePage} />
-                    <Route exact path="/product" component={ProductPage} />
+                    <Route path="/product" component={ProductPage} />
                     <Route exact path="/clients" component={ClientPage} />
                     {renderAdminRoutes()}
 
