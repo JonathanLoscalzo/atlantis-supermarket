@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { Route, Switch } from 'react-router';
 import Layout from '../../components/Layout';
 //import Home from './components/Home';
 import { ToastContainer } from 'react-toastify';
@@ -15,7 +15,8 @@ import LogoutPage from '../auth/containers/LogoutPage';
 // import ElementListPage from './modules/element/list/container/ElementListPage'
 // import TaskListPage from './modules/task/list/container/TaskListPage'
 // import RepairListPage from './modules/repair/list/container/RepairListPage';
-import ProviderPage from '../products/admin/providers/list/container/Page'
+import ProviderPage from '../providers/list/container/Page'
+import { isAdmin } from '../../common/auth'
 
 
 const Private = (props) => {
@@ -26,15 +27,27 @@ const Private = (props) => {
     }
 }
 
+const renderAdminRoutes = () => {
+    if (isAdmin()) {
+        return (
+            <React.Fragment>
+                <Route path="/provider" component={ProviderPage} />
+            </React.Fragment>
+        )
+    }
+}
+
 export default (props) => (
     <div>
         <Private>
             <Layout {...props} >
-                <Route exact path="/" component={HomePage} />
-                <Route exact path="/product" component={ProductPage} />
-                <Route exact path="/clients" component={ClientPage} />
-                <Route path="/provider" component={ProviderPage} />
-                {/* <Route exact path='/' component={Home} />
+                <Switch>
+                    <Route exact path="/" component={HomePage} />
+                    <Route exact path="/product" component={ProductPage} />
+                    <Route exact path="/clients" component={ClientPage} />
+                    {renderAdminRoutes()}
+
+                    {/* <Route exact path='/' component={Home} />
                 <Route exact path='/client' component={Clients} />
                 <Route path='/client/edit/:id' component={ClientEdit} />
                 <Route path='/client/show/:id' component={ClientView} />
@@ -42,9 +55,17 @@ export default (props) => (
                 <Route path='/element' component={ElementListPage} />
                 <Route path='/repair' component={RepairListPage} />
                 <Route path='/task' component={TaskListPage} />*/}
-                <Route path="/logout" component={LogoutPage} /> 
+                    <Route path="/logout" component={LogoutPage} />
+                    <Route component={NoMatch} />
+                </Switch>
             </Layout>
             <ToastContainer autoClose={2000} />
         </Private>
     </div>
 );
+
+const NoMatch = ({ location }) => (
+    <div>
+        <h3>No match for <code>{location.pathname}</code></h3>
+    </div>
+)

@@ -1,6 +1,6 @@
 import _ from 'lodash'
-import api from "../../../../../common/api";
 import { replace } from 'connected-react-router';
+import { api } from '../../shared'
 
 const FETCHED_PROVIDERS = "PROVIDERS/FETCHED"
 const FETCH_PROVIDERS = "PROVIDERS/FETCH"
@@ -101,6 +101,6 @@ export const removeElementAt = (id) => (dispatch, state) => {
     }))
 }
 
-export const goToCreate =()=>dispatch => {
+export const goToCreate = () => dispatch => {
     dispatch(replace("/provider/new"))
 }

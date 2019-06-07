@@ -1,7 +1,7 @@
 import { replace, goBack as gb, go, push } from 'connected-react-router'
 import { toast } from 'react-toastify';
 import _ from 'lodash'
-import api from '../../../../../common/api/index';
+import { api } from '../../shared'
 import { removeElementAt } from '../list';
 
 export const REQUEST_REMOVE_PROVIDER = "PROVIDER/REMOVE/REQUEST_PROVIDER"

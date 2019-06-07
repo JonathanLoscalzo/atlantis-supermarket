@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { change } from 'redux-form';
 
 import * as _ from 'lodash'
-import api from '../../../../../common/api/index';
+import { api } from '../../shared'
 
 export const LOAD_ELEMENT = "PROVIDER/UPDATE/LOAD_CREATE_ELEMENT"
 export const LOADED_ELEMENT = "PROVIDER/UPDATE/LOADED_CREATE_ELEMENT"

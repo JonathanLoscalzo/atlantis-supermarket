@@ -1,6 +1,6 @@
 const menu_factory = (title, to, icon, children = []) => ({ title, to, icon, children })
 
-// TODO: config file
+// TODO: config file with admin and client and user routes
 const menu = [
     // parte admin
     menu_factory("Productos", "/product", "icon-basket", [

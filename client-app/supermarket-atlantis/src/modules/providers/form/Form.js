@@ -4,7 +4,8 @@ import { Row, FormGroup } from 'reactstrap'
 
 import FormToolbar from './Toolbar';
 
-import RenderField from '../../../../../components/inputs/RenderField'
+import { RenderField } from '../../shared'
+
 
 export default props => {
     const {

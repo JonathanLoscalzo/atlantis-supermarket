@@ -9,7 +9,9 @@ import NewPage from '../../create/container/CreatePage'
 import { getProviders, onPageSizeChange, removeElementAt, goToCreate } from '../index'
 import { Switch, Route } from 'react-router-dom'
 import Presentation from '../presentation/Presentation'
-import Spinner from '../../../../../../components/loading/spinner'
+
+import { Spinner, validator } from '../../../shared'
+
 const df = () => (<div></div>)
 class ProvidersPage extends React.Component {
 

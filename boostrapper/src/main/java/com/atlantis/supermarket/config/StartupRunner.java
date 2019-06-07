@@ -35,9 +35,13 @@ public class StartupRunner implements CommandLineRunner {
     @Autowired
     private ProductFactory factory;
     
+    @Autowired
+    public SeedUsers seedUsers;
+    
     @Override
     public void run(String... args) throws Exception {
 	//whenProducHasStockCouldDiscount();
+	seedUsers.addAdmin();
     }
     
     public void whenProducHasStockCouldDiscount() {

@@ -40,14 +40,26 @@ public class UserService {
 	UserNotExists.validate(user, username);
 	return user;
     }
-
-    public User createUser(User user) throws UserExistsException {
+    
+    private User createUser(User user, User.UserRole role) throws UserExistsException {
 	User existent = searcher.findByUsername(user.getUsername());
 	UserExists.validate(existent);
 	user.setPassword(Encoder.passwordEncoder().encode(user.getPassword()));
-	user.addRole(User.UserRole.CLIENT);
+	user.addRole(role);
 	saver.save(user);
 	return user;
+    }
+
+    public User createUser(User user) throws UserExistsException {
+	return this.createUser(user, User.UserRole.CLIENT);
+    }
+    
+    public User createAdminUser(User user) throws UserExistsException {
+	return this.createUser(user, User.UserRole.ADMIN);
+    }
+    
+    public User createCommonUser(User user) throws UserExistsException {
+	return this.createUser(user, User.UserRole.USER);
     }
     
     public User createUser(String username, String password) throws UserExistsException {

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import Spinner from '../../../../../../components/loading/spinner'
+import { Spinner } from '../../../shared'
 import ElementRemove from '../presentation/ElementRemove'
 import { load, remove, goBack } from '../index';
 

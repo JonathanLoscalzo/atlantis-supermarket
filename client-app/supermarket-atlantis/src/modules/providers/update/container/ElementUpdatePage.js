@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { reduxForm, formValueSelector } from 'redux-form'
 
-import { load, create, goBack } from '../index';
-import Spinner from '../../../../../../components/loading/spinner'
+import { load, update, goBack } from '../index';
+import { Spinner } from '../../../shared'
 
 import Form from '../../form/Form'
 import schema from '../../form/Validation';
-import validator from '../../../../../../common/helpers/YupValidator'
+import { validator } from '../../../shared'
 
-class CreatePage extends React.Component {
+class EditPage extends React.Component {
 
     componentWillMount() {
         this.props.load(this.props.match.params.id)
@@ -27,9 +27,9 @@ class CreatePage extends React.Component {
             <Spinner loading={this.props.loading}>
                 <CreateForm
                     {...this.props}
-                    title="Crear"
+                    title="Editar"
                     initialValues={this.props.element}
-                    onSubmit={(values) => { this.props.create(values); }}
+                    onSubmit={(values) => { this.props.update(values); }}
                 />
             </Spinner>
         )
@@ -37,7 +37,7 @@ class CreatePage extends React.Component {
 }
 
 const CreateForm = reduxForm({
-    form: 'provider/create',  // a unique identifier for this form
+    form: 'provider/update',  // a unique identifier for this form
     validate: validator(schema),
     enableReinitialize: true
 })(Form)
@@ -45,16 +45,16 @@ const CreateForm = reduxForm({
 const selector = formValueSelector('element/update');
 
 const mapStateToProps = ({ provider: element, ...state }) => ({
-    element: element.create.element,
-    loading: element.create.loading,
-    error: element.create.error,
+    element: element.update.element,
+    loading: element.update.loading,
+    error: element.update.error,
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(
     {
         load,
-        create,
+        update,
         goBack,
     }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreatePage)
+export default connect(mapStateToProps, mapDispatchToProps)(EditPage)
