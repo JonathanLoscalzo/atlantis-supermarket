@@ -22,7 +22,8 @@ const schema = yup
             //.transform(value => value === '' ? null : value)
             //.nullable(false)
             //.ensure()
-            .required()
+            .required(),
+        categories: yup.array().required()
         // categorias
         // lotes
     })

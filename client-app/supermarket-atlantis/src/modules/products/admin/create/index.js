@@ -77,6 +77,10 @@ export const load = (id) => (dispatch, state) => {
     api.get("/provider/all").then((result) => {
         dispatch({ type: LOADED_RELATED, payload: { providers: result.data } })
     })
+    
+    api.get("/product/category/all").then((result) => {
+        dispatch({ type: LOADED_RELATED, payload: { categories: result.data } })
+    })
 }
 
 export const goBack = () => dispatch => {

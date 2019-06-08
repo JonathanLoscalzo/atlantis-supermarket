@@ -10,11 +10,14 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Where;
+
 import com.atlantis.supermarket.core.shared.BaseEntity;
 
 @Entity
 @Table(name = "category")
 @Access(AccessType.FIELD)
+@Where(clause = "deleted = 0")
 public class Category extends BaseEntity {
 
     private static final long serialVersionUID = 1L;

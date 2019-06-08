@@ -5,7 +5,7 @@ import view from './view'
 import create from './create'
 
 export default combineReducers({
-    list, view, create
+    list, view, create,
 });
 
 export const getCategories = () => (dispatch) => {

@@ -243,6 +243,11 @@ public class Product extends BaseEntityAuditable {
 	this.description = description;
 	return this;
     }
+    
+    public Product setCategories(Collection<Category> categories) {
+	this.categories = categories;
+	return this;
+    }
 
     public void addBatch(Batch... b) {
 	this.batches.addAll(Arrays.asList(b));

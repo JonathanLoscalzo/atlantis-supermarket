@@ -10,7 +10,7 @@ import auth from '../modules/auth'
 import product from '../modules/products'
 import home from '../modules/home'
 import provider from '../modules/providers'
-
+import category from '../modules/products/admin/categories'
 // import element from '../modules/element';
 // import task from '../modules/task';
 // import repair from '../modules/repair';
@@ -23,7 +23,8 @@ export default function configureStore(history, initialState) {
         product,
         home,
         client,
-        provider
+        provider,
+        category
         // client,
         // element, 
         // task,

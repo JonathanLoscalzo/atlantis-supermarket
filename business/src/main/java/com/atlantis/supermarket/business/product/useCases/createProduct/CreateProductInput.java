@@ -1,6 +1,7 @@
 package com.atlantis.supermarket.business.product.useCases.createProduct;
 
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -22,6 +23,7 @@ public class CreateProductInput extends InputPort {
     private String batchDetails;
     private Date expiration;
     private String providerId;
+    private Collection<String> categories;
 
     // TODO: unit type
     private BatchType type;
@@ -158,5 +160,13 @@ public class CreateProductInput extends InputPort {
 
     public void setProviderId(String providerId) {
 	this.providerId = providerId;
+    }
+
+    public Collection<String> getCategories() {
+	return categories;
+    }
+
+    public void setCategories(Collection<String> categories) {
+	this.categories = categories;
     }
 }

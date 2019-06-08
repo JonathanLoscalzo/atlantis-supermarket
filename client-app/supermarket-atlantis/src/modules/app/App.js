@@ -16,6 +16,7 @@ import LogoutPage from '../auth/containers/LogoutPage';
 // import TaskListPage from './modules/task/list/container/TaskListPage'
 // import RepairListPage from './modules/repair/list/container/RepairListPage';
 import ProviderPage from '../providers/list/container/Page'
+import CategoryPage from '../products/admin/categories/list/container/Page'
 import { isAdmin } from '../../common/auth'
 
 
@@ -32,6 +33,7 @@ const renderAdminRoutes = () => {
         return (
             <React.Fragment>
                 <Route path="/provider" component={ProviderPage} />
+                <Route path="/category" component={CategoryPage} />
             </React.Fragment>
         )
     }

@@ -17,11 +17,14 @@ export default props => {
     const {
         handleSubmit,
         title,
-        providers
+        providers,
+        categories,
     } = props
 
     let providersOptions = providers.map(x => ({ value: x.id, label: x.name }))
-    providersOptions.push({value:"", label:"Seleccione"})
+    providersOptions.push({ value: "", label: "Seleccione" })
+
+    let categoriesOptions = categories.map(x => ({ value: x.id, label: x.description }))
 
     return (
         <div>
@@ -75,7 +78,7 @@ export default props => {
                                 placeholder="retailPrice"
                                 component={RenderField}
                                 type="text" />
-                            <Field label="Proveedor" 
+                            <Field label="Proveedor"
                                 name="providerId"
                                 placeholder="Proveedor"
                                 options={providersOptions}
@@ -90,6 +93,13 @@ export default props => {
                                 placeholder="batchDetails"
                                 component={RenderField}
                                 type="textarea" />
+                            <Field
+                                label="Categorias"
+                                name="categories"
+                                multiple
+                                //placeholder="Seleccione..."
+                                options={categoriesOptions}
+                                component={RenderSelectableField} />
                         </FormGroup>
                     </Row>
                     <Spinner loading={props.loading}>

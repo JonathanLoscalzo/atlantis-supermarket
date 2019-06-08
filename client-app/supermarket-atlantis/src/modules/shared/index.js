@@ -4,6 +4,7 @@ import Spinner from '../../components/loading/spinner'
 import RenderField from '../../components/inputs/RenderFieldUpdate'
 import RenderSelectableField from '../../components/inputs/SelectableUpdate'
 import api from '../../common/api/index'
+import * as authHelper from '../../common/auth'
 
 export {
     YupConfig, 
@@ -11,5 +12,6 @@ export {
     Spinner,
     RenderField,
     RenderSelectableField, 
-    api
+    api,
+    authHelper
 }
