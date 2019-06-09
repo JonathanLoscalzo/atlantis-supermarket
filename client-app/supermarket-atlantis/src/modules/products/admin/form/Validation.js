@@ -18,7 +18,8 @@ const schema = (mode = "CREATE") => {
         /*BigDecimal*/ retailPrice: yup.number().moreThan(0).required(),
         /*String*/ description: yup.string().required(),
         /*String*/ batchDetails: yup.string().required(),
-        /*Date*/ expiration: yup.date().required(),
+        /*Date*/ expiration: yup.date().min(0)
+            .when("type", { is: batchTypes.EXPIRATION.enum, then: s => s.required() }),
         /*BatchType*/ type: yup.mixed().oneOf([batchTypes.DEFAULT.enum, batchTypes.EXPIRATION.enum]).required(),
                 providerId: yup.string().min(1)
                     //.transform(value => value === '' ? null : value)

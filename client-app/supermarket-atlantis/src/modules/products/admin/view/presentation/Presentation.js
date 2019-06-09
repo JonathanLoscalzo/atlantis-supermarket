@@ -35,7 +35,11 @@ const Presentation = (props) => {
                             <p>Lote {i + 1}</p>
                             <li>detalle: {b["detail"]}</li>
                             <li>Entrada: {moment(b["entry"]).format("DD/MM/YYYY")}</li>
-                            <li>Expiracion: {moment(b["expiration"]).format("DD/MM/YYYY")}</li>
+
+                            {
+                                props.element["type"] == "EXPIRATION" && (
+                                    <li>Expiracion: {moment(b["expiration"]).format("DD/MM/YYYY")}</li>)
+                            }
                             <li>Restante: {b["remainingUnits"]}</li>
                         </ul>
                     ))}

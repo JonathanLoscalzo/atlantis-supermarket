@@ -47,6 +47,7 @@ const mapStateToProps = ({ product: element, ...state }) => ({
     element: element.create.element,
     providers: element.create.providers,
     categories: element.create.categories,
+    selectedBatchType: selector(state, 'type'),
     loading: element.create.loading,
     error: element.create.error,
 })

@@ -6,7 +6,7 @@ import FormToolbar from './Toolbar';
 import { Spinner } from '../../../shared'
 
 
-import { RenderField, RenderSelectableField } from '../../../shared'
+import { RenderField, RenderSelectableField, RenderDateField } from '../../../shared'
 import batchTypes from '../shared/batchTypes'
 
 const types = [
@@ -19,9 +19,10 @@ export default props => {
         title,
         providers,
         categories,
+        selectedBatchType
     } = props
 
-    let mode = props.mode == "CREATE" ? "CREATE" : "UPDATE";
+    let mode = props.mode == "UPDATE" ? "UPDATE" : "CREATE";
     let providersOptions = providers.map(x => ({ value: x.id, label: x.name }))
     providersOptions.push({ value: "", label: "Seleccione" })
 
@@ -53,9 +54,12 @@ export default props => {
                                 type="text" />
                             {
                                 mode == "CREATE" &&
-                                <Field label="Expiración" name="expiration"
+                                selectedBatchType == "EXPIRATION" &&
+                                <Field label="Expiración"
+                                    name="expiration"
                                     placeholder="expiration"
-                                    component={RenderField}
+                                    showTime={false}
+                                    component={RenderDateField}
                                     type="date" />
                             }
                             <Field

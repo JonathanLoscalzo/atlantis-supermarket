@@ -2,6 +2,7 @@ import YupValidator from '../../common/helpers/YupValidator'
 import * as YupConfig from '../../common/helpers/YupConfig'
 import Spinner from '../../components/loading/spinner'
 import RenderField from '../../components/inputs/RenderFieldUpdate'
+import RenderDateField from '../../components/inputs/RenderFieldDate'
 import RenderSelectableField from '../../components/inputs/SelectableUpdate'
 import api from '../../common/api/index'
 import * as authHelper from '../../common/auth'
@@ -11,7 +12,8 @@ export {
     YupValidator as validator,
     Spinner,
     RenderField,
-    RenderSelectableField, 
+    RenderSelectableField,
+    RenderDateField, 
     api,
     authHelper
 }
