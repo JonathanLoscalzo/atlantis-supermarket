@@ -22,7 +22,7 @@ public class ProductMapperImpl implements ProductMapper {
     @Override
     public ProductDto toDto(Product p) {
 	ProductDto dto = new ProductDto();
-	
+	dto.setSku(p.getSku());
 	dto.setId(p.getId().toString());
 	dto.setUpc(p.getUpc());
 	dto.setName(p.getName());

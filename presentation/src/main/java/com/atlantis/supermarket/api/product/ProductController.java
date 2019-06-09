@@ -27,37 +27,41 @@ import com.atlantis.supermarket.infrastructure.product.ProductRepository;
 @RestController
 @RequestMapping("/api/product")
 public class ProductController {
-    
+
     @Autowired
     private CreateProduct createProduct;
-    
-    @Autowired private ProductService productService;
-    @Autowired private ProductRepository productRepo; //todo: eliminar
-    @Autowired private ProductMapper productMapper;
-    
+    @Autowired
+    private UpdateProduct updateProduct;
+
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private ProductRepository productRepo; // todo: eliminar
+    @Autowired
+    private ProductMapper productMapper;
+
     @GetMapping
     public Page<ProductDto> get(Pageable pageable) {
 	return productRepo.findAll(pageable).map(x -> productMapper.toDto(x));
     }
-    
+
     @GetMapping("/{identifier}")
     public ProductDto get(@PathVariable String identifier) {
 	return productMapper.toDto(productService.retrieve(identifier));
     }
-    
-    
+
     @PostMapping()
-    public ProductDto createProduct(@RequestBody CreateProductInput input){
+    public ProductDto createProduct(@RequestBody CreateProductInput input) {
 	CreateProductOutput output = createProduct.handle(input);
 	return productMapper.toDto(output.getProduct());
     }
-    
+
     @PutMapping()
-    public ProductDto updateProduct(CreateProductInput input){
-	CreateProductOutput output = createProduct.handle(input);
+    public ProductDto updateProduct(@RequestBody CreateProductInput input) {
+	CreateProductOutput output = updateProduct.handle(input);
 	return productMapper.toDto(output.getProduct());
     }
-    
+
     @DeleteMapping("/{identifier}")
     public void delete(@PathVariable String identifier) {
 	productService.delete(identifier);

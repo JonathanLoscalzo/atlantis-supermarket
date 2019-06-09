@@ -47,7 +47,6 @@ export default function reducer(state = initialState, action = {}) {
         case RESPONSE_CREATE_PRODUCT:
             return { ...state, loading: false }
         case LOADED_RELATED:
-            //TODO: VER SI FUNCIONA CON CATEGORIAS LUEGO
             return { ...state, loading: false, ...action.payload }
         case ERROR_CREATE_PRODUCT:
             return { ...state, loading: false, error: action.error }

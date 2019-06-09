@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { reduxForm, formValueSelector } from 'redux-form'
 
-import { load, create, goBack } from '../index';
+import { load, update, goBack } from '../index';
+
+import { Spinner, validator } from '../../../../shared'
 
 import Form from '../../form/Form'
 import schema from '../../form/Validation';
-import { validator } from '../../../../shared'
 
-class CreatePage extends React.Component {
+class EditPage extends React.Component {
 
     componentWillMount() {
         this.props.load(this.props.match.params.id)
@@ -23,39 +24,40 @@ class CreatePage extends React.Component {
 
     render() {
         return (
-            <React.Fragment>
+            <Spinner loading={this.props.loading}>
                 <CreateForm
                     {...this.props}
-                    title="Crear Product"
+                    mode="UPDATE"
+                    title="Editar producto"
                     initialValues={this.props.element}
-                    onSubmit={(values) => { this.props.create(values); }}
+                    onSubmit={(values) => { this.props.update(values); }}
                 />
-            </React.Fragment>
+            </Spinner>
         )
     }
 }
 
 const CreateForm = reduxForm({
-    form: 'product/create',  // a unique identifier for this form
-    validate: validator(schema()),
+    form: 'product/update',  // a unique identifier for this form
+    validate: validator(schema("update")),
     enableReinitialize: true
 })(Form)
 
-const selector = formValueSelector('product/create');
+const selector = formValueSelector('element/update');
 
 const mapStateToProps = ({ product: element, ...state }) => ({
-    element: element.create.element,
-    providers: element.create.providers,
-    categories: element.create.categories,
-    loading: element.create.loading,
-    error: element.create.error,
+    element: element.update.element,
+    providers: element.update.providers,
+    categories: element.update.categories,
+    loading: element.update.loading,
+    error: element.update.error,
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(
     {
         load,
-        create,
+        update,
         goBack,
     }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreatePage)
+export default connect(mapStateToProps, mapDispatchToProps)(EditPage)

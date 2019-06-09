@@ -9,6 +9,7 @@ import { Spinner } from '../../../../shared/index'
 import ProductList from '../presentational/ProductList';
 import ProductView from '../../view/container/Page'
 import ProductCreate from '../../create/container/CreatePage'
+import ProductUpdateView from '../../update/container/ElementUpdatePage'
 
 const df = () => (<div></div>)
 
@@ -30,7 +31,7 @@ class ProductListPage extends React.Component {
             <Spinner loading={this.props.loading}>
                 <Switch>
                     <Route path={urls.new} component={ProductCreate} />
-                    <Route path={urls.edit} component={df} />
+                    <Route path={urls.edit} component={ProductUpdateView} />
                     <Route path={urls.view} component={ProductView} />
                     <ProductList
                         fetchData={this.props.getProducts}

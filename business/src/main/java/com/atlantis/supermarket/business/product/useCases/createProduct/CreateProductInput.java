@@ -10,7 +10,8 @@ import com.atlantis.supermarket.core.product.Batch.BatchType;
 import com.atlantis.supermarket.core.shared.business.InputPort;
 
 public class CreateProductInput extends InputPort {
-
+    
+    private String id;
     private String sku;
     private String upc;
     private String name;
@@ -168,5 +169,13 @@ public class CreateProductInput extends InputPort {
 
     public void setCategories(Collection<String> categories) {
 	this.categories = categories;
+    }
+
+    public String getId() {
+	return id;
+    }
+
+    public void setId(String id) {
+	this.id = id;
     }
 }

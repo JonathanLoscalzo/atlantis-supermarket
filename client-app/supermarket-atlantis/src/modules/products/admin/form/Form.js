@@ -21,6 +21,7 @@ export default props => {
         categories,
     } = props
 
+    let mode = props.mode == "CREATE" ? "CREATE" : "UPDATE";
     let providersOptions = providers.map(x => ({ value: x.id, label: x.name }))
     providersOptions.push({ value: "", label: "Seleccione" })
 
@@ -50,10 +51,13 @@ export default props => {
                                 placeholder="brand"
                                 component={RenderField}
                                 type="text" />
-                            <Field label="Expiración" name="expiration"
-                                placeholder="expiration"
-                                component={RenderField}
-                                type="date" />
+                            {
+                                mode == "CREATE" &&
+                                <Field label="Expiración" name="expiration"
+                                    placeholder="expiration"
+                                    component={RenderField}
+                                    type="date" />
+                            }
                             <Field
                                 label="Tipo Lote"
                                 name="type"
@@ -66,10 +70,11 @@ export default props => {
                                 placeholder="minStock"
                                 component={RenderField}
                                 type="text" />
-                            <Field label="Stock" name="stock"
-                                placeholder="stock"
-                                component={RenderField}
-                                type="text" />
+                            {mode == "CREATE" &&
+                                <Field label="Stock" name="stock"
+                                    placeholder="stock"
+                                    component={RenderField}
+                                    type="text" />}
                             <Field label="Precio costo" name="providerPrice"
                                 placeholder="providerPrice"
                                 component={RenderField}
@@ -89,10 +94,14 @@ export default props => {
                                 placeholder="description"
                                 component={RenderField}
                                 type="textarea" />
-                            <Field label="Descripcion Lote" name="batchDetails"
-                                placeholder="batchDetails"
-                                component={RenderField}
-                                type="textarea" />
+                            {
+                                mode == "CREATE" &&
+                                <Field label="Descripcion Lote" name="batchDetails"
+                                    placeholder="batchDetails"
+                                    component={RenderField}
+                                    type="textarea" />
+                            }
+
                             <Field
                                 label="Categorias"
                                 name="categories"
