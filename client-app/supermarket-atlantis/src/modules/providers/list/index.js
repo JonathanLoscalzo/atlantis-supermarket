@@ -73,6 +73,7 @@ export const getProviders = ({ page, sorted: sort, pageSize: size, ...others } =
 
     api.get("/provider", { params: params })
         .then((result) => {
+            debugger;
             dispatch({
                 type: FETCHED_PROVIDERS,
                 payload:

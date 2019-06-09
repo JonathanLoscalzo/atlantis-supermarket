@@ -46,8 +46,8 @@ public class ProviderController {
     private ProviderMapper mapper;
 
     @GetMapping
-    public Page<Provider> get(Pageable pageable) {
-	return providerRepo.findAll(pageable);
+    public Page<ProviderDto> get(Pageable pageable) {
+	return providerRepo.findAll(pageable).map(mapper::toDto);
     }
 
     @GetMapping("/all")
