@@ -17,6 +17,8 @@ import com.atlantis.supermarket.business.product.useCases.addBatch.AddBatch;
 import com.atlantis.supermarket.business.product.useCases.addBatch.AddBatchInput;
 import com.atlantis.supermarket.business.product.useCases.createProduct.CreateProduct;
 import com.atlantis.supermarket.business.product.useCases.createProduct.UpdateProduct;
+import com.atlantis.supermarket.business.product.useCases.editBatch.EditBatch;
+import com.atlantis.supermarket.business.product.useCases.editBatch.EditBatchInput;
 import com.atlantis.supermarket.business.product.useCases.supplyBatch.SupplyBatch;
 import com.atlantis.supermarket.business.product.useCases.supplyBatch.SupplyBatchInput;
 import com.atlantis.supermarket.core.product.Provider;
@@ -54,6 +56,9 @@ public class BatchController {
     
     @Autowired 
     private AddBatch addBatch;
+    
+    @Autowired
+    private EditBatch editBatch;
 
     @GetMapping
     public Page<ProductDto> get(Pageable pageable) {
@@ -62,7 +67,7 @@ public class BatchController {
 
     @GetMapping("/{identifier}")
     public BatchDto get(@PathVariable String identifier) {
-	return batchMapper.toDto(batchService.retrieve(identifier));
+	return batchMapper.toDtoWithProduct(batchService.retrieve(identifier));
     }
     
     @PutMapping("/{identifier}")
@@ -73,5 +78,11 @@ public class BatchController {
     @PostMapping()
     public void create(@RequestBody AddBatchInput input) {
 	addBatch.handle(input);
+    }
+    
+
+    @PutMapping("/edit")
+    public void edit(@RequestBody BatchDto input) {
+	editBatch.handle(new EditBatchInput(input));
     }
 }

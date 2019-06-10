@@ -1,4 +1,4 @@
-import { replace } from 'connected-react-router'
+import { replace, goBack as gb } from 'connected-react-router'
 import { toast } from 'react-toastify';
 import { change } from 'redux-form';
 import moment from 'moment';
@@ -6,35 +6,25 @@ import moment from 'moment';
 import * as _ from 'lodash'
 import { api } from '../../../../shared'
 
-export const LOAD_ELEMENT = "PRODUCT/UPDATE/LOAD_CREATE_ELEMENT"
-export const LOADED_ELEMENT = "PRODUCT/UPDATE/LOADED_CREATE_ELEMENT"
+export const LOAD_ELEMENT = "BATCH/UPDATE/LOAD_CREATE_ELEMENT"
+export const LOADED_ELEMENT = "BATCH/UPDATE/LOADED_CREATE_ELEMENT"
 
-export const REQUEST_UPDATE_ELEMENT = "PRODUCT/UPDATE/REQUEST_PROVIDER"
-export const RESPONSE_UPDATE = "PRODUCT/UPDATE/RESPONSE"
-export const ERROR_UPDATE = "PRODUCT/UPDATE/ERROR"
+export const REQUEST_UPDATE_ELEMENT = "BATCH/UPDATE/REQUEST_BATCH"
+export const RESPONSE_UPDATE = "BATCH/UPDATE/RESPONSE"
+export const ERROR_UPDATE = "BATCH/UPDATE/ERROR"
 
-const LOADED_RELATED = "PRODUCT/UPDATE/LOADED_RELATED"
-const LOAD_RELATED = "PRODUCT/UPDATE/LOAD_RELATED"
+const LOADED_RELATED = "BATCH/UPDATE/LOADED_RELATED"
+const LOAD_RELATED = "BATCH/UPDATE/LOAD_RELATED"
 
 let initialState = {
     element: {
-        sku: '',
-        upc: '',
-        name: '',
-        brand: '',
-        minStock: 100,
-        stock: '',
-        providerPrice: '',
-        retailPrice: '',
-        description: '',
-        batchDetails: '',
-        expiration: moment().toDate(),
-        type: 'DEFAULT',
-        provider: null,
-        categories: []
+        id: '',
+        productId: '',
+        detail: '',
+        expiration: '',
+        remainingUnits: '',
+        type: 'DEFAULT' //FOR VALIDATION
     },
-    providers: [],
-    categories: [],
     loading: false,
     error: null
 }
@@ -62,47 +52,46 @@ export default function reducer(state = initialState, action = {}) {
 
 export const update = (element) => (dispatch, getState) => {
     dispatch({ type: REQUEST_UPDATE_ELEMENT })
-
-    api.put("/product", element)
+    api.put("/product/batch/edit", element)
         .then((response) => {
             dispatch({ type: RESPONSE_UPDATE, payload: response.data })
-
-            let location = { pathname: "/product", updated: element.id }
+            let location = { pathname: "/batch", created: element.id }
             dispatch(replace(location));
-            toast.success("producto Modificado")
+            toast.success("Lote Modificado")
         })
         .catch((error) => {
-            dispatch({ type: ERROR_UPDATE, error: error })
-            toast.error("Error al modificar producto")
+            toast.error("Error al persistir Lote intente nuevamente")
+            // dispatch(gb());
         })
 }
 
 export const load = (id) => (dispatch, state) => {
-    dispatch({ type: LOAD_ELEMENT })
-    api.get(`/product/${id}`)
-        .then(res => {
-            let order = res.data
-            order.categories = order.categories.map(c => c.id);
-            order.providerId = order.provider != null ? order.provider.id : null;
-            if (order) {
-                dispatch({ type: LOADED_ELEMENT, payload: order })
-
-                api.get("/provider/all").then((result) => {
-                    dispatch({ type: LOADED_RELATED, payload: { providers: result.data } })
-                })
-
-                api.get("/product/category/all").then((result) => {
-                    dispatch({ type: LOADED_RELATED, payload: { categories: result.data } })
-                })
-            } else {
-                dispatch(replace('/product'));
-                toast.warn("No se puede editar el product seleccionado")
-            }
+    dispatch({ type: LOAD_RELATED })
+    api.get(`/product/batch/${id}`)
+        .then((result) => {
+            dispatch({
+                type: LOADED_RELATED,
+                payload: {
+                    element: {
+                        product: {
+                            id: result.data.product.id
+                        },
+                        type: result.data.product.type,
+                        id: result.data.id,
+                        detail: result.data.detail,
+                        expiration: moment(result.data.expiration),
+                        remainingUnits: result.data.remainingUnits,
+                    }
+                }
+            })
         })
-
+        .catch((error) => {
+            toast.error("Error al buscar Producto, intente nuevamente")
+            dispatch(gb());
+        })
 }
 
 export const goBack = () => dispatch => {
-    dispatch(replace('/product'));
+    dispatch(replace('/batch'));
     toast.info("Edición cancelada")
 }

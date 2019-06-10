@@ -1,4 +1,4 @@
-import { replace } from 'connected-react-router'
+import { replace, goBack as gb } from 'connected-react-router'
 import { toast } from 'react-toastify';
 import { change } from 'redux-form';
 
@@ -6,35 +6,25 @@ import * as _ from 'lodash'
 import { api } from '../../../../shared/index';
 import moment from 'moment';
 
-export const LOAD_ELEMENT = "PRODUCT/CREATE/LOAD_CREATE_ELEMENT"
-export const LOADED_ELEMENT = "PRODUCT/CREATE/LOADED_CREATE_ELEMENT"
+export const LOAD_ELEMENT = "BATCH/CREATE/LOAD_CREATE_ELEMENT"
+export const LOADED_ELEMENT = "BATCH/CREATE/LOADED_CREATE_ELEMENT"
 
-export const REQUEST_CREATE_ELEMENT = "PRODUCT/CREATE/REQUEST_PRODUCT"
-export const RESPONSE_CREATE_PRODUCT = "PRODUCT/CREATE/RESPONSE_PRODUCT"
-export const ERROR_CREATE_PRODUCT = "PRODUCT/CREATE/ERROR_PRODUCT"
+export const REQUEST_CREATE_ELEMENT = "BATCH/CREATE/REQUEST_BATCH"
+export const RESPONSE_CREATE_BATCH = "BATCH/CREATE/RESPONSE_BATCH"
+export const ERROR_CREATE_BATCH = "BATCH/CREATE/ERROR_BATCH"
 
-const LOADED_RELATED = "PRODUCT/CREATE/LOADED_RELATED"
-const LOAD_RELATED = "PRODUCT/CREATE/LOAD_RELATED"
+const LOADED_RELATED = "BATCH/CREATE/LOADED_RELATED"
+const LOAD_RELATED = "BATCH/CREATE/LOAD_RELATED"
 
 let initialState = {
     element: {
-        sku: '',
-        upc: '',
-        name: '',
-        brand: '',
-        minStock: 100,
-        stock: '',
-        providerPrice: '',
-        retailPrice: '',
-        description: '',
-        batchDetails: '',
-        expiration: moment().toDate(),
-        type: 'DEFAULT',
-        providerId: "",
-        categories:[]
+        id: '',
+        productId: '',
+        detail: '',
+        expiration: '',
+        remainingUnits: '',
+        type: 'DEFAULT' //FOR VALIDATION
     },
-    providers: [],
-    categories: [],
     loading: false,
     error: null
 }
@@ -44,11 +34,11 @@ export default function reducer(state = initialState, action = {}) {
 
         case REQUEST_CREATE_ELEMENT:
             return { ...state, loading: true }
-        case RESPONSE_CREATE_PRODUCT:
+        case RESPONSE_CREATE_BATCH:
             return { ...state, loading: false }
         case LOADED_RELATED:
             return { ...state, loading: false, ...action.payload }
-        case ERROR_CREATE_PRODUCT:
+        case ERROR_CREATE_BATCH:
             return { ...state, loading: false, error: action.error }
         default:
             return state;
@@ -57,32 +47,38 @@ export default function reducer(state = initialState, action = {}) {
 
 export const create = (element) => (dispatch) => {
     dispatch({ type: REQUEST_CREATE_ELEMENT })
-
-    api.post("/product", element)
+    api.post("/product/batch", element)
         .then((response) => {
-            dispatch({ type: RESPONSE_CREATE_PRODUCT, payload: response.data })
-            let location = { pathname: "/product", created: element.id }
+            dispatch({ type: RESPONSE_CREATE_BATCH, payload: response.data })
+            let location = { pathname: "/batch", created: element.id }
             dispatch(replace(location));
             toast.success("Producto Creado")
         })
         .catch((error) => {
-            dispatch({ type: ERROR_CREATE_PRODUCT, error: error })
-            toast.error("Error al crear Producto")
+            toast.error("Error al persistir Lote intente nuevamente")
+            // dispatch(gb());
         })
 }
 
 export const load = (id) => (dispatch, state) => {
     //dispatch()
-    api.get("/provider/all").then((result) => {
-        dispatch({ type: LOADED_RELATED, payload: { providers: result.data } })
-    })
-    
-    api.get("/product/category/all").then((result) => {
-        dispatch({ type: LOADED_RELATED, payload: { categories: result.data } })
-    })
+    dispatch({ type: LOAD_RELATED })
+    api.get(`/product/${id}`)
+        .then((result) => {
+            dispatch({
+                type: LOADED_RELATED,
+                payload: {
+                    element: { productId: id, type: result.data.type }
+                }
+            })
+        })
+        .catch((error) => {
+            toast.error("Error al buscar Producto, intente nuevamente")
+            dispatch(gb());
+        })
 }
 
 export const goBack = () => dispatch => {
-    dispatch(replace('/product'));
+    dispatch(replace('/batch'));
     toast.info("Edición cancelada")
 }

@@ -14,13 +14,13 @@ const renderToolbar = (value) => {
     //     </Link>
     // )
 
-    // let editButton = (
-    //     <Link to={`/product/edit/${props.value}`}>
-    //         <button >
-    //             <FaEdit />
-    //         </button>
-    //     </Link>
-    // )
+    let editButton = (
+        <Link to={`/batch/edit/${value}`}>
+            <button >
+                <FaEdit />
+            </button>
+        </Link>
+    )
 
     // let removeButton = (
     //     <Link to={`/product/remove/${props.value}`}>
@@ -37,6 +37,7 @@ const renderToolbar = (value) => {
     </Link>
     return (<span>
         {supplyBtn} {' '}
+        {editButton}
     </span>)
 }
 

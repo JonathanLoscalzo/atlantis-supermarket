@@ -17,7 +17,7 @@ class CreatePage extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.pristine && !prevProps.pristine) {
-            debugger;
+
         }
     }
 
@@ -36,18 +36,15 @@ class CreatePage extends React.Component {
 }
 
 const CreateForm = reduxForm({
-    form: 'product/create',  // a unique identifier for this form
+    form: 'batch/create',  // a unique identifier for this form
     validate: validator(schema()),
     enableReinitialize: true
 })(Form)
 
-const selector = formValueSelector('product/create');
+const selector = formValueSelector('batch/create');
 
-const mapStateToProps = ({ product: element, ...state }) => ({
+const mapStateToProps = ({ batch: element, ...state }) => ({
     element: element.create.element,
-    providers: element.create.providers,
-    categories: element.create.categories,
-    selectedBatchType: selector(state, 'type'),
     loading: element.create.loading,
     error: element.create.error,
 })

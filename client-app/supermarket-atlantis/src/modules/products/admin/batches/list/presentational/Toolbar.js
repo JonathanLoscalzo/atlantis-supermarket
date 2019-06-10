@@ -5,9 +5,9 @@ import { FaEdit, FaTrash, FaSearch } from 'react-icons/fa'
 import { MdPlusOne } from 'react-icons/md'
 import batchTypes from '../../../shared/batchTypes'
 
-const renderToolbar = ({ ...props }) => {
+const renderToolbar = (value) => {
     let addBatch = (
-        <Link to={`/batch/add/${props.value}`}>
+        <Link to={`/batch/new/${value}`}>
             <button >
                 <MdPlusOne />
             </button>

@@ -13,6 +13,7 @@ import schema from '../../form/Validation';
 class EditPage extends React.Component {
 
     componentWillMount() {
+        //TODO: este id es el del batch
         this.props.load(this.props.match.params.id)
     }
 
@@ -28,7 +29,7 @@ class EditPage extends React.Component {
                 <CreateForm
                     {...this.props}
                     mode="UPDATE"
-                    title="Editar producto"
+                    title="Editar Batch"
                     initialValues={this.props.element}
                     onSubmit={(values) => { this.props.update(values); }}
                 />
@@ -38,17 +39,15 @@ class EditPage extends React.Component {
 }
 
 const CreateForm = reduxForm({
-    form: 'product/update',  // a unique identifier for this form
-    validate: validator(schema("update")),
+    form: 'batch/update',  // a unique identifier for this form
+    validate: validator(schema()),
     enableReinitialize: true
 })(Form)
 
-const selector = formValueSelector('element/update');
+const selector = formValueSelector('batch/update');
 
-const mapStateToProps = ({ product: element, ...state }) => ({
+const mapStateToProps = ({ batch: element, ...state }) => ({
     element: element.update.element,
-    providers: element.update.providers,
-    categories: element.update.categories,
     loading: element.update.loading,
     error: element.update.error,
 })

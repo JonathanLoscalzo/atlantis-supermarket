@@ -17,16 +17,7 @@ export default props => {
     const {
         handleSubmit,
         title,
-        providers,
-        categories,
-        selectedBatchType
     } = props
-
-    let mode = props.mode == "UPDATE" ? "UPDATE" : "CREATE";
-    let providersOptions = providers.map(x => ({ value: x.id, label: x.name }))
-    providersOptions.push({ value: "", label: "Seleccione" })
-
-    let categoriesOptions = categories.map(x => ({ value: x.id, label: x.description }))
 
     return (
         <div>
@@ -34,85 +25,35 @@ export default props => {
             <div>
                 <form onSubmit={handleSubmit}>
                     <Row>
-                        <FormGroup className="col-3">
-                            <Field label="SKU" name="sku"
-                                placeholder="sku"
-                                component={RenderField}
-                                type="text" />
-                            <Field label="Cód. Barras" name="upc"
-                                placeholder="upc"
-                                component={RenderField}
-                                type="text" />
-                            <Field label="Nombre"
-                                name="name"
-                                placeholder="name"
-                                component={RenderField}
-                                type="text" />
-                            <Field label="Marca/compañia" name="brand"
-                                placeholder="brand"
-                                component={RenderField}
-                                type="text" />
-                            {
-                                mode == "CREATE" &&
-                                selectedBatchType == "EXPIRATION" &&
-                                <Field label="Expiración"
-                                    name="expiration"
-                                    placeholder="expiration"
-                                    showTime={false}
-                                    component={RenderDateField}
-                                    type="date" />
-                            }
+                        <FormGroup className="col-12">
                             <Field
-                                label="Tipo Lote"
-                                name="type"
-                                //placeholder="Seleccione..."
-                                options={types}
-                                component={RenderSelectableField} />
-                        </FormGroup>
-                        <FormGroup className="col-3">
-                            <Field label="Stock minimo" name="minStock"
-                                placeholder="minStock"
+                                className="col-3"
+                                label="Detail"
+                                name="detail"
+                                placeholder="Detalle"
                                 component={RenderField}
                                 type="text" />
-                            {mode == "CREATE" &&
-                                <Field label="Stock" name="stock"
-                                    placeholder="stock"
-                                    component={RenderField}
-                                    type="text" />}
-                            <Field label="Precio costo" name="providerPrice"
-                                placeholder="providerPrice"
+                            <Field
+                                className="col-3"
+                                label="Expiración"
+                                name="expiration"
+                                placeholder="expiration"
+                                showTime={false}
+                                component={RenderDateField}
+                                type="date" />
+                            <Field 
+                                className="col-3"
+                                label="Unidades"
+                                name="remainingUnits"
+                                placeholder="100.20"
                                 component={RenderField}
                                 type="text" />
-                            <Field label="Precio venta" name="retailPrice"
-                                placeholder="retailPrice"
-                                component={RenderField}
-                                type="text" />
-                            <Field label="Proveedor"
+
+                            {/* <Field label="Proveedor"
                                 name="providerId"
                                 placeholder="Proveedor"
                                 options={providersOptions}
-                                component={RenderSelectableField} />
-                        </FormGroup>
-                        <FormGroup className="col-4">
-                            <Field label="Descripcion" name="description"
-                                placeholder="description"
-                                component={RenderField}
-                                type="textarea" />
-                            {
-                                mode == "CREATE" &&
-                                <Field label="Descripcion Lote" name="batchDetails"
-                                    placeholder="batchDetails"
-                                    component={RenderField}
-                                    type="textarea" />
-                            }
-
-                            <Field
-                                label="Categorias"
-                                name="categories"
-                                multiple
-                                //placeholder="Seleccione..."
-                                options={categoriesOptions}
-                                component={RenderSelectableField} />
+                                component={RenderSelectableField} /> */}
                         </FormGroup>
                     </Row>
                     <Spinner loading={props.loading}>

@@ -26,7 +26,7 @@ class ProductListPage extends React.Component {
     render() {
 
         let urls = {
-            new: `${this.props.match.url}/new`,
+            new: `${this.props.match.url}/new/:id`,
             edit: `${this.props.match.url}/edit/:id`,
             remove: `${this.props.match.url}/remove/:id`,
             view: `${this.props.match.url}/view/:id`,
@@ -39,13 +39,13 @@ class ProductListPage extends React.Component {
                     <Route path={urls.new} component={BatchCreate} />
                     <Route path={urls.edit} component={BatchUpdateView} />
                     <Route path={urls.view} component={BatchView} />
+                    <Route path={urls.supply} component={BatchSupplyView} />
                     <BatchList
                         fetchData={this.props.getBatches}
                         urls={urls}
                         {...this.props} />
                 </Switch>
 
-                <Route path={urls.supply} component={BatchSupplyView} />
                 <Route path={urls.remove} component={df} />
             </Spinner>
         )
