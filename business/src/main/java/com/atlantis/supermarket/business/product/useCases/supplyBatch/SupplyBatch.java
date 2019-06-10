@@ -26,8 +26,8 @@ public class SupplyBatch implements UseCaseInput<SupplyBatchInput> {
     @Transactional
     public void handle(SupplyBatchInput input) {
 
-	Batch batch = batches.findById(input.batchId)
-		.orElseThrow(() -> new BatchNotExistException(input.batchId.toString()));
+	Batch batch = batches.findById(input.id)
+		.orElseThrow(() -> new BatchNotExistException(input.id.toString()));
 
 	batch.supply(input.quantity);
 

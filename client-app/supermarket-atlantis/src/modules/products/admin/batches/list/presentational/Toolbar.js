@@ -7,7 +7,7 @@ import batchTypes from '../../../shared/batchTypes'
 
 const renderToolbar = ({ ...props }) => {
     let addBatch = (
-        <Link to={`/batch/new/${props.value}`}>
+        <Link to={`/batch/add/${props.value}`}>
             <button >
                 <MdPlusOne />
             </button>

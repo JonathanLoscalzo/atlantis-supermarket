@@ -146,7 +146,16 @@ const columnsBatch = [
           </div>
         ),
         accessor: 'id',
-        Cell: props => renderToolbarBatches(props.value)
+        Aggregated: row => {
+            return (
+                <span>
+
+                </span>
+            )
+        },
+        Cell: props => {
+            return renderToolbarBatches(props.value)
+        }
     }
 ]
 

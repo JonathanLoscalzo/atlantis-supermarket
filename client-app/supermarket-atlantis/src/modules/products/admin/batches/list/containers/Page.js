@@ -14,6 +14,7 @@ import BatchList from '../presentational/ProductList';
 import BatchView from '../../view/container/Page'
 import BatchCreate from '../../create/container/CreatePage'
 import BatchUpdateView from '../../update/container/ElementUpdatePage'
+import BatchSupplyView from '../../supply/container/Page'
 
 const df = () => (<div></div>)
 
@@ -28,7 +29,8 @@ class ProductListPage extends React.Component {
             new: `${this.props.match.url}/new`,
             edit: `${this.props.match.url}/edit/:id`,
             remove: `${this.props.match.url}/remove/:id`,
-            view: `${this.props.match.url}/view/:id`
+            view: `${this.props.match.url}/view/:id`,
+            supply: `${this.props.match.url}/supply/:id`
         }
 
         return (
@@ -43,6 +45,7 @@ class ProductListPage extends React.Component {
                         {...this.props} />
                 </Switch>
 
+                <Route path={urls.supply} component={BatchSupplyView} />
                 <Route path={urls.remove} component={df} />
             </Spinner>
         )

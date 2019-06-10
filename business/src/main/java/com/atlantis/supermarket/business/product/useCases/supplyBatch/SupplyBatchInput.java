@@ -5,6 +5,6 @@ import java.util.UUID;
 import com.atlantis.supermarket.core.shared.business.InputPort;
 
 public class SupplyBatchInput extends InputPort {
-    public UUID batchId;
+    public UUID id;
     public double quantity;
 }
