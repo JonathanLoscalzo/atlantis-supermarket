@@ -11,9 +11,8 @@ import product from '../modules/products'
 import home from '../modules/home'
 import provider from '../modules/providers'
 import category from '../modules/products/admin/categories'
-// import element from '../modules/element';
-// import task from '../modules/task';
-// import repair from '../modules/repair';
+import batch from '../modules/products/admin/batches'
+
 
 export default function configureStore(history, initialState) {
     const reducers = {
@@ -24,7 +23,8 @@ export default function configureStore(history, initialState) {
         home,
         client,
         provider,
-        category
+        category,
+        batch,
         // client,
         // element, 
         // task,

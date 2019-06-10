@@ -45,7 +45,7 @@ public class ProductMapperImpl implements ProductMapper {
     }
 
     @Override
-    public ProductDto toDtoSimple(Product p) {
+    public ProductDto toDtoAllBatches(Product p) {
 	ProductDto dto = new ProductDto();
 	
 	dto.setId(p.getId().toString());
@@ -58,6 +58,12 @@ public class ProductMapperImpl implements ProductMapper {
 	dto.setDescription(p.getDescription());
 	dto.setType(p.getType());
 	dto.setProvider(providerMapper.toDto(p.getProvider()));
+	
+	dto.setBatches(p.getBatches()
+		.stream()
+		.map(batchMapper::toDto)
+		.collect(Collectors.toList()));
+	
 	dto.setCategories(p.getCategories()
 		.stream()
 		.map(categoryMapper::toDto)

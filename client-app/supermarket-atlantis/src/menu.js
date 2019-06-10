@@ -10,8 +10,8 @@ const menu = [
     ]),
     
     menu_factory("Inventario", "/batch", "icon-basket", [
+      menu_factory("Lotes", "/batch", "icon-basket"),
       menu_factory("Abastecer", "/batch/add", "icon-basket"),
-      menu_factory("Ver", "/batch", "icon-basket"),
     ]),
   
     menu_factory("Clientes", "/clients", "icon-basket", [

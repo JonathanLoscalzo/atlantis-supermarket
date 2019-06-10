@@ -17,6 +17,7 @@ import LogoutPage from '../auth/containers/LogoutPage';
 // import RepairListPage from './modules/repair/list/container/RepairListPage';
 import ProviderPage from '../providers/list/container/Page'
 import CategoryPage from '../products/admin/categories/list/container/Page'
+import BatchPage from '../products/admin/batches/list/containers/Page'
 import { isAdmin } from '../../common/auth'
 
 
@@ -34,6 +35,7 @@ const renderAdminRoutes = () => {
             <React.Fragment>
                 <Route path="/provider" component={ProviderPage} />
                 <Route path="/category" component={CategoryPage} />
+                <Route path="/batch" component={BatchPage} />
             </React.Fragment>
         )
     }
