@@ -10,9 +10,6 @@ const ProductList = (props) => {
         <div className="col">
             <div className="row">
                 <div className="col-3">
-                    <NuevoButton goToCreate={props.goToCreate} /> <br />
-                </div>
-                <div className="col-3">
                         <h4>Filtrado</h4>
                         <Input type="checkbox"
                             checked={props.checked}
