@@ -17,6 +17,7 @@ export default props => {
     const {
         handleSubmit,
         title,
+        element
     } = props
 
     return (
@@ -33,15 +34,18 @@ export default props => {
                                 placeholder="Detalle"
                                 component={RenderField}
                                 type="text" />
+                            {
+                                element.type != "DEFAULT" &&
+                                <Field
+                                    className="col-3"
+                                    label="Expiración"
+                                    name="expiration"
+                                    placeholder="expiration"
+                                    showTime={false}
+                                    component={RenderDateField}
+                                    type="date" />
+                            }
                             <Field
-                                className="col-3"
-                                label="Expiración"
-                                name="expiration"
-                                placeholder="expiration"
-                                showTime={false}
-                                component={RenderDateField}
-                                type="date" />
-                            <Field 
                                 className="col-3"
                                 label="Unidades"
                                 name="remainingUnits"

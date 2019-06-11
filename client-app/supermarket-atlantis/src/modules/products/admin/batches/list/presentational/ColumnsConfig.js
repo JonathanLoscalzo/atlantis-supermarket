@@ -128,7 +128,7 @@ const columnsBatch = [
             return <div style={{
                 backgroundColor: moment(props.value) <= moment() ? 'red' : ''
             }}>
-                {moment(props.value).format("DD/MM/YYYY")}
+                {props.value ? moment(props.value).format("DD/MM/YYYY") : "-"}
             </div>
         },
     },
