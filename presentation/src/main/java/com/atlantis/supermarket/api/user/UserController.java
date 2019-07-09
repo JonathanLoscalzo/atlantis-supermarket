@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.atlantis.supermarket.api.shared.BaseController;
 import com.atlantis.supermarket.business.client.ClientService;
+import com.atlantis.supermarket.business.client.useCases.input.CreateClientAndUser;
 import com.atlantis.supermarket.business.user.UserService;
 import com.atlantis.supermarket.core.user.User;
 import com.atlantis.supermarket.core.user.exceptions.UserExistsException;
+import com.atlantis.supermarket.core.user.exceptions.UsernameNotFoundException;
 
 @RestController
 @RequestMapping("/api/public")
@@ -24,11 +26,18 @@ public class UserController{
     @Autowired
     private UserService userService;
     
+    @Autowired
+    private ClientService clientService;
+    
     //https://medium.com/@MatthewFTech/spring-boot-cache-with-redis-56026f7da83a
     @CacheEvict(value="users")
     @PostMapping("/sign-up")
-    public void signUp(@RequestBody User user) throws UserExistsException {
-	userService.createUser(user);
+    public void signUp(@RequestBody User user) throws UserExistsException, UsernameNotFoundException {
+	CreateClientAndUser input = new CreateClientAndUser();
+	input.setUsername(user.getUsername());
+	input.setPassword(user.getPassword());
+	
+	clientService.createClientAndUser(input);
     }
     
     @Cacheable(value="users")

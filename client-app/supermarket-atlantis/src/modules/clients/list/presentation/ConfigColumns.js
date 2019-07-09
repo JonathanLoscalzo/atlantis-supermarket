@@ -6,7 +6,7 @@ import { FaEdit, FaTrash, FaSearch } from 'react-icons/fa'
 const renderToolbar = ({ ...props }) => {
     let editButton;
     editButton = (
-        <Link to={`/client/sales/${props.value}`}>
+        <Link to={`/clients/view/${props.value}`}>
             <button >
                 <FaEdit /> ver
             </button>

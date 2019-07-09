@@ -9,6 +9,8 @@ import com.atlantis.supermarket.infrastructure.client.ClientRepository;
 
 import java.util.UUID;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,7 @@ import com.atlantis.supermarket.core.client.Client;
 @Service
 public class ClientService extends ServiceImpl<Client> {
 
+    @Autowired
     private ClientRepository clients;
 
     @Autowired
@@ -38,6 +41,7 @@ public class ClientService extends ServiceImpl<Client> {
 	return createClientByUserUseCase.handle(input).client;
     }
     
+    @Transactional
     public Client createClientAndUser(CreateClientAndUser model) throws UsernameNotFoundException, UserExistsException {
 
 	User user = userUseCase.createUser(model.getUsername(), model.getPassword());

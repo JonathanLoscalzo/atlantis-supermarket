@@ -22,7 +22,7 @@ class ProvidersPage extends React.Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
 
         if (this.props.location.removed) {
-            debugger;
+            
             let id = this.props.location.removed
             delete this.props.location.removed
             this.props.removeElementAt(id)

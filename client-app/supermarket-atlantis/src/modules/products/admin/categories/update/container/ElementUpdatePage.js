@@ -17,7 +17,7 @@ class EditPage extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.pristine && !prevProps.pristine) {
-            debugger;
+            
         }
     }
 

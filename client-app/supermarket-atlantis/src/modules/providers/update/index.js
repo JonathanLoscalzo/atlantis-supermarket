@@ -45,7 +45,7 @@ export const update = (element) => (dispatch) => {
 
     api.put("provider", element)
         .then((response) => {
-            debugger;
+            
             dispatch({ type: RESPONSE_UPDATE_PROVIDER, payload: response.data })
 
             let location = { pathname: "/provider", updated: element.id }

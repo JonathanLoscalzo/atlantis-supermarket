@@ -31,7 +31,7 @@ public class Client extends BaseEntity {
     @Column(name = "surname", nullable = false)
     private String surname;
 
-    @Column(name = "document", nullable = false)
+    @Column(name = "document", nullable = true)
     private Integer document;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -49,7 +49,7 @@ public class Client extends BaseEntity {
 	client.setSurname(surname);
 	client.setUser(user);
 	client.setDocument(document);
-	
+	user.setClient(client);
 	return client;
     }
     

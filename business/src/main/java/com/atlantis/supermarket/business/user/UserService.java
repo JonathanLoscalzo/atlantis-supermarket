@@ -66,6 +66,8 @@ public class UserService {
 	User existent = searcher.findByUsername(username);
 	UserExists.validate(existent);
 	User user = new User();
+
+	user.setUsername(username);
 	user.setPassword(Encoder.passwordEncoder().encode(password));
 	user.addRole(User.UserRole.CLIENT);
 	saver.save(user);

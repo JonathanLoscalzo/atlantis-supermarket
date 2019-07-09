@@ -23,6 +23,6 @@ export default function reducer(state = initialState, action = {}) {
 export const getClients = () => (dispatch) => {
     dispatch({ type: FETCH_CLIENTS })
     api.get("client").then((result) => {
-        dispatch({ type: SET_CLIENTS, payload: result.data })
+        dispatch({ type: SET_CLIENTS, payload: result.data.content })
     })
 }

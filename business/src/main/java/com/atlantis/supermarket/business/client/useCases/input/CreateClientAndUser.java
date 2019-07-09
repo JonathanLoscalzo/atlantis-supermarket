@@ -11,14 +11,16 @@ public class CreateClientAndUser extends InputPort {
         this.password = password;
     }
 
-    private String name;
+    private String name = "";
 
-    private String surname;
+    private String surname = "";
 
-    private Integer document;
+    private Integer document = 0;
     
+    // required
     private String username;
 
+    // required
     private String password;
 
     public String getName() {
