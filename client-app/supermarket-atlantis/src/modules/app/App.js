@@ -33,9 +33,11 @@ const renderAdminRoutes = () => {
     if (isAdmin()) {
         return (
             <React.Fragment>
+                <Route path="/product" component={ProductPage} />
                 <Route path="/provider" component={ProviderPage} />
                 <Route path="/category" component={CategoryPage} />
                 <Route path="/batch" component={BatchPage} />
+                <Route path="/clients" component={ClientPage} />
             </React.Fragment>
         )
     }
@@ -47,10 +49,7 @@ export default (props) => (
             <Layout {...props} >
                 <Switch>
                     <Route exact path="/" component={HomePage} />
-                    <Route path="/product" component={ProductPage} />
-                    <Route exact path="/clients" component={ClientPage} />
                     {renderAdminRoutes()}
-
                     {/* <Route exact path='/' component={Home} />
                 <Route exact path='/client' component={Clients} />
                 <Route path='/client/edit/:id' component={ClientEdit} />
@@ -59,9 +58,9 @@ export default (props) => (
                 <Route path='/element' component={ElementListPage} />
                 <Route path='/repair' component={RepairListPage} />
                 <Route path='/task' component={TaskListPage} />*/}
-                    <Route path="/logout" component={LogoutPage} />
                     <Route component={NoMatch} />
                 </Switch>
+                <Route exact path="/logout" component={LogoutPage} />
             </Layout>
             <ToastContainer autoClose={2000} />
         </Private>

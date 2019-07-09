@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
-import { isAdmin } from '../../common/auth'
+import { isClient } from '../../../common/auth'
 
-import list from './list'
+import list from '.'
 
 let reducers = null
 
-if (isAdmin()) {
+if (isClient()) {
     reducers = combineReducers({
         list
     })

@@ -10,7 +10,6 @@ import Logout from '../presentational/Logout'
 class LogoutPage extends React.Component {
 
     componentDidMount() {
-
     }
 
     render() {
