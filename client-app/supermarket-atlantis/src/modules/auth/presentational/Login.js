@@ -9,6 +9,7 @@ import { reduxForm, Field } from 'redux-form'
 
 
 class CreateForm extends React.Component {
+
     errorMessage() {
         if (this.props.errorMessage) {
             return (
@@ -20,7 +21,8 @@ class CreateForm extends React.Component {
     }
 
     render() {
-        const { handleSubmit, submitting } = this.props;
+        
+        const { handleSubmit, submitting, initialValues: credentials} = this.props;
         return (
             <div>
                 <form className="form-signin" onSubmit={handleSubmit}>
@@ -38,19 +40,72 @@ class CreateForm extends React.Component {
                             component={RenderField}
                             type="password" />
                     </FormGroup>
-                    <button
-                        disabled={submitting}
-                        className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
-                        type="submit"
-                        onClick={handleSubmit(values => this.props.onSubmit({ ...values, button: 'login' }))}
-                    >Sign in</button>
-                    <button
-                        disabled={submitting}
-                        type="submit"
-                        className="btn btn-lg btn-secondary btn-block btn-login text-uppercase font-weight-bold mb-2"
-                        onClick={handleSubmit(values => this.props.onSubmit({ ...values, button: 'signup' }))}
-                    >Sign up</button>
-                    {/* <button type="submit" disabled={submitting} className="btn btn-primary">Iniciar sesión</button> */}
+                    {
+                        credentials.isSignup && <div>
+                            <FormGroup>
+                                <Field
+                                    name="email"
+                                    placeholder="Email"
+                                    component={RenderField}
+                                    type="text" />
+                            </FormGroup>
+                            <FormGroup>
+                                <Field
+                                    name="name"
+                                    placeholder="Nombre"
+                                    component={RenderField}
+                                    type="text" />
+                            </FormGroup>
+                            <FormGroup>
+                                <Field
+                                    name="surname"
+                                    placeholder="Apellido"
+                                    component={RenderField}
+                                    type="text" />
+                            </FormGroup>
+                            <FormGroup>
+                                <Field
+                                    name="document"
+                                    placeholder="Documeto"
+                                    component={RenderField}
+                                    type="number" />
+                            </FormGroup>
+                        </div>
+                    }
+
+                    {
+                        !credentials.isSignup && <React.Fragment><button
+                            disabled={submitting}
+                            className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
+                            type="submit"
+                            onClick={handleSubmit(values => this.props.onSubmit({ ...values, button: 'login' }))}>
+                            Sign in
+                        </button>
+                            <button
+                                type="button"
+                                className="btn btn-lg btn-secondary btn-block btn-login text-uppercase font-weight-bold mb-2"
+                                onClick={this.props.signupForm}
+                            >Sign up</button>
+                        </React.Fragment>
+                    }
+
+                    {
+                        credentials.isSignup && 
+                        <React.Fragment>
+                            <button
+                            disabled={submitting}
+                            type="submit"
+                            className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
+                            onClick={handleSubmit(values => this.props.onSubmit({ ...values, button: 'signup' }))}
+                        >Sign up</button>
+                            <button
+                                type="button"
+                                className="btn btn-lg btn-secondary btn-block btn-login text-uppercase font-weight-bold mb-2"
+                                onClick={this.props.signupForm}
+                            >Cancel</button>
+
+                        </React.Fragment>
+                    }
                 </form>
                 {this.errorMessage()}
             </div>)
@@ -80,6 +135,7 @@ const Create = (props) => (
 
 export default reduxForm({
     form: 'auth/login',  // a unique identifier for this form
-    validate: Validator(schema)
+    validate: Validator(schema),
+    enableReinitialize:true
 })(Create)
 

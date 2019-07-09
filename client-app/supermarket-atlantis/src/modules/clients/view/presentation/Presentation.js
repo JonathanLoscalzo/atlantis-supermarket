@@ -2,6 +2,8 @@ import React from 'react'
 import { Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 
 const Presentation = (props) => {
+    const { element } = props;
+
     return (
         <Row>
             <Col sm="12">
@@ -10,6 +12,11 @@ const Presentation = (props) => {
             <Col sm="4">
                 <Card body>
                     <CardTitle>Cliente</CardTitle>
+                    <CardText>
+                        {element.email}
+                        {element.name}, {element.surname}
+                        {element.username}
+                    </CardText>
                 </Card>
             </Col>
         </Row>

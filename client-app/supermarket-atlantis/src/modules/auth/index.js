@@ -7,11 +7,13 @@ const AUTH_RESPONSE = 'AUTH/RESPONSE';
 const AUTH_ERROR = 'AUTH/ERROR';
 const AUTH_CANCEL = 'AUTH/CANCEL';
 const AUTH_LOGOUT = 'AUTH/LOGOUT';
+const AUTH_SIGNUP = 'AUTH/SIGNUP';
 
 const initialState = {
     loading: false,
     authenticated: false,
-    errorMessage: null
+    errorMessage: null,
+    isSignup: false,
 }
 
 export default function reducer(state = initialState, action = {}) {
@@ -32,6 +34,8 @@ export default function reducer(state = initialState, action = {}) {
             return { ...state, loading: false, authenticated: false };
         case AUTH_LOGOUT:
             return state;
+        case AUTH_SIGNUP:
+            return { ...state, isSignup: !state.isSignup };
         default:
             return state;
     }
@@ -54,14 +58,14 @@ export const login = ({ username, password }) => (dispatch) => {
         });
 }
 
-export const signup = ({ username, password }) => (dispatch) => {
+export const signup = ({ ...values }) => (dispatch) => {
     dispatch({ type: AUTH_REQUEST })
 
     const url = '/public/sign-up';
-
-    api.post(url, { username: username, password: password })
+    
+    api.post(url, values)
         .then((response) => {
-           login({username, password})(dispatch)
+            login({ username: values.username, password: values.password })(dispatch)
         })
         .catch(() => {
             //toast.error('Ocurrió un error');
@@ -73,4 +77,8 @@ export const logout = () => (dispatch) => {
     localStorage.removeItem('JWT_LOGIN');
     dispatch(replace("/"))
     window.location.reload()
+}
+
+export const signupForm = () => (dispatch) => {
+    dispatch({ type: AUTH_SIGNUP })
 }

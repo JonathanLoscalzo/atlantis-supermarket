@@ -3,14 +3,7 @@ package com.atlantis.supermarket.business.client.useCases.input;
 import com.atlantis.supermarket.core.shared.business.InputPort;
 
 public class CreateClientAndUser extends InputPort {
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
+    
     private String name = "";
 
     private String surname = "";
@@ -22,6 +15,8 @@ public class CreateClientAndUser extends InputPort {
 
     // required
     private String password;
+    
+    private String email;
 
     public String getName() {
         return name;
@@ -53,6 +48,22 @@ public class CreateClientAndUser extends InputPort {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+    
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+	return email;
+    }
+
+    public void setEmail(String email) {
+	this.email = email;
     }
     
 }

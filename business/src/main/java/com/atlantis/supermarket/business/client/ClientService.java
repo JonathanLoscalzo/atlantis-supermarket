@@ -47,7 +47,8 @@ public class ClientService extends ServiceImpl<Client> {
 	User user = userUseCase.createUser(model.getUsername(), model.getPassword());
 
 	Client client = Client.createClientFromUser(user, model.getName(), model.getSurname(), model.getDocument());
-
+	user.setEmail(model.getEmail());
+	
 	clients.save(client);
 
 	return client;
