@@ -21,7 +21,6 @@ import com.atlantis.supermarket.business.product.useCases.editBatch.EditBatch;
 import com.atlantis.supermarket.business.product.useCases.editBatch.EditBatchInput;
 import com.atlantis.supermarket.business.product.useCases.supplyBatch.SupplyBatch;
 import com.atlantis.supermarket.business.product.useCases.supplyBatch.SupplyBatchInput;
-import com.atlantis.supermarket.core.product.Provider;
 import com.atlantis.supermarket.core.product.dto.BatchDto;
 import com.atlantis.supermarket.core.product.dto.ProductDto;
 import com.atlantis.supermarket.core.product.mapper.BatchMapper;
@@ -31,13 +30,6 @@ import com.atlantis.supermarket.infrastructure.product.ProductRepository;
 @RestController
 @RequestMapping("/api/product/batch")
 public class BatchController {
-    @Autowired
-    private CreateProduct createProduct;
-    @Autowired
-    private UpdateProduct updateProduct;
-
-    @Autowired
-    private ProductService productService;
 
     @Autowired
     private BatchService batchService;

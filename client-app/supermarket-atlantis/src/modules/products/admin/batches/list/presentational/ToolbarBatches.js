@@ -2,7 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 import { Link } from 'react-router-dom'
 import { FaEdit, FaTrash, FaSearch } from 'react-icons/fa'
-import batchTypes from '../../../shared/batchTypes'
+import batchTypes from '../../../../shared/batchTypes'
 import { TiFolderAdd } from 'react-icons/ti'
 
 const renderToolbar = (value) => {

@@ -16,6 +16,7 @@ import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
@@ -30,11 +31,16 @@ import javax.persistence.Table;
 import org.springframework.data.util.Pair;
 
 import com.atlantis.supermarket.core.product.Batch.BatchType;
+import com.atlantis.supermarket.core.product.events.ProductCreatedEvent;
 import com.atlantis.supermarket.core.product.events.ProductMinStockEvent;
 import com.atlantis.supermarket.core.product.exception.BatchNotAvailableException;
 import com.atlantis.supermarket.core.product.exception.BatchNotExistException;
 import com.atlantis.supermarket.core.product.exception.ProductNotSatisfiedStockException;
+import com.atlantis.supermarket.core.product.search.ProductSolrDto;
 import com.atlantis.supermarket.core.shared.BaseEntityAuditable;
+import com.atlantis.supermarket.core.shared.search.SolrDto;
+import com.atlantis.supermarket.core.shared.search.SolrIndexed;
+import com.atlantis.supermarket.core.shared.search.SolrUpdate;
 
 /**
  * “First Expired, First Out” (FEFO)
@@ -45,8 +51,9 @@ import com.atlantis.supermarket.core.shared.BaseEntityAuditable;
  */
 @Entity
 @Table(name = "product")
+@EntityListeners(SolrUpdate.class)
 @Access(AccessType.FIELD)
-public class Product extends BaseEntityAuditable {
+public class Product extends BaseEntityAuditable implements SolrIndexed {
 
     private static final long serialVersionUID = -2257627604122619697L;
     // TODO: product kg/unit/... etc
@@ -88,11 +95,15 @@ public class Product extends BaseEntityAuditable {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
-    @OrderColumn(name="category_order")
+    @OrderColumn(name = "category_order")
     private Collection<Category> categories = new ArrayList<>();
-    
+
     public Product() {
 	this.batches = new ArrayList<Batch>();
+
+	// evento para indexar en solr
+	this.registerEvent(new ProductCreatedEvent(this));
+
     }
 
     @Override
@@ -184,15 +195,15 @@ public class Product extends BaseEntityAuditable {
     public Collection<Batch> getBatches() {
 	return this.getBatches(false);
     }
-    
+
     public void addCategory(Category tag) {
 	categories.add(tag);
-        tag.getProducts().add(this);
+	tag.getProducts().add(this);
     }
- 
+
     public void removeCategory(Category tag) {
-        categories.remove(tag);
-        tag.getProducts().remove(this);
+	categories.remove(tag);
+	tag.getProducts().remove(this);
     }
 
     /**
@@ -222,8 +233,8 @@ public class Product extends BaseEntityAuditable {
 	this.batches = batches;
 	return this;
     }
-    
-    public Collection<Category> getCategories(){
+
+    public Collection<Category> getCategories() {
 	return this.categories;
     }
 
@@ -243,7 +254,7 @@ public class Product extends BaseEntityAuditable {
 	this.description = description;
 	return this;
     }
-    
+
     public Product setCategories(Collection<Category> categories) {
 	this.categories = categories;
 	return this;
@@ -319,6 +330,18 @@ public class Product extends BaseEntityAuditable {
 
 	return consume(quantity, l);
 
+    }
+
+    @Override
+    public SolrDto getSolrDto() {
+	ProductSolrDto dto = new ProductSolrDto();
+	dto.setId(this.getClass(), this.getId());
+	dto.setName(name);
+	dto.setBrand(this.getBrand());
+	dto.setDescription(this.getDescription());
+	dto.setCategories(this.getCategories().stream().map(x -> x.getDescription()).collect(Collectors.toList()));
+	dto.setRetailPrice(this.getRetailPrice());
+	return dto;
     }
 
 }

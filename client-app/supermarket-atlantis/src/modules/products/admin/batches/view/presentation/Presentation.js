@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import { Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
-import BatchTypes from '../../../shared/batchTypes';
+import BatchTypes from '../../../../shared/batchTypes';
 
 const Presentation = (props) => {
     const productKeys = ["name", "brand", "description", "minStock", "providerPrice", "retailPrice", "sku", "upc"]

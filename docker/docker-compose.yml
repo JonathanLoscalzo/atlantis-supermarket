@@ -27,15 +27,17 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
-  # solr:
-  #   image: solr:latest
-  #   ports:
-  #    - "8983:8983"
-  #   volumes:
-  #     - data-solr:/opt/solr/server/solr/mycores
-  #   entrypoint:
-  #     - docker-entrypoint.sh
-  #     - solr-precreate
-  #     - mycore
+  solr:
+    image: solr:latest
+    ports:
+     - "8983:8983"
+    volumes:
+      - data-solr:/opt/solr/server/solr/mycores
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - mycore
 networks:
   webnet:
+volumes:
+  data-solr:

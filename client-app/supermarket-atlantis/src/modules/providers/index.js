@@ -7,7 +7,7 @@ import update from './update'
 import create from './create'
 
 let roles = getRoles();
-let reducer = combineReducers({})
+let reducer = (state = {}, action) => state
 
 if (roles.indexOf("ADMIN") >= 0) {
     reducer = combineReducers({

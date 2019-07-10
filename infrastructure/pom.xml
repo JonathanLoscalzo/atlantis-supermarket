@@ -31,6 +31,11 @@
 			<artifactId>core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-solr</artifactId>
+			<version>4.0.9.RELEASE</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.sendgrid/sendgrid-java -->
 	</dependencies>
 	<build>

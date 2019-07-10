@@ -13,7 +13,7 @@ if (isAdmin()) {
     })
 }
 else {
-    reducers = combineReducers({})
+    reducers = (state = {}, action) => state
 }
 
 export default reducers;

@@ -3,7 +3,7 @@ const menu_factory = (title, to, icon, children = []) => ({ title, to, icon, chi
 
 let menu = []
 
-if (isAdmin) {
+if (isAdmin()) {
   menu =
     [menu_factory("Productos", "/product", "icon-basket", [
       menu_factory("Productos", "/product", "icon-basket"),
@@ -24,8 +24,12 @@ if (isAdmin) {
     ])]
 } else {
   menu = [
-    menu_factory("Catalogo", "", "icon-basket", [
-      menu_factory("Ver", "/car", "icon-basket"),
+    menu_factory("Compras", "", "icon-basket", [
+      menu_factory("Catalogo", "/shopping", "icon-basket"),
+      menu_factory("Carrito", "/basket", "icon-basket"),
+    ]),
+    menu_factory("Ventas", "", "icon-basket", [
+      menu_factory("Ver", "/sales", "icon-basket"),
     ]),
   ]
 }

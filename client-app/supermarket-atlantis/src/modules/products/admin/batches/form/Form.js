@@ -7,7 +7,7 @@ import { Spinner } from '../../../../shared'
 
 
 import { RenderField, RenderSelectableField, RenderDateField } from '../../../../shared'
-import batchTypes from '../../shared/batchTypes'
+import batchTypes from '../../../shared/batchTypes'
 
 const types = [
     { value: batchTypes.DEFAULT.enum, label: batchTypes.DEFAULT.text },

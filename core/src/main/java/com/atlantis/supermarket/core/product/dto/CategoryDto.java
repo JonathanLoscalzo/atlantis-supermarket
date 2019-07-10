@@ -13,6 +13,14 @@ public class CategoryDto extends BaseEntityDto {
 
     private String description;
 
+    public CategoryDto() {
+	
+    }
+    
+    public CategoryDto(String description) {
+	this.description = description;
+    }
+    
     public String getDescription() {
 	return description;
     }

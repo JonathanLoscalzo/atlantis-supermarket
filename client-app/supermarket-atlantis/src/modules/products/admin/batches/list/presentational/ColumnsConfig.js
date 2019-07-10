@@ -1,6 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
-import batchTypes from '../../../shared/batchTypes'
+import batchTypes from '../../../../shared/batchTypes'
 import renderToolbar from './Toolbar'
 import renderToolbarBatches from './ToolbarBatches'
 import moment from 'moment'

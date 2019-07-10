@@ -32,11 +32,7 @@ public class UserController{
     //https://medium.com/@MatthewFTech/spring-boot-cache-with-redis-56026f7da83a
     @CacheEvict(value="users")
     @PostMapping("/sign-up")
-    public void signUp(@RequestBody CreateClientAndUser input) throws UserExistsException, UsernameNotFoundException {
-	/*CreateClientAndUser input = new CreateClientAndUser();
-	input.setUsername(user.getUsername());
-	input.setPassword(user.getPassword());*/
-	
+    public void signUp(@RequestBody CreateClientAndUser input) throws UserExistsException, UsernameNotFoundException {	
 	clientService.createClientAndUser(input);
     }
     

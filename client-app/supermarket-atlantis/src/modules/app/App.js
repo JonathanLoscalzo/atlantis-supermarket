@@ -11,6 +11,7 @@ import ClientPage from '../clients/list/container/Page';
 import HomePage from '../home/container/HomePage';
 import LoginPage from '../auth/containers/LoginPage';
 import ProductPage from '../products/admin/list/containers/ProductListPage'
+import ShoppingPage from '../products/client/search/container/Page';
 import LogoutPage from '../auth/containers/LogoutPage';
 // import ElementListPage from './modules/element/list/container/ElementListPage'
 // import TaskListPage from './modules/task/list/container/TaskListPage'
@@ -18,7 +19,7 @@ import LogoutPage from '../auth/containers/LogoutPage';
 import ProviderPage from '../providers/list/container/Page'
 import CategoryPage from '../products/admin/categories/list/container/Page'
 import BatchPage from '../products/admin/batches/list/containers/Page'
-import { isAdmin } from '../../common/auth'
+import { isAdmin, isClient } from '../../common/auth'
 
 
 const Private = (props) => {
@@ -43,6 +44,18 @@ const renderAdminRoutes = () => {
     }
 }
 
+const renderClientRoutes = () => {
+    if (isClient()) {
+        return (
+            <React.Fragment>
+                <Route path="/shopping" component={ShoppingPage} />
+                <Route path="/basket" component={ClientPage} />
+                <Route path="/sales" component={ClientPage} />
+            </React.Fragment>
+        )
+    }
+}
+
 export default (props) => (
     <div>
         <Private>
@@ -50,14 +63,7 @@ export default (props) => (
                 <Switch>
                     <Route exact path="/" component={HomePage} />
                     {renderAdminRoutes()}
-                    {/* <Route exact path='/' component={Home} />
-                <Route exact path='/client' component={Clients} />
-                <Route path='/client/edit/:id' component={ClientEdit} />
-                <Route path='/client/show/:id' component={ClientView} />
-                <Route path='/client/new' component={ClientNew} />
-                <Route path='/element' component={ElementListPage} />
-                <Route path='/repair' component={RepairListPage} />
-                <Route path='/task' component={TaskListPage} />*/}
+                    {renderClientRoutes()}
                     <Route component={NoMatch} />
                 </Switch>
                 <Route exact path="/logout" component={LogoutPage} />

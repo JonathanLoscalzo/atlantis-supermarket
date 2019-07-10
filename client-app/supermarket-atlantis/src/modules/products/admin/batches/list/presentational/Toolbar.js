@@ -3,7 +3,7 @@ import _ from 'lodash'
 import { Link } from 'react-router-dom'
 import { FaEdit, FaTrash, FaSearch } from 'react-icons/fa'
 import { MdPlusOne } from 'react-icons/md'
-import batchTypes from '../../../shared/batchTypes'
+import batchTypes from '../../../../shared/batchTypes'
 
 const renderToolbar = (value) => {
     let addBatch = (

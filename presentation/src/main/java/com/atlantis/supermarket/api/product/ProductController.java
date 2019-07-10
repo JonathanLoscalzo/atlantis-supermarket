@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.atlantis.supermarket.business.product.ProductService;
@@ -21,6 +22,7 @@ import com.atlantis.supermarket.core.product.Product;
 import com.atlantis.supermarket.core.product.Provider;
 import com.atlantis.supermarket.core.product.dto.ProductDto;
 import com.atlantis.supermarket.core.product.mapper.ProductMapper;
+import com.atlantis.supermarket.core.product.search.SearchProduct;
 import com.atlantis.supermarket.core.user.User;
 import com.atlantis.supermarket.infrastructure.product.ProductRepository;
 
@@ -43,6 +45,11 @@ public class ProductController {
     @GetMapping
     public Page<ProductDto> get(Pageable pageable) {
 	return productRepo.findAll(pageable).map(x -> productMapper.toDto(x));
+    }
+    
+    @PostMapping("/search")
+    public Page<ProductDto> getPagedWithSearch(@RequestBody SearchProduct search, Pageable pageable) {
+	return productService.findByPattern(search, pageable);
     }
 
     @GetMapping("/{identifier}")

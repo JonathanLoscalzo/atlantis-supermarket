@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 import { YupConfig } from '../../../../shared/index'
-import batchTypes from '../../shared/batchTypes'
+import batchTypes from '../../../shared/batchTypes'
 
 const schema = (mode = "CREATE") => {
     if (mode == "CREATE") {
