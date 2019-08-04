@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { FaEdit, FaTrash, FaSearch } from 'react-icons/fa'
 import batchTypes from '../../../shared/batchTypes'
+import { Button } from 'reactstrap';
 /*sku
 upc
 name
@@ -19,9 +20,25 @@ const renderToolbar = ({ ...props }) => {
             </button>
         </Link>
     )
+    // props.original
+    let addItem = (
+        <Link to=
+            {{
+                pathname: "/shopping/additems",
+                state: {
+                    product: props.original,
+                    id: props.value
+                }
+            }}>
+            <button>
+                <FaSearch />
+            </button>
+        </Link >
+    )
 
     return (<span>
         {viewButton} {' '}
+        {addItem} {' '}
     </span>)
 }
 

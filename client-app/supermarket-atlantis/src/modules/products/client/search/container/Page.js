@@ -3,7 +3,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { reduxForm } from 'redux-form'
 
-import { getProducts, onPageSizeChange, search, enableAdvanceSearch } from '../index'
+import {
+    getProducts,
+    onPageSizeChange,
+    search, enableAdvanceSearch,
+    addItemsToBasket
+} from '../index'
+
+// @ts-ignore
 import { Switch, Route } from 'react-router-dom'
 
 import Form from '../presentation/Form'
@@ -12,6 +19,7 @@ import ProductList from '../presentation/ProductList';
 import ProductView from '../../view/container/Page'
 import { validator } from '../../../../shared'
 import schema from '../schema'
+import AddItems from 'modules/products/client/addItems/container/Page';
 
 const df = () => (<div></div>)
 
@@ -23,7 +31,8 @@ class ProductListPage extends React.Component {
     render() {
 
         let urls = {
-            view: `${this.props.match.url}/view/:id`
+            view: `${this.props.match.url}/view/:id`,
+            addItems: `${this.props.match.url}/addItems`
         }
 
         return (
@@ -37,13 +46,12 @@ class ProductListPage extends React.Component {
                 <hr />
                 <Switch>
                     <Route path={urls.view} component={ProductView} />
+                    <Route path={urls.addItems} component={AddItems} />
                     <ProductList
                         fetchData={this.props.getProducts}
                         urls={urls}
                         {...this.props} />
                 </Switch>
-
-                <Route path={urls.remove} component={df} />
             </Spinner>
         )
     }
@@ -71,7 +79,8 @@ const mapDispatchToProps = (dispatch) => ({
         getProducts,
         onPageSizeChange,
         search,
-        enableAdvanceSearch
+        enableAdvanceSearch,
+        addItemsToBasket
     }, dispatch)
 })
 

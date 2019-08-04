@@ -3,7 +3,9 @@ import thunk from 'redux-thunk';
 import { connectRouter } from 'connected-react-router'
 import { routerMiddleware } from 'connected-react-router'
 import { reducer as formReducer } from 'redux-form'
-import { composeWithDevTools } from 'remote-redux-devtools'
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+
 
 import client from '../modules/clients';
 import auth from '../modules/auth'
@@ -12,6 +14,7 @@ import home from '../modules/home'
 import provider from '../modules/providers'
 import category from '../modules/products/admin/categories'
 import batch from '../modules/products/admin/batches'
+import cart from '../modules/cart/index';
 
 
 export default function configureStore(history, initialState) {
@@ -25,6 +28,7 @@ export default function configureStore(history, initialState) {
         provider,
         category,
         batch,
+        cart,
         // client,
         // element, 
         // task,
@@ -39,17 +43,24 @@ export default function configureStore(history, initialState) {
     const enhancers = [];
     const isDevelopment = process.env.NODE_ENV === 'development';
 
-    if (isDevelopment && typeof window !== 'undefined' && window.devToolsExtension) {
-        enhancers.push(window.devToolsExtension());
-    }
-
     const rootReducer = combineReducers({
         ...reducers
     });
 
-    return createStore(
-        rootReducer,
+
+    const persistConfig = {
+        key: 'root',
+        storage,
+    }
+
+    // const persistedReducer = persistReducer(persistConfig, rootReducer)
+    let persistedReducer = rootReducer;
+    let store = createStore(
+        persistedReducer,
         initialState,
         compose(applyMiddleware(...middleware), ...enhancers)
     );
+
+    let persistor = persistStore(store)
+    return { store, persistor };
 }

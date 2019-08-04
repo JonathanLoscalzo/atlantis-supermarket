@@ -20,7 +20,12 @@ const ProductList = (props) => {
                     onPageSizeChange={props.onPageSizeChange}
                     columns={columns}
                     defaultPageSize={props.defaultPageSize}
-                    className="-striped -highlight" />
+                    className="-striped -highlight"
+                    getTdProps={(state, row, col, instance) => ({
+                        onClick: (event, cb) => {
+                            // console.log(state, row, col, instance)
+                        }
+                    })}/>
             </Col>
         </Row >
     )
