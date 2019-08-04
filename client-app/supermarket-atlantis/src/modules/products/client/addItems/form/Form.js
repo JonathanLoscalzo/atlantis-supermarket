@@ -22,7 +22,7 @@ const Form = props => {
             <div>
                 <form onSubmit={handleSubmit}>
                     <Row>
-                        <FormGroup className="col-3">
+                        <FormGroup className="col-5">
                             <Field label="Cantidad"
                                 name="quantity"
                                 placeholder="cantidad"

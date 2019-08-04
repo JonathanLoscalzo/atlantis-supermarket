@@ -2,10 +2,13 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import { connectRouter } from 'connected-react-router'
 import { routerMiddleware } from 'connected-react-router'
+// @ts-ignore
 import { reducer as formReducer } from 'redux-form'
+// @ts-ignore
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
-
+// @ts-ignore
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 import client from '../modules/clients';
 import auth from '../modules/auth'
@@ -43,11 +46,18 @@ export default function configureStore(history, initialState) {
     const enhancers = [];
     const isDevelopment = process.env.NODE_ENV === 'development';
 
+    // @ts-ignore
+    if (isDevelopment && typeof window !== 'undefined' && window.devToolsExtension) {
+        // @ts-ignore
+        enhancers.push(window.devToolsExtension());
+    }
+
     const rootReducer = combineReducers({
         ...reducers
     });
 
 
+    // @ts-ignore
     const persistConfig = {
         key: 'root',
         storage,

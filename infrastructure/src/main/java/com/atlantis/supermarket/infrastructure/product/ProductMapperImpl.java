@@ -66,6 +66,8 @@ public class ProductMapperImpl implements ProductMapper {
 		.stream()
 		.map(categoryMapper::toDto)
 		.collect(Collectors.toList()));
+	dto.setIsPurchable(p.isPurchable())	;
+	dto.setUnits(p.getCurrentUnits());
 	return dto;
     }
 

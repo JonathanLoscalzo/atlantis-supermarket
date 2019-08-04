@@ -332,6 +332,10 @@ public class Product extends BaseEntityAuditable implements SolrIndexed {
 
     }
 
+    public boolean isPurchable() {
+	return this.getCurrentUnits() > 0;
+    }
+
     @Override
     public SolrDto getSolrDto() {
 	ProductSolrDto dto = new ProductSolrDto();

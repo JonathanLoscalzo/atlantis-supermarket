@@ -50,6 +50,10 @@ public class ProductDto extends BaseEntityDto {
 
     private Collection<CategoryDto> categories = new ArrayList<>();
 
+    private boolean purchable;
+
+    private double units;
+
     public String getSku() {
 	return sku;
     }
@@ -96,6 +100,14 @@ public class ProductDto extends BaseEntityDto {
 
     public Collection<CategoryDto> getCategories() {
 	return categories;
+    }
+    
+    public boolean getIsPurchable() {
+	return this.purchable;
+    }
+    
+    public double getUnits() {
+	return this.units;
     }
 
     public void setSku(String sku) {
@@ -144,6 +156,15 @@ public class ProductDto extends BaseEntityDto {
 
     public void setCategories(Collection<CategoryDto> categories) {
 	this.categories = categories;
+    }
+
+    public void setIsPurchable(boolean purchable) {
+	this.purchable = purchable;
+    }
+
+    public void setUnits(double currentUnits) {
+	this.units = currentUnits;
+	
     }
 
 }

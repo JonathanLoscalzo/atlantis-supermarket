@@ -1,17 +1,17 @@
+// @ts-ignore
 import _ from 'lodash'
 
-
 const ADD_BASKET = "BASKET/ADD";
+const DELETE_ITEM_BASKET = "BASKET/DELETE";
 
 const initialState = {
+    loading: false,
     items: [],
-
 }
 
 const handleAddBasket = (state, action) => {
     let elem = _.find(state.items, (f) => f.product.id === action.payload.product.id)
     if (elem) {
-        debugger
         elem.quantity += action.payload.quantity
         return {
             ...state,
@@ -26,11 +26,20 @@ const handleAddBasket = (state, action) => {
             items: [...state.items, action.payload]
         }
     }
+}
 
+const handleDeleteItem = (state, action) => {
+    return {
+        ...state,
+        items: [
+            ..._.filter(state.items, (f) => f.product.id !== action.payload.product.id)
+        ]
+    }
 }
 
 const handlers = {
-    [ADD_BASKET]: handleAddBasket
+    [ADD_BASKET]: handleAddBasket,
+    [DELETE_ITEM_BASKET]: handleDeleteItem
 }
 
 export default function handler(state = initialState, action = {}) {
@@ -46,6 +55,19 @@ export function addItemToBasket(product, quantity) {
             quantity: quantity
         }
     }
+}
+
+export function deleteItem(product) {
+    return {
+        type: DELETE_ITEM_BASKET,
+        payload: {
+            product
+        }
+    }
+}
+
+export function getItemSelector(state, id) {
+    return state.cart.list.items.find(x => x.product.id === id)
 }
 
 

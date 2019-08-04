@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { FaEdit, FaTrash, FaSearch } from 'react-icons/fa'
+import { FaEdit, FaTrash, FaSearch, FaPlusCircle } from 'react-icons/fa'
 import batchTypes from '../../../shared/batchTypes'
 import { Button } from 'reactstrap';
 /*sku
@@ -21,20 +21,21 @@ const renderToolbar = ({ ...props }) => {
         </Link>
     )
     // props.original
-    let addItem = (
-        <Link to=
-            {{
-                pathname: "/shopping/additems",
-                state: {
-                    product: props.original,
-                    id: props.value
-                }
-            }}>
-            <button>
-                <FaSearch />
-            </button>
-        </Link >
-    )
+    let addItem = props.original.isPurchable ?
+        (
+            <Link to=
+                {{
+                    pathname: "/shopping/additems",
+                    state: {
+                        product: props.original,
+                        id: props.value
+                    }
+                }}>
+                <button>
+                    <FaPlusCircle />
+                </button>
+            </Link >
+        ) : (<div></div>);
 
     return (<span>
         {viewButton} {' '}
@@ -76,10 +77,22 @@ const columns = [
                 textAlign: "left",
                 fontWeight: 'bold'
             }}>
-                $$$
+                Precio
               </div>
         ),
         accessor: 'retailPrice',
+        Cell: props => `$${props.value}`
+    },
+    {
+        Header: () => (
+            <div style={{
+                textAlign: "left",
+                fontWeight: 'bold'
+            }}>
+                Stock
+              </div>
+        ),
+        accessor: 'units',
         Cell: props => props.value
     },
     {

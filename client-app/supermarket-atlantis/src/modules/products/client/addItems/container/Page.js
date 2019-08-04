@@ -34,6 +34,7 @@ const mapStateToProps = ({ product: element }) => ({
     isOpen: element.addItems.isOpen
 })
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({ goBack, setProduct, submit }, dispatch)
+const mapDispatchToProps = (dispatch) => bindActionCreators(
+    { goBack, setProduct, submit }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddItemModal)

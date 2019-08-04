@@ -4,8 +4,8 @@ import { YupConfig } from 'modules/shared'
 const schema = yup
     .object()
     .shape({
-        //product: yup.object(),
-        quantity: yup.number().positive().required(),
+        product: yup.object(),
+        quantity: yup.number().max(yup.ref("maxUnits")).positive().required(),
     })
 
 
