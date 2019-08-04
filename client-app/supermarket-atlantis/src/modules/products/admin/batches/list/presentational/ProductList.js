@@ -10,11 +10,13 @@ const ProductList = (props) => {
         <div className="col">
             <div className="row">
                 <div className="col-3">
-                        <h4>Filtrado</h4>
+                    <h4>Filtrado</h4>
+                    <div className="col">
                         <Input type="checkbox"
                             checked={props.checked}
                             onChange={props.handlePivot} />{' '}
                         Pivotear Tipo
+                        </div>
                 </div>
                 <div className="col-3">
                     <h4>Referencia</h4>
