@@ -49,8 +49,10 @@ public class ClientServiceTest {
     @MockBean
     private UserRepository users;
 
+    /*
+     * No usar
     @MockBean
-    private SaveUser saver;
+    private SaveUser saver;*/
 
     @MockBean
     private ClientRepository clients;
@@ -64,7 +66,7 @@ public class ClientServiceTest {
 	User user = new User();
 	user.setPassword("asdf");
 	user.setUsername("asdf");
-	saver.save(user);
+	users.save(user);
 	Mockito.when(users.findById(user.getId())).thenReturn(Optional.of(user));
 	Mockito.when(clients.save(Mockito.any())).thenReturn(new Client());
 
