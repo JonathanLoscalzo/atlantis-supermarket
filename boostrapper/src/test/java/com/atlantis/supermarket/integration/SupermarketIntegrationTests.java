@@ -20,7 +20,7 @@ import io.restassured.RestAssured;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class SupermarketIntegrationTests {
+public abstract class SupermarketIntegrationTests {
     
     @Before
     public void setup() {
@@ -30,6 +30,7 @@ public class SupermarketIntegrationTests {
 
     @LocalServerPort
     private int port;
+    
     
     
 

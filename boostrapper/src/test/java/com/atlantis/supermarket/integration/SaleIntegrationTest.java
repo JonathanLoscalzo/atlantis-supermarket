@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.solr.client.solrj.SolrClient;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -55,6 +56,9 @@ import com.atlantis.supermarket.infrastructure.sale.SaleRepository;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class SaleIntegrationTest extends SupermarketIntegrationTests {
 
+    @MockBean
+    SolrClient client;
+    
     @Autowired
     private SaveUser userRepository;
     

@@ -2,6 +2,7 @@ package com.atlantis.supermarket.integration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.apache.solr.client.solrj.SolrClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
@@ -9,10 +10,12 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.atlantis.supermarket.core.user.User;
 import com.atlantis.supermarket.core.user.generator.SaveUser;
+import com.atlantis.supermarket.infrastructure.external.email.EmailAdapter;
 
 import io.restassured.RestAssured;
 
@@ -20,6 +23,11 @@ import io.restassured.RestAssured;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class UserIntegrationTests extends SupermarketIntegrationTests{
 
+    @MockBean
+    SolrClient client;
+    @MockBean
+    private EmailAdapter emailAdapter;
+    
     @Autowired
     private SaveUser userRepository;
 

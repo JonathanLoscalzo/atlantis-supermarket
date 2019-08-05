@@ -9,16 +9,21 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;
 
+import org.apache.solr.client.solrj.SolrClient;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.atlantis.supermarket.api.product.ProductController;
+import com.atlantis.supermarket.business.product.ProductService;
 import com.atlantis.supermarket.core.product.Batch;
 import com.atlantis.supermarket.core.product.Product;
 import com.atlantis.supermarket.core.product.exception.BatchNotAvailableException;
@@ -32,6 +37,14 @@ import com.atlantis.supermarket.infrastructure.product.ProductRepository;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class ProductIntegrationTest extends SupermarketIntegrationTests {
 
+    @Mock
+    private ProductController controller;
+    @Mock
+    private ProductService service;
+    
+    @MockBean
+    SolrClient client;
+    
     @Autowired
     private ProductRepository products;
 
