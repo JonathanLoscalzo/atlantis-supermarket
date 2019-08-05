@@ -20,6 +20,7 @@ import com.atlantis.supermarket.business.user.UserService;
 import com.atlantis.supermarket.core.client.Client;
 import com.atlantis.supermarket.core.user.User;
 import com.atlantis.supermarket.core.user.exceptions.UsernameNotFoundException;
+import com.atlantis.supermarket.core.user.generator.SaveUser;
 import com.atlantis.supermarket.infrastructure.client.ClientRepository;
 import com.atlantis.supermarket.infrastructure.user.UserRepository;
 
@@ -38,7 +39,7 @@ public class ClientServiceTest {
 	public UserService userService() {
 	    return new UserService();
 	}
-	
+
 	@Bean
 	public CreateClientByUserUseCase createClientByUserUseCase() {
 	    return new CreateClientByUserUseCase();
@@ -47,6 +48,9 @@ public class ClientServiceTest {
 
     @MockBean
     private UserRepository users;
+
+    @MockBean
+    private SaveUser saver;
 
     @MockBean
     private ClientRepository clients;
@@ -60,7 +64,7 @@ public class ClientServiceTest {
 	User user = new User();
 	user.setPassword("asdf");
 	user.setUsername("asdf");
-	users.save(user);
+	saver.save(user);
 	Mockito.when(users.findById(user.getId())).thenReturn(Optional.of(user));
 	Mockito.when(clients.save(Mockito.any())).thenReturn(new Client());
 
