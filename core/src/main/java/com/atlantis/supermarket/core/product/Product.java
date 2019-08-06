@@ -285,7 +285,7 @@ public class Product extends BaseEntityAuditable implements SolrIndexed {
 
 	if (quantity > this.getCurrentUnits(consumableBatches)) {
 	    throw new ProductNotSatisfiedStockException(String.valueOf(quantity),
-		    String.valueOf(this.getCurrentUnits(consumableBatches)));
+		    String.valueOf(this.getCurrentUnits(consumableBatches)), this.getId());
 	}
 
 	for (Batch b : consumableBatches) {

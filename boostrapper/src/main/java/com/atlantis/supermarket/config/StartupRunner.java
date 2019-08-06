@@ -38,10 +38,14 @@ public class StartupRunner implements CommandLineRunner {
     @Autowired
     public SeedUsers seedUsers;
     
+    @Autowired
+    private SeedMethodTypes types;
+    
     @Override
     public void run(String... args) throws Exception {
 	//whenProducHasStockCouldDiscount();
 	seedUsers.addAdmin();
+	types.addMercadoPago();
     }
     
     public void whenProducHasStockCouldDiscount() {

@@ -91,7 +91,7 @@ public class GenerateSale implements UseCaseOutput<Input, Output> {
 	}
 
 	Sale sale = factory.createSale(client, items, paymentMethods);
-	
+
 	sales.save(sale);
 
 	return new Output(sale);
@@ -114,7 +114,7 @@ public class GenerateSale implements UseCaseOutput<Input, Output> {
 	List<SaleItem> items = new ArrayList<>();
 
 	int row = 0;
-	
+
 	try {
 	    for (Product p : products) {
 		// TODO: SI FALLA CONSUME IGUAL? NO DEBERÍA. VER COMO ROLLBACKEAR ESTE CAMBIO
@@ -147,7 +147,7 @@ public class GenerateSale implements UseCaseOutput<Input, Output> {
 			.map(x -> UUID.fromString(x.paymentId))
 			.collect(Collectors.toList()));
 
-	if (methods.size() != input.payments.size()) {
+	if (methods.size() != input.payments.size() || methods.size() == 0) {
 	    throw new PaymentMethodNotFound(methods,
 		    input.payments.stream().map(x -> x.paymentId).collect(Collectors.toList()));
 	}
@@ -169,6 +169,7 @@ public class GenerateSale implements UseCaseOutput<Input, Output> {
 		    items++;
 		}
 	    }
+	    paymentMethods.forEach(x -> x.setCanceled(false));
 	} catch (ExternalPaymentException e) {
 	    cancelPayments(paymentMethods);
 	    throw new ExternalPaymentFailure(e.getPayment(), paymentMethods, e);
@@ -185,7 +186,7 @@ public class GenerateSale implements UseCaseOutput<Input, Output> {
 
 	paymentRepo.saveAll(paymentMethods);
     }
-    
+
     private void cancelProducts(Collection<Product> products, Exception e) {
 	products.forEach(productsRepo::detach);
 	throw new ConsumeProductFailure("", e);
