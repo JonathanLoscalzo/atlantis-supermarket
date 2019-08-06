@@ -35,7 +35,7 @@ const mapStateToProps = ({ cart, ...state }) => {
         total: cart.list.total,
         payment: cart.list.payment,
         change: cart.list.change,
-        payments: _.concat([{ value: null, label: "Seleccione..." }], ...cart.list.payments.map(x => ({ value: x.id, label: x.name })))
+        payments: _.concat([{ value: '', label: "Seleccione..." }], ...cart.list.payments.map(x => ({ value: x.id, label: x.name })))
     })
 }
 

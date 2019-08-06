@@ -79,7 +79,7 @@ const handleGetPaymenetMethods = (state, action) => {
 const handleChangeSelectable = (state, action) => {
     return {
         ...state,
-        payment: state.payments.find(x => x.id == action.payload)
+        payment: state.payments.find(x => x.id == action.payload) || ''
     }
 }
 
@@ -175,7 +175,7 @@ export const submit = (values) => (dispatch, getState) => {
     //validar si total < pay y no se permite dar cambio.
     let payment = getState().cart.list.payment
 
-    if (!payment.allowchange && total < values.pay) {
+    if (payment && !payment.allowchange && total < values.pay) {
         toast.error("la forma de pago no acepta dar vuelto! completar exacto!")
     }
 

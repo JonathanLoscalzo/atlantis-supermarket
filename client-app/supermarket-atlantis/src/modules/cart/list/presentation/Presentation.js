@@ -68,23 +68,23 @@ export default Presentation;
 
 let form = ({ handleSubmit, ...props }) => (
     <form onSubmit={handleSubmit}>
-        <Row>
-            <FormGroup className="col-5">
-                <Field
-                    onChange={(event, newValue, previousValue) => props.changeSelectable(newValue)}
-                    label="Cantidad"
-                    name="payment"
-                    placeholder="Tipo de pago"
-                    options={props.payments}
-                    component={RenderSelectableField} />
-                <Field label="Cantidad"
-                    onChange={(_, newValue) => props.changePay(newValue)}
-                    name="pay"
-                    placeholder="cantidad"
-                    component={RenderField}
-                    type="number" />
-            </FormGroup>
-        </Row>
+
+        <FormGroup>
+            <Field
+                onChange={(event, newValue, previousValue) => props.changeSelectable(newValue)}
+                label="Cantidad"
+                name="payment"
+                placeholder="Tipo de pago"
+                options={props.payments}
+                component={RenderSelectableField} />
+            <Field label="Cantidad"
+                onChange={(_, newValue) => props.changePay(newValue)}
+                name="pay"
+                placeholder="cantidad"
+                component={RenderField}
+                type="number" />
+        </FormGroup>
+
         <FormToolbar submitting={props.submitting}
             pristine={props.pristine}
             reset={props.reset}
