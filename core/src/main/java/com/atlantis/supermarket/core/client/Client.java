@@ -17,6 +17,8 @@ import com.atlantis.supermarket.core.client.events.SaleAddedEvent;
 import com.atlantis.supermarket.core.sale.Sale;
 import com.atlantis.supermarket.core.shared.BaseEntity;
 import com.atlantis.supermarket.core.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "client")
@@ -36,9 +38,11 @@ public class Client extends BaseEntity {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonBackReference
     private User user;
 
     @OneToMany(mappedBy = "client",cascade = CascadeType.ALL)
+    @JsonBackReference
     private Collection<Sale> sales = new ArrayList<Sale>();
 
     public Client(){}

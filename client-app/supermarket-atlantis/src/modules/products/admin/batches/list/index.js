@@ -2,6 +2,7 @@
 import _ from 'lodash'
 import { replace } from 'connected-react-router';
 import { api } from '../../../../shared'
+import moment from 'moment';
 
 const FETCHED = "BATCH/ADMIN/FETCHED"
 const FETCH = "BATCH/ADMIN/FETCH"
@@ -38,7 +39,23 @@ export default function reducer(state = initialState, action = {}) {
             return {
                 ...state,
                 data: {
-                    rows: action.payload.content,
+                    rows: action.payload.content.map(x => {
+
+                        let batches = x.batches.map(b => ({
+                            ...b,
+                            expiration: moment(b.expiration),
+                            isExpired: moment(b.expiration) <= moment().startOf('day')
+                        }));
+
+                        let stock = _.sum(batches.filter(b => !b.isExpired).map(b => b.remainingUnits))
+
+                        return {
+                            ...x,
+                            batches,
+                            stock,
+                            isLowStock: x.minStock > stock
+                        }
+                    }),
                     loading: false,
                     pages: action.payload.totalPages,
                     page: action.payload.page,

@@ -13,6 +13,7 @@ import org.springframework.data.util.Pair;
 
 import com.atlantis.supermarket.core.payment.PaymentMethod;
 import com.atlantis.supermarket.core.shared.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Payment extends BaseEntity {
@@ -26,6 +27,7 @@ public class Payment extends BaseEntity {
     
     @ManyToOne()
     @JoinColumn(name="sale_id")
+    @JsonBackReference
     private Sale sale;
     
     @Column

@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Where;
 
 import com.atlantis.supermarket.core.shared.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "provider")
@@ -22,6 +24,7 @@ public class Provider extends BaseEntity {
     private String phone;
     
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "provider", cascade = CascadeType.ALL)
+    @JsonBackReference
     private Collection<Product> products = new ArrayList<>();
 
     public String getName() {

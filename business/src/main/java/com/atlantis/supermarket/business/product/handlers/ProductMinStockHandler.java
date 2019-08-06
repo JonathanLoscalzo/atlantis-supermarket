@@ -26,7 +26,6 @@ public class ProductMinStockHandler extends BaseServiceEventHandler<ProductMinSt
     
     @Async
     @TransactionalEventListener
-    @Override
     public void handle(ProductMinStockEvent event) {
 	// send notifications to admin
 	//TODO

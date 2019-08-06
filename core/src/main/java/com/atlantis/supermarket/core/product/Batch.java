@@ -14,6 +14,8 @@ import javax.persistence.Table;
 
 import com.atlantis.supermarket.core.product.events.BatchEmptyEvent;
 import com.atlantis.supermarket.core.shared.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "batch")
@@ -43,7 +45,7 @@ public class Batch extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    // @JsonBackReference
+    @JsonManagedReference
     private Product product;
 
     public Batch() {
@@ -114,11 +116,11 @@ public class Batch extends BaseEntity {
 	return this;
     }
 
-    public Product getProducto() {
+    public Product getProduct() {
 	return product;
     }
 
-    public Batch setProducto(Product producto) {
+    public Batch setProduct(Product producto) {
 	this.product = producto;
 	return this;
     }

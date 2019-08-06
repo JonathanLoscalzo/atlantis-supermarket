@@ -37,7 +37,7 @@ public class BatchMapperImpl implements BatchMapper {
 	dto.setEntry(b.getEntry());
 	dto.setDetail(b.getDetail());
 	dto.setRemainingUnits(b.getRemainingUnits());
-	dto.setProduct(productMapper.toDtoAllBatches(b.getProducto()));
+	dto.setProduct(productMapper.toDtoAllBatches(b.getProduct()));
 	
 	return dto;
 	

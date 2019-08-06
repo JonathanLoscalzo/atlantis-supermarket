@@ -74,7 +74,7 @@ public class ProductIntegrationTest extends SupermarketIntegrationTests {
 
 	Batch b = new Batch()
 		.setDetail("some-detail")
-		.setProducto(p2)
+		.setProduct(p2)
 		.setExpiration(expiration)
 		.setEntry(new Date())
 		.setRemainingUnits(1300.0);
@@ -109,7 +109,7 @@ public class ProductIntegrationTest extends SupermarketIntegrationTests {
 
 	Batch b = new Batch()
 		.setDetail("some-detail")
-		.setProducto(p2)
+		.setProduct(p2)
 		.setExpiration(expiration)
 		.setEntry(new Date())
 		.setRemainingUnits(1300.0);
@@ -139,7 +139,7 @@ public class ProductIntegrationTest extends SupermarketIntegrationTests {
 
 	Batch b = new Batch()
 		.setDetail("some-detail")
-		.setProducto(p2)
+		.setProduct(p2)
 		.setExpiration(expiration)
 		.setEntry(new Date())
 		.setRemainingUnits(1300.0);
@@ -165,7 +165,7 @@ public class ProductIntegrationTest extends SupermarketIntegrationTests {
 
 	Batch b = new Batch()
 		.setDetail("some-detail")
-		.setProducto(p2)
+		.setProduct(p2)
 		.setExpiration(expiration)
 		.setEntry(new Date())
 		.setRemainingUnits(1300.0);
@@ -191,7 +191,7 @@ public class ProductIntegrationTest extends SupermarketIntegrationTests {
 
 	Batch b = new Batch()
 		.setDetail("some-detail")
-		.setProducto(p2)
+		.setProduct(p2)
 		.setExpiration(expiration)
 		.setEntry(new Date())
 		.setRemainingUnits(1300.0);

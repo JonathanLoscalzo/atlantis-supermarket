@@ -160,7 +160,7 @@ public class SaleIntegrationTest extends SupermarketIntegrationTests {
 	
 	Batch b = new Batch()
 		.setDetail("some-detail")
-		.setProducto(p2)
+		.setProduct(p2)
 		.setExpiration(expiration)
 		.setEntry(new Date())
 		.setRemainingUnits(1300.0);
@@ -173,7 +173,7 @@ public class SaleIntegrationTest extends SupermarketIntegrationTests {
 	
 	b = new Batch()
 		.setDetail("some-detail")
-		.setProducto(p2)
+		.setProduct(p2)
 		.setExpiration(anotherExp)
 		.setEntry(new Date())
 		.setRemainingUnits(1300.0);
@@ -208,7 +208,7 @@ public class SaleIntegrationTest extends SupermarketIntegrationTests {
 	
 	Output output = generateSale.handle(input);
 	
-	Sale s = sales.findById(output.sale.getId()).orElseGet(null);
+	Sale s = sales.findById(UUID.fromString(output.sale.getId())).orElseGet(null);
 	
 	assertThat(s, is(notNullValue()));
 	
@@ -234,7 +234,7 @@ public class SaleIntegrationTest extends SupermarketIntegrationTests {
 	
 	Output output = generateSale.handle(input);
 	
-	Sale s = sales.findById(output.sale.getId()).orElseGet(null);
+	Sale s = sales.findById(UUID.fromString(output.sale.getId())).orElseGet(null);
 	
 	assertThat(s, is(notNullValue()));
 	
@@ -266,7 +266,7 @@ public class SaleIntegrationTest extends SupermarketIntegrationTests {
 	
 	Output output = generateSale.handle(input);
 	
-	Sale s = sales.findById(output.sale.getId()).orElseGet(null);
+	Sale s = sales.findById(UUID.fromString(output.sale.getId())).orElseGet(null);
 	
 	assertThat(s, is(notNullValue()));
 	
@@ -294,7 +294,7 @@ public class SaleIntegrationTest extends SupermarketIntegrationTests {
 	
 	Output output = generateSale.handle(input);
 	
-	Sale s = sales.findById(output.sale.getId()).orElseGet(null);
+	Sale s = sales.findById(UUID.fromString(output.sale.getId())).orElseGet(null);
 	
 	assertThat(s, is(notNullValue()));
 	

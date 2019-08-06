@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Where;
 
 import com.atlantis.supermarket.core.shared.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "category")
@@ -26,6 +28,7 @@ public class Category extends BaseEntity {
     private String description;
     
     @ManyToMany(mappedBy = "categories")
+    @JsonBackReference
     private List<Product> products = new ArrayList<>();
     
     public String getDescription() {

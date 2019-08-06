@@ -2,8 +2,6 @@ package com.atlantis.supermarket.business.sale.useCases.generateSale;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -33,6 +31,7 @@ import com.atlantis.supermarket.core.sale.exceptions.ExternalPaymentException;
 import com.atlantis.supermarket.core.sale.factory.PaymentFactory;
 import com.atlantis.supermarket.core.sale.factory.SaleFactory;
 import com.atlantis.supermarket.core.sale.factory.SaleItemFactory;
+import com.atlantis.supermarket.core.sale.mapper.SaleMapper;
 import com.atlantis.supermarket.core.shared.business.UseCaseOutput;
 import com.atlantis.supermarket.infrastructure.client.ClientRepository;
 import com.atlantis.supermarket.infrastructure.external.payment.PaymentResolutor;
@@ -55,6 +54,9 @@ public class GenerateSale implements UseCaseOutput<Input, Output> {
 
     @Autowired
     private PaymentResolutor resolutor;
+    
+    @Autowired
+    private SaleMapper saleMapper;
 
     @Autowired
     private SaleRepository sales;
@@ -94,7 +96,7 @@ public class GenerateSale implements UseCaseOutput<Input, Output> {
 
 	sales.save(sale);
 
-	return new Output(sale);
+	return new Output(saleMapper.toDto(sale));
     }
 
     private List<SaleItem> consumeProducts(Input input) {

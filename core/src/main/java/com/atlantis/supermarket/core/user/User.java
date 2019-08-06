@@ -14,7 +14,7 @@ import javax.persistence.Transient;
 
 import com.atlantis.supermarket.core.shared.BaseEntity;
 import com.atlantis.supermarket.core.user.event.UserCreatedEvent;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.atlantis.supermarket.core.client.Client;
 
 @Entity
@@ -40,6 +40,7 @@ public class User extends BaseEntity {
     private Set<UserRole> Roles;
     
     @OneToOne()
+    @JsonManagedReference
     private Client client;
     
 

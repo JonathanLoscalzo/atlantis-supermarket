@@ -84,10 +84,9 @@ const columns = [
         ),
         id: "sum",
         Cell: props => {
-            let stock = _.sum(props.original.batches.map(x => x.remainingUnits))
             return <div style={{
-                backgroundColor: props.original.minStock > stock ? 'yellow' : ''
-            }}>{stock}</div>
+                backgroundColor: props.original.isLowStock ? 'yellow' : ''
+            }}>{props.original.stock}</div>
         }
     },
     {
@@ -126,9 +125,9 @@ const columnsBatch = [
         accessor: "expiration",
         Cell: props => {
             return <div style={{
-                backgroundColor: moment(props.value) <= moment() ? 'red' : ''
+                backgroundColor: props.original.isExpired ? 'red' : ''
             }}>
-                {props.value ? moment(props.value).format("DD/MM/YYYY") : "-"}
+                {props.value ? props.value.format("DD/MM/YYYY") : "-"}
             </div>
         },
     },

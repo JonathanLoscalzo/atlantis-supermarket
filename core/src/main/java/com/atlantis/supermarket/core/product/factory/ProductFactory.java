@@ -85,6 +85,6 @@ public class ProductFactory {
     }
 
     private static Batch createBatch(Product p, Double stock, String details, Date expiration) {
-	return new Batch().setProducto(p).setEntry(new Date()).setRemainingUnits(stock).setDetail(details).setExpiration(expiration);
+	return new Batch().setProduct(p).setEntry(new Date()).setRemainingUnits(stock).setDetail(details).setExpiration(expiration);
     }
 }

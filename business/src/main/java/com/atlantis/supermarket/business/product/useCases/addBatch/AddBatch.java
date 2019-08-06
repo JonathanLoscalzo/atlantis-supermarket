@@ -26,7 +26,7 @@ public class AddBatch implements UseCaseInput<AddBatchInput>{
 		.setEntry(new Date())
 		.setExpiration(input.expiration)
 		.setRemainingUnits(input.remainingUnits)
-		.setProducto(p);
+		.setProduct(p);
 		
 	p.addBatch(b);
 	

@@ -15,4 +15,12 @@ public class Invoice extends BaseEntityAuditable {
     public void invoiceCreated() {
 	this.registerEvent( new InvoiceCreatedEvent(this));
     }
+    
+    public void setSale(Sale sale) {
+	this.sale = sale;
+    }
+    
+    public Sale getSale(Sale sale) {
+	return this.sale;
+    }
 }

@@ -18,6 +18,8 @@ import javax.persistence.Table;
 
 import com.atlantis.supermarket.core.product.Product;
 import com.atlantis.supermarket.core.shared.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "sale_item")
@@ -29,19 +31,22 @@ public class SaleItem extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "sale_id")
+    @JsonBackReference
     private Sale sale;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
+    @JsonBackReference
     private Product product;
 
     @Column
     private BigDecimal pricePerUnit;
-    
+
     @Column(nullable = false)
     private BigDecimal providerPrice;
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Collection<ProductConsumed> consumed = new ArrayList<>();
 
     public Double getUnits() {
@@ -83,20 +88,26 @@ public class SaleItem extends BaseEntity {
     public void setConsumed(Collection<ProductConsumed> consumed) {
 	this.consumed = consumed;
     }
-    
+
     public Integer getRow() {
-        return line;
+	return line;
     }
 
     public void setRow(Integer row) {
-        this.line = row;
+	this.line = row;
     }
 
     public BigDecimal getProviderPrice() {
-        return providerPrice;
+	return providerPrice;
     }
 
     public void setProviderPrice(BigDecimal providerPrice) {
-        this.providerPrice = providerPrice;
+	this.providerPrice = providerPrice;
+    }
+
+    public String toString() {
+	return this.getProduct().getName() + " - " + this.getUnits() + " - $"
+		+ BigDecimal.valueOf(this.getUnits()).multiply(this.getPricePerUnit()).toString() + " ($"
+		+ this.getPricePerUnit().toString() + ")";
     }
 }

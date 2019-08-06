@@ -13,13 +13,11 @@ import LoginPage from '../auth/containers/LoginPage';
 import ProductPage from '../products/admin/list/containers/ProductListPage'
 import ShoppingPage from '../products/client/search/container/Page';
 import LogoutPage from '../auth/containers/LogoutPage';
-// import ElementListPage from './modules/element/list/container/ElementListPage'
-// import TaskListPage from './modules/task/list/container/TaskListPage'
-// import RepairListPage from './modules/repair/list/container/RepairListPage';
 import ProviderPage from '../providers/list/container/Page'
 import CategoryPage from '../products/admin/categories/list/container/Page'
 import BatchPage from '../products/admin/batches/list/containers/Page'
 import CartPage from '../cart/list/container/Page'
+import SalePage from 'modules/sales/list/container/Page';
 
 import { isAdmin, isClient } from '../../common/auth'
 
@@ -52,7 +50,7 @@ const renderClientRoutes = () => {
             <React.Fragment>
                 <Route path="/shopping" component={ShoppingPage} />
                 <Route path="/basket" component={CartPage} />
-                <Route path="/sales" component={ClientPage} />
+                <Route path="/sales" component={SalePage} />
             </React.Fragment>
         )
     }

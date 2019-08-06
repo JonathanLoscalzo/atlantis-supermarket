@@ -41,6 +41,8 @@ import com.atlantis.supermarket.core.shared.BaseEntityAuditable;
 import com.atlantis.supermarket.core.shared.search.SolrDto;
 import com.atlantis.supermarket.core.shared.search.SolrIndexed;
 import com.atlantis.supermarket.core.shared.search.SolrUpdate;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
  * “First Expired, First Out” (FEFO)
@@ -86,16 +88,18 @@ public class Product extends BaseEntityAuditable implements SolrIndexed {
     private BatchType type = BatchType.DEFAULT;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "product", cascade = CascadeType.ALL)
-    // @JsonManagedReference
+    @JsonBackReference
     private Collection<Batch> batches;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
+    @JsonManagedReference
     private Provider provider;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     @OrderColumn(name = "category_order")
+    @JsonManagedReference
     private Collection<Category> categories = new ArrayList<>();
 
     public Product() {

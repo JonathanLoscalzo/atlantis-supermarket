@@ -7,6 +7,7 @@ const DELETE_ITEM_BASKET = "BASKET/DELETE";
 const GET_PAYMENT_METHODS = "BASKET/GET_PAYMENT_METHOD"
 const CHANGE_SELECTABLE = "BASKET/CHANGE_SELECTABLE"
 const CHANGE_PAY = "BASKET/CHANGE_PAY"
+const RESET_CART = "BASKET/RESET_CART"
 
 const initialState = {
     loading: false,
@@ -103,12 +104,20 @@ const handleChangePay = (state, action) => {
     }
 }
 
+const handleReset = (state, action) => {
+    return {
+        ...state,
+        ...action.payload
+    }
+}
+
 const handlers = {
     [ADD_BASKET]: handleAddBasket,
     [DELETE_ITEM_BASKET]: handleDeleteItem,
     [GET_PAYMENT_METHODS]: handleGetPaymenetMethods,
     [CHANGE_SELECTABLE]: handleChangeSelectable,
-    [CHANGE_PAY]: handleChangePay
+    [CHANGE_PAY]: handleChangePay,
+    [RESET_CART]: handleReset
 }
 
 export default function handler(state = initialState, action = {}) {
@@ -162,6 +171,23 @@ export const changePay = (value) => {
     }
 }
 
+export const resetCart = () => {
+    return {
+        type: RESET_CART,
+        payload: {
+            loading: false,
+            element: {
+                payment: '',
+                pay: 0,
+                items: []
+            },
+            payment: null,
+            total: 0,
+            change: null,
+        }
+    }
+}
+
 
 export const submit = (values) => (dispatch, getState) => {
 
@@ -183,7 +209,24 @@ export const submit = (values) => (dispatch, getState) => {
         toast.error("No alcanza para pagar!")
     }
 
-    console.log(values)
+    let body = {
+        consume: {},
+        payments: [{
+            paymentId: values.payment,
+            pay: parseFloat(values.pay)
+        }]
+    }
+
+    values.items.forEach(i => body.consume[i.product.id] = i.quantity)
+
+    api.post('/sale', body)
+        .then((res) => {
+            toast.success("La ventá se concretó, espero el correo con su factura!")
+            dispatch(resetCart())
+        })
+        .catch((err) => {
+            toast.error(err.response.data.message);
+        })
 }
 
 export function getItemSelector(state, id) {

@@ -6,6 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+/**
+ * De aquí se enviaría a la cola de mensajes para que genere la factura cuando pueda de manera desacoplada
+ * EJ: AFIP
+ * @author jloscalzo
+ *
+ */
 @Component
 public class InvoiceSender {
     @Autowired

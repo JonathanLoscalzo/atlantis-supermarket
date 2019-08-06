@@ -18,6 +18,7 @@ import provider from '../modules/providers'
 import category from '../modules/products/admin/categories'
 import batch from '../modules/products/admin/batches'
 import cart from '../modules/cart/index';
+import sales from '../modules/sales/index'
 
 
 export default function configureStore(history, initialState) {
@@ -32,6 +33,7 @@ export default function configureStore(history, initialState) {
         category,
         batch,
         cart,
+        sales
         // client,
         // element, 
         // task,
