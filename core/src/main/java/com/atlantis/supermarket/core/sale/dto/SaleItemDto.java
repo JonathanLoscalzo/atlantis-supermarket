@@ -14,6 +14,8 @@ public class SaleItemDto extends BaseEntityDto {
     private BigDecimal pricePerUnit;
 
     private BigDecimal providerPrice;
+    
+    private Double units;
 
     public Integer getLine() {
         return line;
@@ -45,5 +47,17 @@ public class SaleItemDto extends BaseEntityDto {
 
     public void setProviderPrice(BigDecimal providerPrice) {
         this.providerPrice = providerPrice;
+    }
+
+    public void setUnits(Double units) {
+	this.units = units;
+    }
+    
+    public Double getUnits() {
+	return this.units;
+    }
+    
+    public BigDecimal getTotal() {
+	return BigDecimal.valueOf(this.units).multiply(this.getPricePerUnit());
     }
 }

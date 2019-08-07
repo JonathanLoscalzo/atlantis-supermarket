@@ -2,11 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-
 import { getSales, onPageSizeChange, removeElementAt } from '../index'
 import { Switch, Route } from 'react-router-dom'
 import Presentation from '../presentation/Presentation'
-
+import ViewPage from '../../view/container/Page';
 import { Spinner, validator } from '../../../shared'
 
 const df = () => (<div></div>)
@@ -17,9 +16,9 @@ class ProvidersPage extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        
+
         if (this.props.location.removed) {
-            
+
             let id = this.props.location.removed
             delete this.props.location.removed
             this.props.removeElementAt(id)
@@ -37,12 +36,14 @@ class ProvidersPage extends React.Component {
         return (
             <Spinner loading={this.props.loading}>
                 <Switch>
+                    <Route path={urls.view} component={ViewPage} />
                     <Presentation
                         fetchData={this.props.getSales}
                         urls={urls}
                         {...this.props} />
+
                 </Switch>
-                <Route path={urls.view} component={df} />
+
             </Spinner>
 
         )

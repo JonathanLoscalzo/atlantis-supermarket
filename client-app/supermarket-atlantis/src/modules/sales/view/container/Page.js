@@ -1,10 +1,11 @@
+// @ts-ignore
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { getElement, goBack } from '../index'
 import Presentation from '../presentation/Presentation'
-import { Spinner } from '../../../../shared'
+import { Spinner } from 'modules/shared'
 
 const ViewPage = (props) => {
     useEffect(() => {
@@ -18,7 +19,7 @@ const ViewPage = (props) => {
     )
 }
 
-const mapStateToProps = ({ product: entity }) => {
+const mapStateToProps = ({ sales: entity }) => {
     return ({
         element: entity.view.element,
         loading: entity.view.loading

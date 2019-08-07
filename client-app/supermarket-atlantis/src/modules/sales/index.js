@@ -6,10 +6,10 @@ import view from './view'
 
 let reducer = (state = {}, action) => state
 
-if (isClient()) {
+// if (isClient()) {
     reducer = combineReducers({
         list, view
     });
-}
+// }
 
 export default reducer;

@@ -20,6 +20,7 @@ import com.atlantis.supermarket.business.sale.useCases.generateSale.Output;
 import com.atlantis.supermarket.core.payment.PaymentMethod;
 import com.atlantis.supermarket.core.sale.Sale;
 import com.atlantis.supermarket.core.sale.dto.SaleDto;
+import com.atlantis.supermarket.core.sale.mapper.SaleMapper;
 import com.atlantis.supermarket.infrastructure.payment.PaymentMethodRepository;
 import com.atlantis.supermarket.security.UserPrincipal;
 import com.atlantis.supermarket.security.UserSecurityService;
@@ -43,6 +44,9 @@ public class SaleController {
 
     @Autowired
     SaleService service;
+    
+    @Autowired
+    SaleMapper saleMapper;
 
     @GetMapping("/paymentMethods")
     public List<PaymentMethod> generate() {
@@ -61,7 +65,11 @@ public class SaleController {
     public Page<SaleDto> getSales(Pageable pageable) {
 	UserPrincipal user = (UserPrincipal) securityService
 		.loadUserByUsername(authenticationFacade.getAuthentication().getPrincipal().toString());
-	return service.findMySales(user.getUser().getClient(), pageable);
+	if (user.getAuthorities().stream().anyMatch(x -> x.getAuthority() == "ADMIN")){
+	    return service.find(pageable).map(saleMapper::toDto);
+	} else {	    
+	    return service.findMySales(user.getUser().getClient(), pageable);
+	}
     }
 
 }

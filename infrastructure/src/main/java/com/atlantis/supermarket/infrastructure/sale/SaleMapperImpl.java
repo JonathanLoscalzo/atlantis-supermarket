@@ -53,6 +53,8 @@ public class SaleMapperImpl implements SaleMapper {
 	dto.setPricePerUnit(x.getPricePerUnit());
 	dto.setProduct(productMapper.toDto(x.getProduct()));
 	dto.setProviderPrice(x.getProviderPrice());
+	dto.setUnits(x.getUnits());
+	
 	return dto;
     }
 

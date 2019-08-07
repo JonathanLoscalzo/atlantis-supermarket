@@ -1,9 +1,9 @@
 
-import { goBack as gb } from 'connected-react-router'
+import { goBack as gb, replace } from 'connected-react-router'
 import { api } from 'modules/shared';
-
-const FETCH = "PRODUCT/ADMIN/FETCH_ELEMENT"
-const FETCHED = "PRODUCT/ADMIN/FETCHED_ELEMENT"
+import { getSale } from 'modules/sales/list/index';
+const FETCH = "SALES/FETCH_ELEMENT"
+const FETCHED = "SALES/FETCHED_ELEMENT"
 
 const initialState = {
     element: null,
@@ -14,7 +14,7 @@ export default function reducer(state = initialState, action = {}) {
 
     switch (action.type) {
         case FETCH:
-            return { ...state, loading:true };
+            return { ...state, loading: true };
         case FETCHED:
             return { ...state, element: action.payload, loading: false };
         default:
@@ -23,12 +23,11 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 export const getElement = (id) => (dispatch, getState) => {
-    dispatch({ type: FETCH })
-    api.get(`/product/${id}`).then(result => {
-        dispatch({ type: FETCHED, payload: result.data })
-    }).catch(() => {
-
-    })
+    let sale = getSale(getState(), id)
+    if (!sale){
+        return dispatch(replace("/sales"));
+    }
+    return dispatch({ type: FETCHED, payload: sale })
 }
 
 export const goBack = () => (dispatch) => {

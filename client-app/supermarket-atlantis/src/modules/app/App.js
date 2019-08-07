@@ -39,6 +39,7 @@ const renderAdminRoutes = () => {
                 <Route path="/category" component={CategoryPage} />
                 <Route path="/batch" component={BatchPage} />
                 <Route path="/clients" component={ClientPage} />
+                <Route path="/sales" component={SalePage} />
             </React.Fragment>
         )
     }

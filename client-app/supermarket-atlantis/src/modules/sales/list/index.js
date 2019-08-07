@@ -74,7 +74,6 @@ export const getSales = ({ page, sorted: sort, pageSize: size, ...others } = { p
 
     api.get("/sale", { params: params })
         .then((result) => {
-            debugger
             return dispatch({
                 type: FETCHED_SALES,
                 payload:
@@ -102,4 +101,8 @@ export const removeElementAt = (id) => (dispatch, state) => {
             sorted: state().provider.list.data.sort,
             pageSize: state().provider.list.defaultPageSize
         }))
+}
+
+export const getSale = (state, id) => {
+    return state.sales.list.data.rows.find(x => x.id == id);
 }

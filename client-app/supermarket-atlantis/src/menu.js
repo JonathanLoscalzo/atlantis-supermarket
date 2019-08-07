@@ -20,7 +20,7 @@ if (isAdmin()) {
     ]),
 
     menu_factory("Ventas", "", "icon-basket", [
-      menu_factory("Ver", "/sale", "icon-basket"),
+      menu_factory("Ver", "/sales", "icon-basket"),
     ])]
 } else {
   menu = [
