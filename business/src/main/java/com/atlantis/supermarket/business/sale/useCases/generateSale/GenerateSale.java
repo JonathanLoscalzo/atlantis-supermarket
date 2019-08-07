@@ -160,16 +160,19 @@ public class GenerateSale implements UseCaseOutput<Input, Output> {
 
 	try {
 	    for (PaymentMethod m : methods) {
-		if (m.getExternalPayment()) {
-		    PaymentInput pay = input.payments
+		PaymentInput pay = input.payments
 			    .stream()
 			    .filter(x -> UUID.fromString(x.paymentId).equals(m.getId())).findFirst()
 			    .orElseThrow(() -> new RuntimeException());
 
+		if (m.getExternalPayment()) {
 		    Map<String, String> result = resolutor.getPaymentStrategy(m.getPaymentType()).pay(pay.properties);
 		    paymentMethods.add(paymentFactory.createPayment(m, pay.pay, result.get("id")));
-		    items++;
+		} else {
+		    paymentMethods.add(paymentFactory.createPayment(m, pay.pay, null));
 		}
+		
+		items++;
 	    }
 	    paymentMethods.forEach(x -> x.setCanceled(false));
 	} catch (ExternalPaymentException e) {

@@ -200,9 +200,11 @@ export const submit = (values) => (dispatch, getState) => {
 
     //validar si total < pay y no se permite dar cambio.
     let payment = getState().cart.list.payment
-
-    if (payment && !payment.allowchange && total < values.pay) {
-        toast.error("la forma de pago no acepta dar vuelto! completar exacto!")
+    debugger;
+    if (payment && !payment.allowChange) {
+        if (total < values.pay) {
+            toast.error("la forma de pago no acepta dar vuelto! completar exacto!")
+        }
     }
 
     if (total > values.pay) {
