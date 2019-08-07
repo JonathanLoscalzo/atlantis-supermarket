@@ -35,8 +35,9 @@ public class EditBatch implements UseCaseInput<EditBatchInput> {
 		.setExpiration(input.batch.getExpiration())
 		.setRemainingUnits(input.batch.getRemainingUnits())
 		.setProduct(p);
-
+	p.changeNotified();
 	batches.save(b);
+	
 
     }
 

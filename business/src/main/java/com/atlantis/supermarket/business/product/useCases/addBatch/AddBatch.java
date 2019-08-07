@@ -39,7 +39,8 @@ public class AddBatch implements UseCaseInput<AddBatchInput> {
 		.setProduct(p);
 
 	p.addBatch(b);
-
+	p.changeNotified();
+	
 	products.save(p);
 
     }

@@ -27,6 +27,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.data.util.Pair;
 
@@ -83,6 +84,9 @@ public class Product extends BaseEntityAuditable implements SolrIndexed {
 
     @Column(nullable = false)
     private String description;
+
+    @Column(nullable = false)
+    private Boolean notifiedProvider = false;
 
     @Enumerated(EnumType.STRING)
     private BatchType type = BatchType.DEFAULT;
@@ -196,6 +200,14 @@ public class Product extends BaseEntityAuditable implements SolrIndexed {
 	return this;
     }
 
+    public Boolean getNotifiedProvider() {
+	return notifiedProvider;
+    }
+
+    public void setNotifiedProvider(Boolean notifiedProvider) {
+	this.notifiedProvider = notifiedProvider;
+    }
+
     public Collection<Batch> getBatches() {
 	return this.getBatches(false);
     }
@@ -305,12 +317,35 @@ public class Product extends BaseEntityAuditable implements SolrIndexed {
 	    }
 	}
 
-	if (this.getCurrentUnits() <= this.getMinStock()) {
+	/**
+	 * Si ya notifiqué al proveedor no lo vuelvo a hacer
+	 */
+	if (haveToNotifiedProvider()) {
 	    // https://www.baeldung.com/spring-data-ddd
 	    this.registerEvent(new ProductMinStockEvent(this));
 	}
 
 	return consumed;
+    }
+
+    @Transient
+    public Boolean haveToNotifiedProvider() {
+	return hasNotStock() && !this.getNotifiedProvider();
+    }
+    
+    @Transient
+    public Boolean hasNotStock() {
+	return this.getCurrentUnits() <= this.getMinStock();
+    }
+    
+    /**
+     * Si tengo stock y notifiqué al proveedor de no stock cambio valor
+     */
+    @Transient
+    public void changeNotified() {
+	if (!this.hasNotStock() && this.getNotifiedProvider()) {
+	    this.setNotifiedProvider(false);
+	}
     }
 
     public List<Pair<Batch, Double>> consume(double quantity, UUID batch)
