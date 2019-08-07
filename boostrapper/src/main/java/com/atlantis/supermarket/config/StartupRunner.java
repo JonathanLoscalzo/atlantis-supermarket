@@ -46,6 +46,8 @@ public class StartupRunner implements CommandLineRunner {
 	//whenProducHasStockCouldDiscount();
 	seedUsers.addAdmin();
 	types.addMercadoPago();
+	types.addAnotherPayment();
+	types.addCash();
     }
     
     public void whenProducHasStockCouldDiscount() {

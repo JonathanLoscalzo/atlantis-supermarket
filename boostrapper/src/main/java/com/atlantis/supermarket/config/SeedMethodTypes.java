@@ -27,4 +27,30 @@ public class SeedMethodTypes {
 	}
 
     }
+    
+    public void addAnotherPayment() {
+
+	if (repo.findByName("Acepta cambio y es externo").size() == 0) {
+	    PaymentMethod pm = new PaymentMethod();
+	    pm.setAllowChange(true);
+	    pm.setExternalPayment(true);
+	    pm.setName("Acepta cambio y es externo");
+	    pm.setPaymentType(PaymentType.ANOTHERPAYMENT);
+	    repo.save(pm);
+	}
+
+    }
+    
+    public void addCash() {
+
+	if (repo.findByName("Efectivo").size() == 0) {
+	    PaymentMethod pm = new PaymentMethod();
+	    pm.setAllowChange(true);
+	    pm.setExternalPayment(false);
+	    pm.setName("Efectivo");
+	    pm.setPaymentType(PaymentType.CASH);
+	    repo.save(pm);
+	}
+
+    }
 }
