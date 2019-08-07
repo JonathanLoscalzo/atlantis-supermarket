@@ -95,6 +95,20 @@ public class Sale extends BaseEntityAuditable {
 
     public void setItems(Collection<SaleItem> items) {
 	this.items = items;
+
+	// los eventos solo se despachan de aggregateRoots!
+	items.stream().forEach(i -> {
+	    i.getProduct()
+		    .getDomainEvents()
+		    .stream()
+		    .forEach(e -> this.registerEvent(e));
+	    
+	    i.getConsumed().forEach(e -> e
+		    .getBatch()
+		    .getDomainEvents()
+		    .stream()
+		    .forEach(d -> this.registerEvent(d)));
+	});
     }
 
     public Collection<Payment> getPaymentMethods() {

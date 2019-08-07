@@ -45,7 +45,7 @@ public class Batch extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    @JsonManagedReference
+    @JsonBackReference
     private Product product;
 
     public Batch() {

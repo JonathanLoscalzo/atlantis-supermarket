@@ -34,9 +34,9 @@ public class SaleItem extends BaseEntity {
     @JsonBackReference
     private Sale sale;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
-    @JsonBackReference
+    @JsonManagedReference
     private Product product;
 
     @Column

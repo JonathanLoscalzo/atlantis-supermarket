@@ -3,6 +3,7 @@ import { Label, Input, FormFeedback } from 'reactstrap';
 import { DatePicker, DateTimePicker } from 'react-widgets'
 import Moment from 'moment'
 import momentLocalizer from 'react-widgets-moment';
+import moment from 'moment';
 
 Moment.locale('es')
 momentLocalizer()
@@ -29,7 +30,7 @@ const RenderFieldUpdate = (props) => {
                     onChange={onChange}
                     format="DD MM YYYY"
                     time={showTime}
-                    value={!value ? null : new Date(value)}
+                    value={!value ? null : moment(value).startOf('day').toDate()}
                 />
             </div>
             {touched

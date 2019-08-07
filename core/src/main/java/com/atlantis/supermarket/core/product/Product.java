@@ -88,7 +88,7 @@ public class Product extends BaseEntityAuditable implements SolrIndexed {
     private BatchType type = BatchType.DEFAULT;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "product", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonManagedReference
     private Collection<Batch> batches;
 
     @ManyToOne
@@ -306,6 +306,7 @@ public class Product extends BaseEntityAuditable implements SolrIndexed {
 	}
 
 	if (this.getCurrentUnits() <= this.getMinStock()) {
+	    // https://www.baeldung.com/spring-data-ddd
 	    this.registerEvent(new ProductMinStockEvent(this));
 	}
 

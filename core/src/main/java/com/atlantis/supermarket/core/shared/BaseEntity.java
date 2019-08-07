@@ -1,6 +1,8 @@
 package com.atlantis.supermarket.core.shared;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -72,8 +74,18 @@ public abstract class BaseEntity extends AbstractAggregateRoot<BaseEntity> imple
 	if (!(obj instanceof BaseEntity)) {
 	    return false;
 	}
-	
+
 	BaseEntity other = (BaseEntity) obj;
 	return getId().equals(other.getId());
+    }
+
+    /**
+     * usar en caso de emergencia. Na.
+     * No se puede ejecutar eventos que no sean de aggregateRoots.
+     * En el caso de Sale->Product, si product tiene eventos, nunca se ejecutan.
+     * @return
+     */
+    public Collection<Object> getDomainEvents() {
+	return this.domainEvents();
     }
 }

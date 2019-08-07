@@ -32,9 +32,9 @@ public class ProductConsumed extends BaseEntity {
     @Transient
     private static final long serialVersionUID = 1L;
     
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.ALL})
     @JoinColumn(name="batch_id")
-    @JsonBackReference
+    @JsonManagedReference
     private Batch batch;
     
     @Column(name = "expiration", nullable = true)

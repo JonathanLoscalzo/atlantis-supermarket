@@ -12,6 +12,6 @@ public class BatchEmptyEventHandler extends BaseServiceEventHandler<BatchEmptyEv
     @TransactionalEventListener
     public void handle(BatchEmptyEvent event) {
 	System.out.println("aloha: " + event);
-	//PODRÍA PERSISTIR EL EVENTO.
+	//TODO: sin utilidad, PODRÍA PERSISTIR EL EVENTO.
     }
 }

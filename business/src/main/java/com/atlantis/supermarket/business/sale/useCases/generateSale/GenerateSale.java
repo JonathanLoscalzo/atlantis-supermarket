@@ -74,13 +74,13 @@ public class GenerateSale implements UseCaseOutput<Input, Output> {
     private PaymentRepository paymentRepo;
 
     @Override
-    @Transactional
+    //@Transactional
     public Output handle(Input input) {
+	// https://www.baeldung.com/spring-data-ddd
+	// problema con eventos, solo se despachan cuando usas un repo!
 	Client client = clients
 		.findById(UUID.fromString(input.clientId))
 		.orElseThrow(() -> new ClientNotExists(UUID.fromString(input.clientId)));
-
-	// could consume
 
 	Collection<Payment> paymentMethods = generatePayments(input);
 	List<SaleItem> items = null;
