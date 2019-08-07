@@ -25,6 +25,19 @@ const columns = [
                 textAlign: "left",
                 fontWeight: 'bold'
             }}>
+                Fecha creación
+              </div>
+        ),
+        sortable: false,
+        accessor: 'createdAt',
+        Cell: props => moment(props.value).format("DD/MM/YYYY hh:mm:ss")
+    },
+    {
+        Header: () => (
+            <div style={{
+                textAlign: "left",
+                fontWeight: 'bold'
+            }}>
                 Estados
               </div>
         ),
