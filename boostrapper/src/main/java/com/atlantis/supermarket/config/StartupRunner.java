@@ -41,6 +41,12 @@ public class StartupRunner implements CommandLineRunner {
     @Autowired
     private SeedMethodTypes types;
     
+    @Autowired
+    private SeedProviders provSeed;
+    
+    @Autowired
+    private SeedCategories categories;
+    
     @Override
     public void run(String... args) throws Exception {
 	//whenProducHasStockCouldDiscount();
@@ -48,6 +54,8 @@ public class StartupRunner implements CommandLineRunner {
 	types.addMercadoPago();
 	types.addAnotherPayment();
 	types.addCash();
+	provSeed.set();
+	categories.set();
     }
     
     public void whenProducHasStockCouldDiscount() {
