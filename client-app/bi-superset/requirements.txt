@@ -1,0 +1,5 @@
+superset
+#superset[cors]
+pandas==0.23.4
+sqlalchemy==1.2.18
+mysqlclient

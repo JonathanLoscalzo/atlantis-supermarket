@@ -1,0 +1,109 @@
+- columns:
+  - avg: true
+    column_name: line
+    sum: true
+    type: INTEGER(11)
+  - avg: true
+    column_name: price_per_unit
+    sum: true
+    type: DECIMAL(19, 2)
+  - avg: true
+    column_name: provider_price
+    sum: true
+    type: DECIMAL(19, 2)
+  - column_name: created_date
+    database_expression: ''
+    description: ''
+    filterable: true
+    is_dttm: true
+    python_date_format: ''
+    type: DATE
+    verbose_name: ''
+  - column_name: created_datetime
+    database_expression: ''
+    description: ''
+    filterable: true
+    groupby: true
+    is_dttm: true
+    python_date_format: ''
+    type: DATETIME
+    verbose_name: ''
+  - column_name: deleted
+    type: BIT(1)
+  - column_name: id
+    database_expression: ''
+    description: ''
+    groupby: true
+    python_date_format: ''
+    type: BINARY(16)
+    verbose_name: ''
+  - column_name: name
+    database_expression: ''
+    description: nombre del producot
+    groupby: true
+    python_date_format: ''
+    type: TEXT
+    verbose_name: ''
+  - column_name: product_id
+    database_expression: ''
+    description: ''
+    groupby: true
+    python_date_format: ''
+    type: BINARY(16)
+    verbose_name: ''
+  - column_name: profit
+    database_expression: ''
+    description: ganancias
+    filterable: true
+    python_date_format: ''
+    type: DECIMAL(19,2)
+    verbose_name: ''
+  - column_name: quantity
+    database_expression: ''
+    description: ''
+    filterable: true
+    python_date_format: ''
+    type: DECIMAL(19,2)
+    verbose_name: ''
+  - column_name: sale_id
+    database_expression: ''
+    description: ''
+    groupby: true
+    python_date_format: ''
+    type: BINARY(16)
+    verbose_name: ''
+  default_endpoint: ''
+  description: ''
+  metrics:
+  - expression: AVG(line)
+    metric_name: avg__line
+    metric_type: avg
+  - expression: AVG(price_per_unit)
+    metric_name: avg__price_per_unit
+    metric_type: avg
+  - expression: AVG(provider_price)
+    metric_name: avg__provider_price
+    metric_type: avg
+  - expression: COUNT(*)
+    metric_name: count
+    metric_type: count
+    verbose_name: COUNT(*)
+  - expression: SUM(line)
+    metric_name: sum__line
+    metric_type: sum
+  - expression: SUM(price_per_unit)
+    metric_name: sum__price_per_unit
+    metric_type: sum
+  - expression: SUM(provider_price)
+    metric_name: sum__provider_price
+    metric_type: sum
+  schema: ''
+  sql: "select\r\n\tsi.*,\r\n\t((si.price_per_unit - si.provider_price) * pc.quantity\
+    \ ) as profit,\r\n\tpc.quantity,\r\n\tFROM_UNIXTIME(s.created_date/1000) as created_datetime,\r\
+    \n       DATE(FROM_UNIXTIME(s.created_date/1000)) as created_date,\r\n\tp.name,\r\
+    \n\tp.brand\r\nfrom\r\n\tsale_item si\r\ninner join (\r\n\tselect\r\n\t\tSUM(quantity)\
+    \ as quantity,\r\n\t\titem_id\r\n\tfrom\r\n\t\tproduct_consumed pc\r\n\tGROUP\
+    \ BY\r\n\t\tpc.item_id ) pc on\r\n\tsi.id = pc.item_id\r\ninner join sale s on\r\
+    \n\tsi.sale_id = s.id\r\ninner join product p on\r\n\tsi.product_id = p.id"
+  table_name: sale_item
+  template_params: ''
