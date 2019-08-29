@@ -61,13 +61,13 @@ public class ProviderController {
     }
 
     @PostMapping
-    public Provider create(@RequestBody Provider provider) {
-	return providerService.save(provider);
+    public Provider create(@RequestBody ProviderDto provider) {
+	return providerService.save(mapper.toEntity(provider));
     }
 
     @PutMapping
-    public Provider update(@RequestBody Provider provider) {
-	return providerService.save(provider);
+    public Provider update(@RequestBody ProviderDto provider) {
+	return providerService.save(mapper.toEntity(provider));
     }
 
     @DeleteMapping("/{identifier}")

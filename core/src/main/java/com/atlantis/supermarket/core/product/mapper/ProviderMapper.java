@@ -5,4 +5,6 @@ import com.atlantis.supermarket.core.product.dto.ProviderDto;
 
 public interface ProviderMapper {
     ProviderDto toDto(Provider p);
+
+    Provider toEntity(ProviderDto provider);
 }

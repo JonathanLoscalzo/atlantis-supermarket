@@ -4,7 +4,8 @@ const api = axios.create({
     //baseURL: 'https://recito.serveo.net/api',
     baseURL: 'http://localhost:8080/api',
     headers:{
-        "Access-Control-Allow-Origin":"*"
+        "Access-Control-Allow-Origin":"*",
+        "Content-type": "application/json"
     }
 })
 

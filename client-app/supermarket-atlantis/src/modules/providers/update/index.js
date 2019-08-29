@@ -42,10 +42,10 @@ export default function reducer(state = initialState, action = {}) {
 
 export const update = (element) => (dispatch) => {
     dispatch({ type: REQUEST_UPDATE_ELEMENT })
-
-    api.put("provider", element)
+    
+    api.put("provider", _.pick(element, ["email", "id", "name", "phone"]))
         .then((response) => {
-            
+
             dispatch({ type: RESPONSE_UPDATE_PROVIDER, payload: response.data })
 
             let location = { pathname: "/provider", updated: element.id }

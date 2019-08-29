@@ -35,11 +35,6 @@ public class CategoryController {
     @Autowired
     private CategoryMapper mapper;
 
-    @PostMapping
-    public CategoryDto create(@RequestBody Category c) {
-	return mapper.toDto(service.save(c));
-    }
-    
     @GetMapping
     public Page<CategoryDto> get(Pageable pageable) {
 	return repo.findAll(pageable).map(mapper::toDto);
@@ -55,9 +50,14 @@ public class CategoryController {
 	return mapper.toDto(service.retrieve(identifier));
     }
 
+    @PostMapping
+    public CategoryDto create(@RequestBody CategoryDto c) {
+	return mapper.toDto(service.save(mapper.toEntity(c)));
+    }
+
     @PutMapping
-    public CategoryDto update(@RequestBody Category provider) {
-	return mapper.toDto(service.save(provider));
+    public CategoryDto update(@RequestBody CategoryDto c) {
+	return mapper.toDto(service.save(mapper.toEntity(c)));
     }
 
     @DeleteMapping("/{identifier}")

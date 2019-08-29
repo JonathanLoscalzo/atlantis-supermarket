@@ -6,4 +6,6 @@ import com.atlantis.supermarket.core.shared.MapperDto;
 
 public interface CategoryMapper extends MapperDto<Category, CategoryDto> {
     public CategoryDto toDto(Category p) ;
+
+    public Category toEntity(CategoryDto c);
 }
