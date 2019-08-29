@@ -21,8 +21,8 @@ class CreateForm extends React.Component {
     }
 
     render() {
-        
-        const { handleSubmit, submitting, initialValues: credentials} = this.props;
+
+        const { handleSubmit, submitting, initialValues: credentials } = this.props;
         return (
             <div>
                 <form className="form-signin" onSubmit={handleSubmit}>
@@ -84,20 +84,23 @@ class CreateForm extends React.Component {
                             <button
                                 type="button"
                                 className="btn btn-lg btn-secondary btn-block btn-login text-uppercase font-weight-bold mb-2"
-                                onClick={this.props.signupForm}
+                                onClick={(d) => {
+                                    this.props.reset()
+                                    this.props.signupForm(d)
+                                }}
                             >Sign up</button>
                         </React.Fragment>
                     }
 
                     {
-                        credentials.isSignup && 
+                        credentials.isSignup &&
                         <React.Fragment>
                             <button
-                            disabled={submitting}
-                            type="submit"
-                            className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
-                            onClick={handleSubmit(values => this.props.onSubmit({ ...values, button: 'signup' }))}
-                        >Sign up</button>
+                                disabled={submitting}
+                                type="submit"
+                                className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
+                                onClick={handleSubmit(values => this.props.onSubmit({ ...values, button: 'signup' }))}
+                            >Sign up</button>
                             <button
                                 type="button"
                                 className="btn btn-lg btn-secondary btn-block btn-login text-uppercase font-weight-bold mb-2"
@@ -136,6 +139,6 @@ const Create = (props) => (
 export default reduxForm({
     form: 'auth/login',  // a unique identifier for this form
     validate: Validator(schema),
-    enableReinitialize:true
+    enableReinitialize: true
 })(Create)
 
